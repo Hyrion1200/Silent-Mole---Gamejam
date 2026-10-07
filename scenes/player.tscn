@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bu4sxdgniekf"]
+
+[ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
+friction = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ke0wg"]
+
+[node name="Player" type="RigidBody3D" unique_id=704551036]
+physics_material_override = SubResource("PhysicsMaterial_player")
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_player")
+speed = 2.75
+accel = 10.0
+eye_height = 0.3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=958506263]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1863481527]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_player")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1716908041]
+physics_interpolation_mode = 2
+top_level = true
+attributes = SubResource("CameraAttributesPhysical_ke0wg")
+current = true
+fov = 37.849285
