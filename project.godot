@@ -8,16 +8,34 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://FMOD/Build/Desktop/Desktop"
+
 [application]
 
 config/name="oelajam"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FmodManager="*uid://cds10pm7hwn3p"
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+
+[fmod]
+
+banks/import/fmod_studio_path="C:/Program Files/FMOD SoundSystem/FMOD Studio 2.03.15/FMOD Studio.exe"
+banks/import/fmod_project_path="C:/Users/bicho/oelajam/FMOD/FMOD.fspro"
+banks/initialization/load_banks=2
 
 [physics]
 
