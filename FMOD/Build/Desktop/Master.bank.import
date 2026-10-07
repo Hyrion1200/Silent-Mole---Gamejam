@@ -1,0 +1,14 @@
+[remap]
+
+importer="godot.fmod.bank"
+type="FmodBank"
+uid="uid://c0elgcrnmeyuq"
+path="res://.godot/imported/Master.bank-58f0a575ab84762ab84a6d02240c484e.bank"
+
+[deps]
+
+source_file="res://FMOD/Build/Desktop/Master.bank"
+dest_files=["res://.godot/imported/Master.bank-58f0a575ab84762ab84a6d02240c484e.bank"]
+
+[params]
+
