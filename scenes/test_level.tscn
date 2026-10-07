@@ -1,45 +1,164 @@
 [gd_scene format=3 uid="uid://c3a7c6yiaig8g"]
 
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://0vvx42g72lnn" path="res://assets/JAM_BLOCKOUT_LVL1.fbx" id="2_paw1w"]
+[ext_resource type="PackedScene" uid="uid://blqqtvbyut2vk" path="res://assets/JAM_HERO_PRX.fbx" id="3_j6w7d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke0wg"]
+albedo_color = Color(0.4896223, 0.48962218, 0.48962235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2venv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcd3b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_small"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw1w"]
+albedo_color = Color(0.82638466, 0.52687705, 0.883106, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_small"]
+material = SubResource("StandardMaterial3D_paw1w")
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_medium"]
+size = Vector3(0.7, 0.7, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88ety"]
+albedo_color = Color(0.827451, 0.5254902, 0.88235295, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_medium"]
+material = SubResource("StandardMaterial3D_88ety")
+size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_crate"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4b8f"]
+albedo_color = Color(1, 1, 0.68235296, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_crate"]
+material = SubResource("StandardMaterial3D_x4b8f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmr53"]
+albedo_color = Color(0.43262947, 0.69003093, 0.87571794, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2venv"]
+material = SubResource("StandardMaterial3D_tmr53")
+size = Vector3(0.7, 0.7, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6w7d"]
+albedo_color = Color(0.4469139, 0.74286175, 0.44260445, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_paw1w"]
+material = SubResource("StandardMaterial3D_j6w7d")
+size = Vector3(0.7, 0.7, 0.7)
 
 [node name="TestLevel" type="Node3D" unique_id=574000196]
 
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1224720312]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -13.763757, 5.237507, -35.12233)
+area_range = 8.064
+area_attenuation = 0.5
+area_size = Vector2(1.945, 1.945)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1909031340]
+transform = Transform3D(0.3931882, -0.91346157, 0.10483823, -0.22892168, 0.013175786, 0.97335577, -0.89050436, -0.40671173, -0.2039306, -13.763758, 6.7605553, -21.719387)
+light_energy = 2.41
+spot_range = 9.764
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=115473002]
+transform = Transform3D(0.86601907, -0.3535631, 0.35355926, 0, 0.70710295, 0.70711064, -0.500011, -0.61237127, 0.6123646, -13.168308, 5.7769594, -4.036379)
+light_energy = 3.207
+spot_range = 7.567
+spot_attenuation = 0.65
+spot_angle = 69.83
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1197079701]
-transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 10, 0)
+transform = Transform3D(0.86601907, -0.35356307, 0.3535593, 0, 0.707103, 0.7071106, -0.500011, -0.6123712, 0.61236465, 7.9206657, 5.3368177, 0)
+light_energy = 0.882
 shadow_enabled = true
+shadow_opacity = 0.9
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1466038562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(40, 1, 40)
+material = SubResource("StandardMaterial3D_ke0wg")
 
 [node name="Box" type="CSGBox3D" parent="." unique_id=1060727687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -5)
 use_collision = true
 size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_2venv")
 
 [node name="Wall" type="CSGBox3D" parent="." unique_id=448765822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -12)
 use_collision = true
 size = Vector3(10, 3, 0.5)
+material = SubResource("StandardMaterial3D_qcd3b")
 
 [node name="Ramp" type="CSGBox3D" parent="." unique_id=1055200228]
 transform = Transform3D(1, 0, 0, 0, 0.94, -0.342, 0, 0.342, 0.94, 8, 1.2, 0)
 use_collision = true
 size = Vector3(4, 0.5, 10)
 
-[node name="Crate" type="RigidBody3D" parent="." unique_id=1834802710]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -5)
+[node name="CrateLight1kg" type="RigidBody3D" parent="." unique_id=18875608 groups=["draggable", "throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.2, -4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crate" unique_id=1883143567]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateLight1kg" unique_id=347654334]
+shape = SubResource("BoxShape3D_small")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateLight1kg" unique_id=1914806015]
+mesh = SubResource("BoxMesh_small")
+
+[node name="CrateMedium4kg" type="RigidBody3D" parent="." unique_id=613022680 groups=["draggable", "throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -4)
+mass = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateMedium4kg" unique_id=637227563]
+shape = SubResource("BoxShape3D_medium")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateMedium4kg" unique_id=404326132]
+mesh = SubResource("BoxMesh_medium")
+
+[node name="CrateHeavy20kg" type="RigidBody3D" parent="." unique_id=609283891 groups=["draggable", "throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -4)
+mass = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateHeavy20kg" unique_id=506392707]
 shape = SubResource("BoxShape3D_crate")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Crate" unique_id=2038283290]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateHeavy20kg" unique_id=569948294]
 mesh = SubResource("BoxMesh_crate")
+
+[node name="CrateDragOnly4kg" type="RigidBody3D" parent="." unique_id=1304513609 groups=["draggable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.35, -7)
+mass = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateDragOnly4kg" unique_id=49654117]
+shape = SubResource("BoxShape3D_medium")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateDragOnly4kg" unique_id=1639355633]
+mesh = SubResource("BoxMesh_2venv")
+
+[node name="CrateThrowOnly4kg" type="RigidBody3D" parent="." unique_id=1611054268 groups=["throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.35, -7)
+mass = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateThrowOnly4kg" unique_id=1210456750]
+shape = SubResource("BoxShape3D_medium")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateThrowOnly4kg" unique_id=1770294654]
+mesh = SubResource("BoxMesh_paw1w")
 
 [node name="Player" parent="." unique_id=520541980 instance=ExtResource("1_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+speed = 7.47
+drag_force = 200.0
+throw_impulse = 10.0
+
+[node name="JAM_BLOCKOUT_LVL1" parent="." unique_id=1993698397 instance=ExtResource("2_paw1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.027038, -0.03827572, 0)
+
+[node name="JAM_HERO_PRX" parent="." unique_id=888050093 instance=ExtResource("3_j6w7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3129, 0, -3.287963)
