@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b7fhu1h1igrkn"]
+
+[ext_resource type="PackedScene" uid="uid://dvvet50uh7urs" path="res://assets/_mesh/_Lookdev/JAM_Wall.fbx" id="1_jyk51"]
+[ext_resource type="Texture2D" uid="uid://kk1x6cj0b5i8" path="res://assets/_texture/_rock/Low_Albedo.jpg" id="2_txqtx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd7y8"]
+albedo_texture = ExtResource("2_txqtx")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.001, 0.001, 0.001)
+uv1_triplanar = true
+
+[node name="JAM_Wall" unique_id=1723334683 instance=ExtResource("1_jyk51")]
+
+[node name="Wall" parent="." index="0" unique_id=1783102446]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -0.046657562, -9.536743e-07, -0.029266357)
+surface_material_override/0 = SubResource("StandardMaterial3D_fd7y8")
+surface_material_override/1 = SubResource("StandardMaterial3D_fd7y8")
+
+[node name="CollisionShape3D" parent="Wall/Wall_col" parent_id_path=PackedInt32Array(220233597) index="0" unique_id=1422246144]
+visible = false

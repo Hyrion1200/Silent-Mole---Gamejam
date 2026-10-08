@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://0vvx42g72lnn"
-path="res://.godot/imported/JAM_BLOCKOUT_LVL1.fbx-e5b5f03387095881f52da98f836b35e5.scn"
+uid="uid://cxkhqv3j0pnux"
+path="res://.godot/imported/JAM_ST_Wagon.fbx-9a524554d898136736de91fcc2a99fd6.scn"
 
 [deps]
 
-source_file="res://assets/JAM_BLOCKOUT_LVL1.fbx"
-dest_files=["res://.godot/imported/JAM_BLOCKOUT_LVL1.fbx-e5b5f03387095881f52da98f836b35e5.scn"]
+source_file="res://assets/_mesh/_Lookdev/JAM_ST_Wagon.fbx"
+dest_files=["res://.godot/imported/JAM_ST_Wagon.fbx-9a524554d898136736de91fcc2a99fd6.scn"]
 
 [params]
 
@@ -35,7 +35,7 @@ animation/fps=30
 animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path="res://scripts/blockout_import.gd"
+import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dm573cbubm8dn"]
+
+[ext_resource type="PackedScene" uid="uid://dlk7b8207ipno" path="res://assets/_mesh/_Lookdev/JAM_Poutres.fbx" id="1_ct0mc"]
+[ext_resource type="Texture2D" uid="uid://d3ygv2420tx5u" path="res://assets/_texture/_wood/Wood_Albedo.jpg" id="2_rbnty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8c4j"]
+albedo_texture = ExtResource("2_rbnty")
+texture_filter = 0
+
+[node name="JAM_Poutres" unique_id=1185288636 instance=ExtResource("1_ct0mc")]
+
+[node name="Arch" parent="." index="0" unique_id=2130470719]
+material_override = SubResource("StandardMaterial3D_j8c4j")
+
+[node name="CollisionShape3D" parent="Arch/Arch_col" parent_id_path=PackedInt32Array(684899512) index="0" unique_id=41665615]
+visible = false
