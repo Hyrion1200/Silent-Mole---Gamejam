@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dhfkp631hxh67"]
+
+[ext_resource type="Script" uid="uid://dkrwkuqjo3r22" path="res://scripts/title_screen.gd" id="1_title"]
+[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_camera"]
+[ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="3_env"]
+
+[sub_resource type="Environment" id="Environment_title"]
+background_energy_multiplier = 0.19
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_title"]
+albedo_color = Color(0.9, 0.8, 0.55, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_title"]
+material = SubResource("StandardMaterial3D_title")
+text = "Taupinambourre"
+font_size = 60
+depth = 0.15
+
+[node name="TitleScreen" type="Node3D" unique_id=1931692903]
+script = ExtResource("1_title")
+
+[node name="Environment" parent="." unique_id=162347460 instance=ExtResource("3_env")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=370744867]
+environment = SubResource("Environment_title")
+
+[node name="Title" type="MeshInstance3D" parent="." unique_id=1065754874]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.5404388, 2.4417167, 24.427166)
+mesh = SubResource("TextMesh_title")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1383406950]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.6544843, 2, 18.953295)
+current = true
+fov = 37.849285
+script = ExtResource("2_camera")
+
+[node name="Fade" type="CanvasLayer" parent="Camera3D" unique_id=1112681068]
+
+[node name="Rect" type="ColorRect" parent="Camera3D/Fade" unique_id=1945054566]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1812408492]
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 30.0
+spot_angle = 35.0
+
+[node name="UI" type="Control" parent="." unique_id=102739143]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Play" type="Button" parent="UI" unique_id=1384153505]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -150.0
+offset_right = 90.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[connection signal="pressed" from="UI/Play" to="." method="_on_play_pressed"]
