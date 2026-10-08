@@ -41,6 +41,18 @@ const ICONS: Dictionary[State, String] = {
 		if profile:
 			profile.changed.connect(_update_view_shape)
 		_update_view_shape()
+## Stops of the round walked in IDLE, after the place the enemy starts at.
+## Empty --> stands at its post
+@export var patrol: Array[PatrolPoint]
+## Walking speed on the round
+@export var patrol_speed: float = 1.5
+## Seconds spent at the starting position, the other stops have their own wait
+@export_range(0.0, 10.0, 0.1, "or_greater") var patrol_wait: float = 1.0
+## Walks the round backward once at the last stop. Off --> goes straight back to the start
+@export var ping_pong: bool = true
+
+## How close the enemy gets to a stop of its round
+const PATROL_REACH := 0.2
 
 ## 0 = unaware, 1 = player detected.
 var awareness: float = 0.0
@@ -57,11 +69,15 @@ var _search_timer: float = 0.0
 var _caught: bool = false
 ## captured was emitted for the current capture
 var _captured_sent: bool = false
+## Stops left behind since the start of the round
+var _patrol_count: int = 0
 
 ## On start of the scene save "home" position and rotation to comeback in case of chase ending
 ## We will need to save base animation aswell later on
 @onready var _home: Vector3 = global_position
 @onready var _home_yaw: float = rotation.y
+## Time left standing at the current stop of the round
+@onready var _patrol_timer: float = patrol_wait
 @onready var _label: Label3D = $Label3D
 @onready var _bar: MeshInstance3D = $Debug/Bar
 
@@ -122,6 +138,8 @@ func reset() -> void:
 	velocity = Vector3.ZERO
 	global_position = _home
 	rotation.y = _home_yaw
+	_patrol_count = 0
+	_patrol_timer = patrol_wait
 	_set_state(State.IDLE)
 
 
@@ -159,16 +177,25 @@ func _physics_process(delta: float) -> void:
 
 	# Horizontal velocity wanted this tick
 	var move := Vector3.ZERO
+	# Stop of the round it walks to or stands at, null for the place it started at
+	var stop := _patrol_point()
+	var post := stop.global_position if stop else _home
 	match state:
 		State.IDLE:
-			pass
+			move = _step_toward(post, PATROL_REACH) * patrol_speed
+			if move == Vector3.ZERO:
+				_patrol_timer -= delta
+				if _patrol_timer <= 0.0:
+					_patrol_count += 1
+					var next := _patrol_point()
+					_patrol_timer = next.wait if next else patrol_wait
 		State.SUSPICIOUS:
 			_forget(gain, delta)
 		State.INVESTIGATING:
-			move = _step_toward(_focus) * profile.walk_speed
+			move = _step_toward(_focus, profile.stop_distance) * profile.walk_speed
 			_forget(gain, delta)
 		State.CHASING:
-			move = _step_toward(_focus) * profile.run_speed
+			move = _step_toward(_focus, profile.stop_distance) * profile.run_speed
 			if gain <= 0.0 and move == Vector3.ZERO:
 				# Got to the last place it saw or heard the player: search around it
 				_set_state(State.SEARCHING)
@@ -180,11 +207,12 @@ func _physics_process(delta: float) -> void:
 			_search_timer -= delta
 			if _search_timer <= 0.0:
 				_pick_search_point(player)
-			move = _step_toward(_focus) * profile.walk_speed
+			move = _step_toward(_focus, profile.stop_distance) * profile.walk_speed
 			# The bar empties over the search, then the enemy gives up
 			awareness = maxf(awareness - delta / profile.search_time, 0.0)
 		State.RETURNING:
-			move = _step_toward(_home) * profile.walk_speed
+			# Back to the stop it left, the round carries on from there
+			move = _step_toward(post, PATROL_REACH) * profile.walk_speed
 			if move == Vector3.ZERO:
 				_set_state(State.IDLE)
 
@@ -196,8 +224,8 @@ func _physics_process(delta: float) -> void:
 	# not know about (a crate), awareness decays and the enemy ends up giving up
 	_travelling = state in [State.INVESTIGATING, State.CHASING] and get_real_velocity().dot(move) > 0.5 * move.length_squared()
 
-	# Look where it walks, else at the stimulus, else the way it faced at its post
-	var yaw := _home_yaw
+	# Look where it walks, else at the stimulus, else the way its stop faces
+	var yaw := stop.global_rotation.y if stop else _home_yaw
 	if move != Vector3.ZERO:
 		yaw = atan2(-move.x, -move.z)
 	elif awareness > 0.0:
@@ -266,12 +294,19 @@ func _pick_search_point(player: Node3D) -> void:
 			get_world_3d().navigation_map, centre + Vector3(spread.x, 0.0, spread.y))
 
 
+## The stop of the round the enemy is on, null for the place it started at.
+func _patrol_point() -> PatrolPoint:
+	# Start is stop 0, patrol[i - 1] is stop i
+	var i := int(pingpong(_patrol_count, patrol.size())) if ping_pong else _patrol_count % (patrol.size() + 1)
+	return patrol[i - 1] if i > 0 else null
+
+
 ## Horizontal direction to walk in to reach target along the navmesh,
-## or zero once there or when there is no way to get closer.
-func _step_toward(target: Vector3) -> Vector3:
+## or zero once within reach of it or when there is no way to get closer.
+func _step_toward(target: Vector3, reach: float) -> Vector3:
 	var to := target - global_position
 	to.y = 0.0
-	if to.length() <= profile.stop_distance:
+	if to.length() <= reach:
 		return Vector3.ZERO
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
 	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true):

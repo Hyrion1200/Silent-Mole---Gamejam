@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://0vvx42g72lnn" path="res://assets/_mesh/_Blockout/JAM_BLOCKOUT_LVL1.fbx" id="2_paw1w"]
 [ext_resource type="PackedScene" uid="uid://blqqtvbyut2vk" path="res://assets/_mesh/_Blockout/JAM_HERO_PRX.fbx" id="3_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="4_enemy"]
+[ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="6_7gix3"]
 [ext_resource type="PackedScene" path="res://scenes/climb_point.tscn" id="6_qcd3b"]
 [ext_resource type="PackedScene" uid="uid://bintkcf5gav7" path="res://scenes/trigger.tscn" id="7_ahbqi"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="8_7gix3"]
@@ -128,7 +129,7 @@ light_energy = 2.41
 spot_range = 9.764
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=115473002]
-transform = Transform3D(0.86601907, -0.3535631, 0.35355926, 0, 0.70710295, 0.70711064, -0.500011, -0.61237127, 0.6123646, -13.168308, 5.7769594, -4.036379)
+transform = Transform3D(0.86601907, -0.3535631, 0.35355926, 0, 0.70710295, 0.70711064, -0.500011, -0.61237127, 0.6123646, -12.675564, 5.7769594, -4.036379)
 light_energy = 3.207
 spot_range = 7.567
 spot_attenuation = 0.65
@@ -232,7 +233,7 @@ size = Vector3(10, 3, 0.5)
 material = SubResource("StandardMaterial3D_7gix3")
 
 [node name="Player" parent="." unique_id=520541980 instance=ExtResource("1_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-0.5143874, 0, 0.85755795, 0, 1, 0, -0.85755795, 0, -0.5143874, 0, 1, 0)
 speed = 7.47
 reach = 1.5
 drag_force = 200.0
@@ -247,16 +248,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.027038, -0.03827572, 0)
 [node name="JAM_HERO_PRX" parent="." unique_id=888050093 instance=ExtResource("3_j6w7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3129, 0, -3.287963)
 
-[node name="Enemy" parent="." unique_id=254065046 instance=ExtResource("4_enemy")]
+[node name="Enemy2" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
+transform = Transform3D(-0.9919228, 0, 0.126844, 0, 1, 0, -0.126844, 0, -0.9919228, 34.89942, 0.9, -4.436102)
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+ping_pong = false
+
+[node name="PatrolPoint2" type="Marker3D" parent="Enemy2" unique_id=293693444]
+transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.5615474, 6.6634803, 0, -15.132591)
+gizmo_extents = 1.07
+script = ExtResource("6_7gix3")
+wait = 5.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="PatrolPoint" type="Marker3D" parent="Enemy2" unique_id=1643730210]
+transform = Transform3D(0.86009645, 0, 0.5101315, 0, 1, 0, -0.5101315, 0, 0.86009645, -0.9329996, 0, -14.649002)
+gizmo_extents = 1.07
+script = ExtResource("6_7gix3")
+wait = 2.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="Enemy" parent="." unique_id=254065046 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
 transform = Transform3D(-0.06355046, 0, -0.9979786, 0, 1, 0, 0.9979786, 0, -0.06355046, 4, 0.9, -9)
-view_half_angle = 70.0
-view_width = 9.375
-detect_time = 1.0
-lamp_detect_time = 3.0
-forget_time = 15.0
-search_radius = 15.0
-search_point_time = 1.0
-search_cheat = 0.6
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+
+[node name="PatrolPoint2" type="Marker3D" parent="Enemy" unique_id=1834547566]
+transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.5615474, 6.6634803, 0, -15.132591)
+gizmo_extents = 1.07
+script = ExtResource("6_7gix3")
+wait = 5.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="PatrolPoint" type="Marker3D" parent="Enemy" unique_id=316257414]
+transform = Transform3D(0.86009645, 0, 0.5101315, 0, 1, 0, -0.5101315, 0, 0.86009645, -0.9329996, 0, -14.649002)
+gizmo_extents = 1.07
+script = ExtResource("6_7gix3")
+wait = 2.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=868819294]
 environment = SubResource("Environment_ke0wg")
