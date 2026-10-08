@@ -56,6 +56,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().call_group(&"debug", &"set_visible", _debug)
 	elif _debug and event.is_action_pressed(&"shake"): # C
 		_camera.shake()
+	elif _debug and event.is_action_pressed(&"fade_in"): # U
+		_camera.fade_in()
+	elif _debug and event.is_action_pressed(&"fade_out"): # I
+		_camera.fade_out()
 	elif event.is_action_pressed(&"lamp"): # F
 		_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"grab"):

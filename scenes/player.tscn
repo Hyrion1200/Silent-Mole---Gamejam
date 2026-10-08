@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu4sxdgniekf"]
 
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_shake.gd" id="2_shake"]
+[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
 friction = 0.0
@@ -56,6 +56,20 @@ fov = 37.849285
 script = ExtResource("2_shake")
 shake_amplitude = 0.15
 shake_duration = 5.0
+fade_out_duration = 3.0
+fade_in_duration = 10.0
+fade_in_start_ratio = 0.2
+
+[node name="Fade" type="CanvasLayer" parent="Camera3D" unique_id=865412043]
+
+[node name="Rect" type="ColorRect" parent="Camera3D/Fade" unique_id=1254635496]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1830250579 groups=["lamp"]]
 light_energy = 4.0
