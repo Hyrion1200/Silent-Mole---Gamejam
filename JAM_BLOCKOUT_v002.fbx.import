@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://blqqtvbyut2vk"
-path="res://.godot/imported/JAM_HERO_PRX.fbx-5093c083c40ca579992671e6d0dca157.scn"
+uid="uid://dvy7g6pwa03j7"
+path="res://.godot/imported/JAM_BLOCKOUT_v002.fbx-06179c9eb32181c080a60aa5a30e2307.scn"
 
 [deps]
 
-source_file="res://assets/JAM_HERO_PRX.fbx"
-dest_files=["res://.godot/imported/JAM_HERO_PRX.fbx-5093c083c40ca579992671e6d0dca157.scn"]
+source_file="res://JAM_BLOCKOUT_v002.fbx"
+dest_files=["res://.godot/imported/JAM_BLOCKOUT_v002.fbx-06179c9eb32181c080a60aa5a30e2307.scn"]
 
 [params]
 
