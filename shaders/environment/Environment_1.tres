@@ -3,8 +3,7 @@
 [resource]
 background_energy_multiplier = 0.0
 ambient_light_source = 2
-ambient_light_color = Color(0.13319641, 0.13319641, 0.13319635, 1)
-ambient_light_energy = 0.45
+ambient_light_energy = 0.0
 glow_enabled = true
 glow_levels/1 = 5.38
 glow_levels/2 = 0.53
@@ -13,10 +12,13 @@ glow_intensity = 3.93
 glow_strength = 1.05
 glow_bloom = 0.23
 glow_blend_mode = 2
-fog_light_color = Color(0.12658942, 0.14164221, 0.1657274, 1)
-fog_light_energy = 1.58
+fog_enabled = true
+fog_light_color = Color(0.10239611, 0.11612176, 0.13671058, 1)
+fog_light_energy = 4.74
+fog_density = 0.015
 fog_sky_affect = 0.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.023
-volumetric_fog_albedo = Color(0.9346582, 0.79444873, 0.812613, 1)
+volumetric_fog_density = 0.083
+volumetric_fog_albedo = Color(0.4530841, 0.22732484, 0.26889023, 1)
 volumetric_fog_emission_energy = 0.0
+adjustment_enabled = true
