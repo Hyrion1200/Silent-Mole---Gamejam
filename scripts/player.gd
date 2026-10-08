@@ -20,6 +20,9 @@ extends RigidBody3D
 ## Speed at which a climb point pulls the player up, in m/s.
 @export var climb_speed: float = 1.0
 
+## How fast the camera is turned toward the enemy that captured the player, in rad/s.
+@export var capture_turn_speed: float = 0.5
+
 ## How far a footstep is heard by enemies.
 @export var step_noise_radius: float = 6.0
 ## Distance travelled between two footsteps. We can increase it to be more lenient
@@ -30,6 +33,11 @@ var _yaw: float = 0.0
 var _pitch: float = 0.0
 var _total_walked: float = 0.0
 var _debug: bool = false
+var _move_tween: Tween
+## The enemy that captured the player, and the height of its head above its center
+var _captor: Node3D
+var _captor_head: float = 0.0
+var _capture_faded: bool = false
 
 @onready var _camera: Camera3D = $Camera3D
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
@@ -49,7 +57,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not _captor:
 		_yaw -= event.relative.x * mouse_sensitivity
 		_pitch = clampf(_pitch - event.relative.y * mouse_sensitivity, -1.55, 1.55)
 	elif event.is_action_pressed("ui_cancel"):
@@ -66,6 +74,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera.fade_in()
 	elif _debug and event.is_action_pressed(&"fade_out"): # I
 		_camera.fade_out()
+	elif _captor:
+		# Captured --> We can start something if needed
+		pass
 	elif event.is_action_pressed(&"lamp"): # F
 		_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"interact"): # E
@@ -129,11 +140,34 @@ func _climb(point: ClimbPoint) -> void:
 	# The point marks where the feet land
 	var top := point.global_position + Vector3.UP * capsule.height * collision.scale.y / 2.0
 	var above := Vector3(global_position.x, top.y, global_position.z)
-	var tween := create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	tween.tween_property(self, ^"global_position", above, global_position.distance_to(above) / climb_speed)
-	tween.tween_property(self, ^"global_position", top, above.distance_to(top) / climb_speed)
-	tween.tween_callback(set_freeze_enabled.bind(false))
+	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	_move_tween.tween_property(self, ^"global_position", above, global_position.distance_to(above) / climb_speed)
+	_move_tween.tween_property(self, ^"global_position", top, above.distance_to(top) / climb_speed)
+	_move_tween.tween_callback(set_freeze_enabled.bind(false))
 	# Start the climb SFX @Pierre67
+
+
+## Caught by an enemy: frozen for good, the camera turns to the enemy's head and the view fades out.
+## head_height is the head above the captor's center. Called every tick the player is in a death range.
+## The player is slid to distance from the captor, on the side they were caught on.
+func capture(captor: Node3D, head_height: float, distance: float) -> void:
+	if _captor:
+		return
+	_captor = captor
+	_captor_head = head_height
+	_release()
+	# A climb in progress would carry on and unfreeze the player at its end
+	if _move_tween:
+		_move_tween.kill()
+	freeze = true
+	linear_velocity = Vector3.ZERO
+	var away := global_position - captor.global_position
+	away.y = 0.0
+	# ponytail: straight slide with no collision, can end in a wall. Add a ray if it happens
+	var place := global_position - away + away.normalized() * distance
+	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
+	# Start the captured SFX @Pierre67
 
 
 func _aimed_body() -> RigidBody3D:
@@ -151,15 +185,26 @@ func _aimed(areas: bool = false) -> Object:
 	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	## Prevent stuttering that we would get with get_global_transform()
 	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
+	if is_instance_valid(_captor):
+		# The mouse no longer drives the view, it turns to the head of the captor
+		var to := _captor.global_position + Vector3.UP * _captor_head - _camera.global_position
+		var yaw := atan2(-to.x, -to.z)
+		var pitch := atan2(to.y, Vector2(to.x, to.z).length())
+		_yaw = rotate_toward(_yaw, yaw, capture_turn_speed * delta)
+		_pitch = rotate_toward(_pitch, pitch, capture_turn_speed * delta)
+		# The fade out only starts once the player is placed and the camera faces the head
+		if not _capture_faded and not _move_tween.is_running() and is_zero_approx(angle_difference(_yaw, yaw)) and is_equal_approx(_pitch, pitch):
+			_capture_faded = true
+			_camera.fade_out()
 	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
 	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
 	var body := _aimed_body()
-	_prompt.visible = _held != null \
+	_prompt.visible = _captor == null and (_held != null \
 			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable"))) \
-			or (not freeze and _aimed(true) is ClimbPoint)
+			or (not freeze and _aimed(true) is ClimbPoint))
 
 	if _beam.is_visible_in_tree():
 		# Same ray as the enemies cast to find the spot lit by the lamp

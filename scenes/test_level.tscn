@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bcnvckuhutasf" path="res://scenes/jam_blockout_v_002.tscn" id="1_tmr53"]
 [ext_resource type="PackedScene" uid="uid://0vvx42g72lnn" path="res://assets/JAM_BLOCKOUT_LVL1.fbx" id="2_paw1w"]
 [ext_resource type="PackedScene" uid="uid://blqqtvbyut2vk" path="res://assets/JAM_HERO_PRX.fbx" id="3_j6w7d"]
-[ext_resource type="PackedScene" uid="uid://cuinlpmbkspdn" path="res://scenes/enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/climb_point.tscn" id="6_qcd3b"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tmr53"]
@@ -227,7 +227,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 speed = 7.47
 reach = 1.5
 drag_force = 200.0
-throw_impulse = 10.0
+throw_impulse = 8.0
+climb_speed = 0.6
+capture_turn_speed = 0.9
 step_noise_radius = 7.0
 
 [node name="JAM_BLOCKOUT_LVL1" parent="." unique_id=1993698397 instance=ExtResource("2_paw1w")]
