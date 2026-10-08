@@ -4,16 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/jam_poutres.tscn" id="2_o7s6v"]
 [ext_resource type="PackedScene" uid="uid://b7fhu1h1igrkn" path="res://scenes/jam_wall.tscn" id="3_207s6"]
 
-[node name="Node3D" type="Node3D" unique_id=1151871138]
+[node name="TextureSet" type="Node3D" unique_id=1151871138]
 
 [node name="JAM_Ground" parent="." unique_id=1565302591 instance=ExtResource("1_ydfpr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08311653, 0, 39.880707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1259768, 2.830391, 55.34503)
 
 [node name="JAM_Poutres" parent="." unique_id=1185288636 instance=ExtResource("2_o7s6v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08311653, 0, 39.880707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1259768, 2.830391, 55.34503)
 
 [node name="JAM_Wall" parent="." unique_id=1723334683 instance=ExtResource("3_207s6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08311653, 0, 39.880707)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="JAM_Wall" unique_id=2018020248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1752243, 1.7453399, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1259768, 2.830391, 55.34503)
