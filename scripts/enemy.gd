@@ -51,6 +51,14 @@ const ICONS: Dictionary[State, String] = {
 	set(value):
 		eye_height = value
 		_update_view_shape()
+## Radius of the death range, a sphere right in front of the enemy
+## A player touching it is captured
+@export var death_range: float = 0.6:
+	set(value):
+		death_range = value
+		_update_view_shape()
+## Distance from the enemy where a captured player is placed, so the enemy is not seen from too close
+@export var death_placement_distance: float = 1.5
 ## Seconds of seeing the player at point-blank to fully detect them
 ## Takes up to 4x longer at the edge of view_range
 @export var detect_time: float = 0.5
@@ -92,6 +100,8 @@ var _travelling: bool = false
 var _search_origin: Vector3
 ## Time left on the current search point.
 var _search_timer: float = 0.0
+## Captured the player --> Used to deactivate the AI
+var _caught: bool = false
 
 ## On start of the scene save "home" position and rotation to comeback in case of chase ending
 ## We will need to save base animation aswell later on
@@ -111,6 +121,10 @@ func _ready() -> void:
 func _update_view_shape() -> void:
 	if not is_node_ready():
 		return
+	var death: SphereShape3D = $DeathRange/CollisionShape3D.shape
+	death.radius = death_range
+	$DeathRange.position = Vector3(0.0, 0.0, -death_range)
+	$Debug/DeathRange.transform = Transform3D(Basis.from_scale(Vector3.ONE * death_range), $DeathRange.position)
 	var slope := tan(deg_to_rad(view_half_angle))
 	var tip := minf(view_range, view_width / slope)
 	var cone: CylinderMesh = $Debug/Cone.mesh
@@ -151,6 +165,16 @@ func _physics_process(delta: float) -> void:
 	var player := get_tree().get_first_node_in_group(&"player") as CollisionObject3D
 	# If we end up with multiple lamp i'll change this
 	var lamp := get_tree().get_first_node_in_group(&"lamp") as SpotLight3D
+	# ponytail: no line of sight check, a thin wall does not protect. Add a ray if it happens
+	if player and $DeathRange.overlaps_body(player):
+		# The camera is forced to look at the head
+		player.capture(self, eye_height, death_placement_distance)
+		_caught = true
+	if _caught:
+		# AI off: stands there and only turns to face the player
+		var dir := player.global_position - global_position
+		rotation.y = rotate_toward(rotation.y, atan2(-dir.x, -dir.z), turn_speed * delta)
+		return
 	var gain := 0.0
 	if player and _sees_body(player):
 		_focus = player.global_position

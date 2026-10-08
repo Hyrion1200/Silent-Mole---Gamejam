@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
+[ext_resource type="Texture2D" uid="uid://dfx63ja3l32u7" path="res://icon.svg" id="3_icon"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
 friction = 0.0
@@ -18,7 +19,11 @@ height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
 shading_mode = 0
-albedo_color = Color(0.2, 0.8, 1, 1)
+albedo_color = Color(0.8007495, 0.6530097, 0.9789923, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_reach"]
+material = SubResource("StandardMaterial3D_debug")
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_beam"]
 material = SubResource("StandardMaterial3D_debug")
@@ -33,6 +38,7 @@ ring_segments = 6
 physics_material_override = SubResource("PhysicsMaterial_player")
 can_sleep = false
 lock_rotation = true
+freeze_mode = 1
 script = ExtResource("1_player")
 speed = 2.75
 accel = 10.0
@@ -70,6 +76,52 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="Crosshair" type="ColorRect" parent="Camera3D/Fade" unique_id=1253191871 groups=["debug"]]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1.3083353, 1.2534453, 0.46668562, 1)
+
+[node name="Prompt" type="HBoxContainer" parent="Camera3D/Fade" unique_id=1980338411]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 24.0
+offset_bottom = 48.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Camera3D/Fade/Prompt" unique_id=474906451]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Camera3D/Fade/Prompt" unique_id=1945273560]
+layout_mode = 2
+text = "Interact"
+
+[node name="Reach" type="MeshInstance3D" parent="Camera3D" unique_id=2063681345 groups=["debug"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -3)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_reach")
 
 [node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1830250579 groups=["lamp"]]
 light_energy = 4.0
