@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://crm1lak61ifmc"]
 
 [ext_resource type="Script" uid="uid://bpi0mc82yj0fk" path="res://scripts/enemy.gd" id="1_enemy"]
+[ext_resource type="Resource" path="res://resources/enemy_default.tres" id="2_profile"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
 radius = 0.4
@@ -65,8 +66,7 @@ cap_top = false
 
 [node name="Enemy" type="CharacterBody3D" unique_id=142524920 groups=["enemies"]]
 script = ExtResource("1_enemy")
-view_half_angle = 60.0
-view_width = 2.165
+profile = ExtResource("2_profile")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=265422109]
 shape = SubResource("CapsuleShape3D_enemy")

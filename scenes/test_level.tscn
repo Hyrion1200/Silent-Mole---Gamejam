@@ -20,16 +20,16 @@ agent_max_climb = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke0wg"]
 albedo_color = Color(0.4896223, 0.48962218, 0.48962235, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_x4b8f"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ahbqi"]
 _surfaces = [{
-"aabb": AABB(-50, -0.5, -50, 100, 1, 100),
+"aabb": AABB(-47.0791, -0.5, -55, 94.1582, 1, 110),
 "attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
 "format": 34359738391,
 "material": SubResource("StandardMaterial3D_ke0wg"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 36,
-"vertex_data": PackedByteArray("AABIwgAAAL8AAEhCAABIwgAAAL8AAEjCAABIwgAAAD8AAEjCAABIQgAAAL8AAEjCAABIwgAAAL8AAEjCAABIwgAAAL8AAEhCAABIwgAAAD8AAEjCAABIwgAAAL8AAEjCAABIQgAAAL8AAEjCAABIwgAAAD8AAEjCAABIwgAAAD8AAEhCAABIwgAAAL8AAEhCAABIwgAAAL8AAEhCAABIwgAAAD8AAEhCAABIQgAAAD8AAEhCAABIQgAAAD8AAEhCAABIwgAAAD8AAEhCAABIwgAAAD8AAEjCAABIwgAAAL8AAEhCAABIQgAAAL8AAEhCAABIQgAAAL8AAEjCAABIQgAAAD8AAEhCAABIQgAAAL8AAEhCAABIwgAAAL8AAEhCAABIQgAAAL8AAEjCAABIQgAAAL8AAEhCAABIQgAAAD8AAEhCAABIQgAAAL8AAEjCAABIQgAAAD8AAEjCAABIwgAAAD8AAEjCAABIwgAAAD8AAEjCAABIQgAAAD8AAEjCAABIQgAAAD8AAEhCAABIQgAAAD8AAEhCAABIQgAAAD8AAEjCAABIQgAAAL8AAEjCAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+"vertex_data": PackedByteArray("AFE8wgAAAL8AAFxCAFE8wgAAAL8AAFzCAFE8wgAAAD8AAFzCAFE8QgAAAL8AAFzCAFE8wgAAAL8AAFzCAFE8wgAAAL8AAFxCAFE8wgAAAD8AAFzCAFE8wgAAAL8AAFzCAFE8QgAAAL8AAFzCAFE8wgAAAD8AAFzCAFE8wgAAAD8AAFxCAFE8wgAAAL8AAFxCAFE8wgAAAL8AAFxCAFE8wgAAAD8AAFxCAFE8QgAAAD8AAFxCAFE8QgAAAD8AAFxCAFE8wgAAAD8AAFxCAFE8wgAAAD8AAFzCAFE8wgAAAL8AAFxCAFE8QgAAAL8AAFxCAFE8QgAAAL8AAFzCAFE8QgAAAD8AAFxCAFE8QgAAAL8AAFxCAFE8wgAAAL8AAFxCAFE8QgAAAL8AAFzCAFE8QgAAAL8AAFxCAFE8QgAAAD8AAFxCAFE8QgAAAL8AAFzCAFE8QgAAAD8AAFzCAFE8wgAAAD8AAFzCAFE8wgAAAD8AAFzCAFE8QgAAAD8AAFzCAFE8QgAAAD8AAFxCAFE8QgAAAD8AAFxCAFE8QgAAAD8AAFzCAFE8QgAAAL8AAFzCAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_small"]
@@ -113,8 +113,8 @@ use_collision = true
 size = Vector3(94.1582, 1, 110)
 material = SubResource("StandardMaterial3D_ke0wg")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1945727505]
-mesh = SubResource("ArrayMesh_x4b8f")
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1519786441]
+mesh = SubResource("ArrayMesh_ahbqi")
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1224720312]
 transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, -13.763757, 5.237507, -35.12233)
@@ -265,7 +265,14 @@ environment = SubResource("Environment_ke0wg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.269635, 2.1252515, 0)
 radius = 0.5
 
-[node name="Trigger" parent="." unique_id=1808192201 instance=ExtResource("7_ahbqi")]
+[node name="Trigger2" parent="." unique_id=1808192201 instance=ExtResource("7_ahbqi")]
+transform = Transform3D(-4.371139e-08, 0, -8.875, 0, 1, 0, 1, 0, -3.8793857e-07, -15.1061, 0, 3.0595665)
+size = Vector3(1, 1, 1)
+fire_once = true
+camera_shake = SubResource("Resource_du5ex")
+spawn_point_set = true
+
+[node name="Trigger" parent="." unique_id=1628911216 instance=ExtResource("7_ahbqi")]
 transform = Transform3D(1, 0, 0, 0, 1.0241094, 0, 0, 0, 4.858903, -54.780514, 0, -9.699995)
 fire_once = true
 camera_shake = SubResource("Resource_du5ex")
