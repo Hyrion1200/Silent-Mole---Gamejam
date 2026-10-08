@@ -14,3 +14,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08311653, 0, 39.880707)
 
 [node name="JAM_Wall" parent="." unique_id=1723334683 instance=ExtResource("3_207s6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08311653, 0, 39.880707)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="JAM_Wall" unique_id=2018020248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1752243, 1.7453399, 0)

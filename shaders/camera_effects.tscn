@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://b2w6vs80j0kt1"]
+
+[ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shader/ScreenEffects/pixelization_spatial.gdshader" id="1_q7ro7"]
+[ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shader/colorgrading/ScreenEffects_Ultimate.tres" id="2_35j0a"]
+[ext_resource type="Shader" uid="uid://dbapk0dtj85oy" path="res://shader/colorgrading/ColorCorrection_Mini.tres" id="3_07g0h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyc2g"]
+render_priority = 0
+shader = ExtResource("1_q7ro7")
+shader_parameter/pixel_size = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6135i"]
+material = SubResource("ShaderMaterial_wyc2g")
+flip_faces = true
+size = Vector2(2, 2)
+center_offset = Vector3(0, 0.11, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gv2ai"]
+shader = ExtResource("2_35j0a")
+shader_parameter/Pixelation = true
+shader_parameter/Pixelation_Scale = 19.60000029206352
+shader_parameter/Panini = 0.0
+shader_parameter/Chromatic_Peripheral = 0.9
+shader_parameter/Chromatic_Aberrations = 0.0
+shader_parameter/Chromatic_Darkening = 0.9
+shader_parameter/Blur_Amount = -4.0
+shader_parameter/Blur_Centered = 0.0
+shader_parameter/Bloom_Starts = 0.94999998807907
+shader_parameter/Bloom_Halation = 0.0
+shader_parameter/Bloom_Booster = 0.0
+shader_parameter/Shadows_Split = 0.3
+shader_parameter/Shadow_Color_Temp = 0.0
+shader_parameter/Shadow_Green_Tint = 0.0
+shader_parameter/Shadow_Brightness = 1.0
+shader_parameter/Shadow_Contrast = 1.0
+shader_parameter/Shadows_Saturation = 1.0
+shader_parameter/Highlights_Split = 0.7
+shader_parameter/Mid_Color_Temp = 7.500000856819
+shader_parameter/Mid_Green_Tint = 15.800000980498965
+shader_parameter/Mid_Brightness = 0.75
+shader_parameter/Mid_Contrast = 0.75
+shader_parameter/Mid_Saturation = 1.0
+shader_parameter/High_Color_Temp = 0.0
+shader_parameter/High_Green_Tint = 0.0
+shader_parameter/High_Brightness = 1.0
+shader_parameter/High_Contrast = 0.75
+shader_parameter/High_Saturation = 0.0
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = -66.19999949633944
+shader_parameter/Main_Brightness = 1.20000001788144
+shader_parameter/Main_Contrast = 1.0
+shader_parameter/Main_Saturation = 1.0
+shader_parameter/Posterization = 0.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Film_Grain = 0.0
+shader_parameter/Filter_Strenght = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3h3om"]
+shader = ExtResource("3_07g0h")
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = -76.4999996498218
+shader_parameter/Main_Brightness = 1.40000002086168
+shader_parameter/Main_Contrast = 1.10000001639132
+shader_parameter/Main_Saturation = 1.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Color_Filter = Color(1, 1, 1, 1)
+
+[node name="camera_effects" type="Node" unique_id=1463463682]
+
+[node name="pixelizeMesh" type="MeshInstance3D" parent="." unique_id=116501398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62268e-06, 6.64, 13)
+mesh = SubResource("QuadMesh_6135i")
+
+[node name="Screen_Effect_Ultimate" type="CanvasLayer" parent="." unique_id=1944841500]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="Screen_Effect_Ultimate" unique_id=287277032]
+material = SubResource("ShaderMaterial_gv2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen_Effect_Colorgrading_simple" type="CanvasLayer" parent="." unique_id=582672975]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Screen_Effect_Colorgrading_simple" unique_id=627566664]
+material = SubResource("ShaderMaterial_3h3om")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
