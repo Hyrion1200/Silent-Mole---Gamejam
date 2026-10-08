@@ -2,10 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://dvvet50uh7urs" path="res://assets/_mesh/_Lookdev/JAM_Wall.fbx" id="1_jyk51"]
 [ext_resource type="Texture2D" uid="uid://kk1x6cj0b5i8" path="res://assets/_texture/_rock/Low_Albedo.jpg" id="2_txqtx"]
+[ext_resource type="Texture2D" uid="uid://0cljef3bvyma" path="res://assets/_texture/_rock/Low_Normal.jpg" id="3_txqtx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd7y8"]
 albedo_texture = ExtResource("2_txqtx")
 metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 4.3
+normal_texture = ExtResource("3_txqtx")
 uv1_scale = Vector3(0.001, 0.001, 0.001)
 uv1_triplanar = true
 

@@ -2,9 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://dlk7b8207ipno" path="res://assets/_mesh/_Lookdev/JAM_Poutres.fbx" id="1_ct0mc"]
 [ext_resource type="Texture2D" uid="uid://d3ygv2420tx5u" path="res://assets/_texture/_wood/Wood_Albedo.jpg" id="2_rbnty"]
+[ext_resource type="Texture2D" uid="uid://ccjaonj3ygl8v" path="res://assets/_texture/_wood/Wood_Normal.jpg" id="3_fm37m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8c4j"]
 albedo_texture = ExtResource("2_rbnty")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("3_fm37m")
 texture_filter = 0
 
 [node name="JAM_Poutres" unique_id=1185288636 instance=ExtResource("1_ct0mc")]
