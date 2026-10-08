@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bu4sxdgniekf"]
 
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_shake.gd" id="2_shake"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
 friction = 0.0
@@ -19,14 +20,14 @@ height = 1.8
 shading_mode = 0
 albedo_color = Color(0.2, 0.8, 1, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_beam"]
+material = SubResource("StandardMaterial3D_debug")
+size = Vector3(0.02, 0.02, 1)
+
 [sub_resource type="TorusMesh" id="TorusMesh_noise"]
 material = SubResource("StandardMaterial3D_debug")
 rings = 96
 ring_segments = 6
-
-[sub_resource type="BoxMesh" id="BoxMesh_beam"]
-material = SubResource("StandardMaterial3D_debug")
-size = Vector3(0.02, 0.02, 1)
 
 [node name="Player" type="RigidBody3D" unique_id=704551036 groups=["player"]]
 physics_material_override = SubResource("PhysicsMaterial_player")
@@ -52,6 +53,9 @@ top_level = true
 attributes = SubResource("CameraAttributesPhysical_ke0wg")
 current = true
 fov = 37.849285
+script = ExtResource("2_shake")
+shake_amplitude = 0.15
+shake_duration = 5.0
 
 [node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1830250579 groups=["lamp"]]
 light_energy = 4.0
@@ -59,13 +63,13 @@ shadow_enabled = true
 spot_range = 10.0
 spot_angle = 25.0
 
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=556691104 groups=["debug"]]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_beam")
+
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("TorusMesh_noise")
-
-[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" groups=["debug"]]
-visible = false
-cast_shadow = 0
-mesh = SubResource("BoxMesh_beam")
