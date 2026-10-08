@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{50e21b86-166b-4c8d-b489-cd8740e58e87}">
+		<property name="name">
+			<value>musParameter</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d96527fb-defb-461d-9cab-d5e68445d838}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{42d57716-0047-4272-85e8-d948155cd570}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{42d57716-0047-4272-85e8-d948155cd570}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>7</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Nothing</value>
+			<value>Menu</value>
+			<value>Idle</value>
+			<value>Suspicious</value>
+			<value>Alerted</value>
+			<value>Found</value>
+			<value>Death</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
