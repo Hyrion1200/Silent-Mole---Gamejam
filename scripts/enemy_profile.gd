@@ -20,6 +20,12 @@ extends Resource
 	set(value):
 		view_width = value
 		emit_changed()
+## How far above and below eye level the enemy sees at most. The vision is view_width
+## squashed down to this height, so it is an ellipse seen from the front.
+@export_range(0.1, 20.0, 0.1, "or_greater") var view_height: float = 2.0:
+	set(value):
+		view_height = value
+		emit_changed()
 ## Eye offset from the body center.
 @export var eye_height: float = 0.7:
 	set(value):

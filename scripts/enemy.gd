@@ -102,6 +102,10 @@ func _update_view_shape() -> void:
 	cone.height = tip
 	cone.bottom_radius = tip * slope
 	$Debug/Cone.position = Vector3(0.0, profile.eye_height, -tip / 2.0)
+	# The meshes lie along the view axis, their local Z is the height of the vision
+	var squash := Vector3(1.0, 1.0, profile.view_height / profile.view_width)
+	$Debug/Cone.scale = squash
+	$Debug/Tube.scale = squash
 	$Debug/Tube.visible = profile.view_range > tip
 	if profile.view_range > tip:
 		var tube: CylinderMesh = $Debug/Tube.mesh
@@ -357,7 +361,8 @@ func _sees(point: Vector3, target: CollisionObject3D = null) -> bool:
 	var to := point - eye
 	# Distance along the view axis, and away from it
 	var ahead := to.dot(-global_basis.z)
-	var aside := sqrt(maxf(to.length_squared() - ahead * ahead, 0.0))
+	# Height counts for more than width, which squashes the vision down to view_height
+	var aside := Vector2(to.dot(global_basis.x), to.dot(global_basis.y) * profile.view_width / profile.view_height).length()
 	if ahead <= 0.0 or ahead > profile.view_range or aside > minf(ahead * tan(deg_to_rad(profile.view_half_angle)), profile.view_width):
 		return false
 	var query := PhysicsRayQueryParameters3D.create(eye, point)
