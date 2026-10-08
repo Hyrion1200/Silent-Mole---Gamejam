@@ -17,6 +17,9 @@ extends RigidBody3D
 ## Throw impulse. Launch speed is throw_impulse / mass, so heavy items land closer.
 @export var throw_impulse: float = 30.0
 
+## Speed at which a climb point pulls the player up, in m/s.
+@export var climb_speed: float = 1.0
+
 ## How far a footstep is heard by enemies.
 @export var step_noise_radius: float = 6.0
 ## Distance travelled between two footsteps. We can increase it to be more lenient
@@ -31,6 +34,7 @@ var _debug: bool = false
 @onready var _camera: Camera3D = $Camera3D
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
 @onready var _beam: MeshInstance3D = $Camera3D/Lamp/Beam
+@onready var _prompt: Control = $Camera3D/Fade/Prompt
 
 
 func _ready() -> void:
@@ -40,6 +44,8 @@ func _ready() -> void:
 	var ring: TorusMesh = $NoiseRing.mesh
 	ring.outer_radius = step_noise_radius
 	ring.inner_radius = step_noise_radius - 0.06
+	# Plane facing the camera at the end of the aim ray
+	$Camera3D/Reach.position.z = -reach
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -62,6 +68,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera.fade_out()
 	elif event.is_action_pressed(&"lamp"): # F
 		_lamp.visible = not _lamp.visible
+	elif event.is_action_pressed(&"interact"): # E
+		var point := _aimed(true) as ClimbPoint
+		# Prevent retriggering climibing if already climbing or freezed (death animation for ex.)
+		if point and not freeze:
+			_climb(point)
 	elif event.is_action_pressed(&"grab"):
 		if _held:
 			_release()
@@ -106,17 +117,49 @@ func _let_go() -> void:
 		_held = null
 
 
+## Frozen and moved by physical forces --> straight up to the point's height, then over onto it
+## May have to be changed later but will do the job for now
+func _climb(point: ClimbPoint) -> void:
+	_release()
+	freeze = true
+	# Otherwise the speed from before the climb keeps counting footsteps and comes back after
+	linear_velocity = Vector3.ZERO
+	var collision: CollisionShape3D = $CollisionShape3D
+	var capsule: CapsuleShape3D = collision.shape
+	# The point marks where the feet land
+	var top := point.global_position + Vector3.UP * capsule.height * collision.scale.y / 2.0
+	var above := Vector3(global_position.x, top.y, global_position.z)
+	var tween := create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	tween.tween_property(self, ^"global_position", above, global_position.distance_to(above) / climb_speed)
+	tween.tween_property(self, ^"global_position", top, above.distance_to(top) / climb_speed)
+	tween.tween_callback(set_freeze_enabled.bind(false))
+	# Start the climb SFX @Pierre67
+
+
 func _aimed_body() -> RigidBody3D:
+	return _aimed() as RigidBody3D
+
+
+## What the camera looks at within reach. Climb points are areas, bodies still block the ray.
+func _aimed(areas: bool = false) -> Object:
 	var from := _camera.global_position
 	var query := PhysicsRayQueryParameters3D.create(from, from - _camera.global_basis.z * reach)
 	query.exclude = [get_rid()]
-	return get_world_3d().direct_space_state.intersect_ray(query).get("collider") as RigidBody3D
+	query.collide_with_areas = areas
+	# Standing inside a climb point counts as aiming at it
+	query.hit_from_inside = areas
+	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
 
 func _process(_delta: float) -> void:
 	## Prevent stuttering that we would get with get_global_transform()
 	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
 	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
+	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
+	var body := _aimed_body()
+	_prompt.visible = _held != null \
+			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable"))) \
+			or (not freeze and _aimed(true) is ClimbPoint)
 
 	if _beam.is_visible_in_tree():
 		# Same ray as the enemies cast to find the spot lit by the lamp
