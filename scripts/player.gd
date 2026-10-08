@@ -54,6 +54,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"debug"): # F3
 		_debug = not _debug
 		get_tree().call_group(&"debug", &"set_visible", _debug)
+	elif _debug and event.is_action_pressed(&"shake"): # C
+		_camera.shake()
 	elif event.is_action_pressed(&"lamp"): # F
 		_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"grab"):
@@ -62,21 +64,38 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			var body := _aimed_body()
 			if body and body.is_in_group(&"draggable"): # Left-Click
-				_held = body
-				# Prevent riding the item we are holding
-				add_collision_exception_with(body)
-				# Prevent the held item from spinning
-				body.lock_rotation = true
+				_drag(body)
 	elif event.is_action_pressed(&"throw"):
 		# A throwable that is not held (or not draggable) is shoved from where it stands
 		var body := _held if _held else _aimed_body()
 		if body and body.is_in_group(&"throwable"): # Right-Click
-			_release()
-			# Same impulse for every item: launch speed is throw_impulse / mass
-			body.apply_central_impulse(-_camera.global_basis.z * throw_impulse)
+			_throw(body)
+
+
+func _drag(body: RigidBody3D) -> void:
+	_held = body
+	# Prevent riding the item we are holding
+	add_collision_exception_with(body)
+	# Prevent the held item from spinning
+	body.lock_rotation = true
+	# Start the dragged SFX @Pierre67
+
+
+func _throw(body: RigidBody3D) -> void:
+	_let_go()
+	# Same impulse for every item: launch speed is throw_impulse / mass
+	body.apply_central_impulse(-_camera.global_basis.z * throw_impulse)
+	# Start the throw SFX @Pierre67
 
 
 func _release() -> void:
+	if _held:
+		_let_go()
+		# Start the SFX release @Pierre67
+
+
+## Stops holding the item without any SFX, shared by _release and _throw
+func _let_go() -> void:
 	if _held:
 		remove_collision_exception_with(_held)
 		_held.lock_rotation = false

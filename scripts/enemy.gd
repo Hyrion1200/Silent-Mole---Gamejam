@@ -221,7 +221,7 @@ func _next_state(gain: float) -> State:
 		return State.IDLE if state == State.IDLE else State.RETURNING
 	match state:
 		State.CHASING:
-			# Only leaves by starting a search, or by awareness running out
+			# Only leaves by starting a search, or by awareness running out 
 			return State.CHASING
 		State.SEARCHING:
 			return State.CHASING if gain > 0.0 else State.SEARCHING
@@ -234,6 +234,22 @@ func _set_state(new_state: State) -> void:
 	if new_state == State.CHASING and state not in [State.CHASING, State.SEARCHING]:
 		detected.emit()
 	state = new_state
+	match state:
+		State.IDLE:
+			# Start the idle music @Pierre67
+			return
+		State.SUSPICIOUS:
+			# Start the Suspicious music @Pierre67
+			return
+		State.INVESTIGATING:
+			# Start the Alerted music @Pierre67
+			return
+		State.SEARCHING:
+			# Fallback to the Alerted music @Pierre67
+			return
+		State.CHASING:
+			# Start the Found music @Pierre67
+			return
 
 
 ## Awareness decays when nothing feeds it, except while the enemy is still on its
