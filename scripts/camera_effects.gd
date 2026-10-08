@@ -16,10 +16,20 @@ extends Camera3D
 ## 0.1 is linear, higher makes the fade in start slow then rush to the view
 @export_range(0.0, 1.0) var fade_in_start_ratio: float = 0.5
 
+## Set before changing scene so the next camera starts black and fades in
+static var fade_in_on_ready: bool = false
+
 var _shake: float = 0.0
 var _fade_tween: Tween
 
 @onready var _fade: ColorRect = $Fade/Rect
+
+
+func _ready() -> void:
+	if fade_in_on_ready:
+		fade_in_on_ready = false
+		_fade.color.a = 1.0
+		fade_in()
 
 
 ## Reveal the view from black
