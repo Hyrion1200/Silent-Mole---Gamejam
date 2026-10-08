@@ -7,6 +7,7 @@ script = ExtResource("1_profile")
 view_half_angle = 70.0
 view_width = 9.35
 view_height = 1.0
+eye_height = 0.4
 detect_time = 1.0
 lamp_detect_time = 3.0
 forget_time = 15.0
