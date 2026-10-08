@@ -1,9 +1,7 @@
 extends Camera3D
 
-## Max offset of the view at full strength, in meters
-@export var shake_amplitude: float = 0.5
-## Time for a full strength shake to fade out, in seconds
-@export var shake_duration: float = 0.4
+## Shake played when shake() is called without settings
+@export var default_shake: ShakeSettings
 
 ## Time for a full fade out, in seconds
 @export var fade_out_duration: float = 1.0
@@ -20,6 +18,7 @@ extends Camera3D
 static var fade_in_on_ready: bool = false
 
 var _shake: float = 0.0
+var _shake_settings: ShakeSettings
 var _fade_tween: Tween
 
 @onready var _fade: ColorRect = $Fade/Rect
@@ -55,16 +54,20 @@ func _fade_to(alpha: float, fade_duration: float, start_ratio: float) -> void:
 	_fade_tween.tween_property(_fade, ^"color:a", alpha, fade_duration * (1.0 - start_ratio))
 
 
-func shake(strength: float = 1.0) -> void:
-	_shake = maxf(_shake, strength)
+func shake(settings: ShakeSettings = default_shake) -> void:
+	# A weaker shake shall not cut a stronger one short
+	if _shake > 0.0 and _shake_settings.amplitude * _shake > settings.amplitude:
+		return
+	_shake_settings = settings
+	_shake = 1.0
 	# Start a sound here @Pierre67
 
 
 func _process(delta: float) -> void:
 	if _shake <= 0.0:
 		return
-	_shake = maxf(_shake - delta / shake_duration, 0.0)
+	_shake = maxf(_shake - delta / _shake_settings.duration, 0.0)
 	# The offsets only move the view --> the player keeps driving position and rotation
 	# h_offset and v_offset and Camera3D properties
-	h_offset = randf_range(-1.0, 1.0) * shake_amplitude * _shake
-	v_offset = randf_range(-1.0, 1.0) * shake_amplitude * _shake
+	h_offset = randf_range(-1.0, 1.0) * _shake_settings.amplitude * _shake
+	v_offset = randf_range(-1.0, 1.0) * _shake_settings.amplitude * _shake

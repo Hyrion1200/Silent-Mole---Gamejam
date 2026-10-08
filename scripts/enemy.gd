@@ -4,6 +4,8 @@ extends CharacterBody3D
 
 ## Emitted when the enemy starts chasing. Not emitted again when a search turns back into a chase.
 signal detected
+## Emitted once per capture, when the caught player is placed and faces the enemy.
+signal captured
 
 enum State {
 	# Idle
@@ -102,6 +104,8 @@ var _search_origin: Vector3
 var _search_timer: float = 0.0
 ## Captured the player --> Used to deactivate the AI
 var _caught: bool = false
+## captured was emitted for the current capture
+var _captured_sent: bool = false
 
 ## On start of the scene save "home" position and rotation to comeback in case of chase ending
 ## We will need to save base animation aswell later on
@@ -158,6 +162,18 @@ func hear(at: Vector3, radius: float) -> void:
 			_set_state(State.CHASING)
 
 
+## Back at its post as if nothing happened.
+## Called through the "enemies" group when the player respawns.
+func reset() -> void:
+	_caught = false
+	_captured_sent = false
+	awareness = 0.0
+	velocity = Vector3.ZERO
+	global_position = _home
+	rotation.y = _home_yaw
+	_set_state(State.IDLE)
+
+
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -174,6 +190,9 @@ func _physics_process(delta: float) -> void:
 		# AI off: stands there and only turns to face the player
 		var dir := player.global_position - global_position
 		rotation.y = rotate_toward(rotation.y, atan2(-dir.x, -dir.z), turn_speed * delta)
+		if not _captured_sent and player.facing_captor:
+			_captured_sent = true
+			captured.emit()
 		return
 	var gain := 0.0
 	if player and _sees_body(player):

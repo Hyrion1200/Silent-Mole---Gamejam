@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bintkcf5gav7"]
+
+[ext_resource type="Script" uid="uid://3608fk1q3ipl" path="res://scripts/trigger.gd" id="1_trigger"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_zone"]
+resource_local_to_scene = true
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_zone"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.6, 0.2, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_zone"]
+material = SubResource("StandardMaterial3D_zone")
+
+[node name="Trigger" type="Area3D" unique_id=1808192201]
+monitorable = false
+script = ExtResource("1_trigger")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=529204665]
+shape = SubResource("BoxShape3D_zone")
+
+[node name="Debug" type="MeshInstance3D" parent="." unique_id=1273321278 groups=["debug"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_zone")
