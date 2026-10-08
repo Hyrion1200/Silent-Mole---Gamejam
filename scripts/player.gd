@@ -17,16 +17,29 @@ extends RigidBody3D
 ## Throw impulse. Launch speed is throw_impulse / mass, so heavy items land closer.
 @export var throw_impulse: float = 30.0
 
+## How far a footstep is heard by enemies.
+@export var step_noise_radius: float = 6.0
+## Distance travelled between two footsteps. We can increase it to be more lenient
+@export var step_length: float = 0.8
+
 var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
+var _total_walked: float = 0.0
+var _debug: bool = false
 
 @onready var _camera: Camera3D = $Camera3D
+@onready var _lamp: SpotLight3D = $Camera3D/Lamp
+@onready var _beam: MeshInstance3D = $Camera3D/Lamp/Beam
 
 
 func _ready() -> void:
 	# Capture the mouse to prevent mouse from leaving the window
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# For Debug purposes
+	var ring: TorusMesh = $NoiseRing.mesh
+	ring.outer_radius = step_noise_radius
+	ring.inner_radius = step_noise_radius - 0.06
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -38,12 +51,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event is InputEventMouseButton and event.pressed and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif event.is_action_pressed(&"debug"): # F3
+		_debug = not _debug
+		get_tree().call_group(&"debug", &"set_visible", _debug)
+	elif event.is_action_pressed(&"lamp"): # F
+		_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"grab"):
 		if _held:
 			_release()
 		else:
 			var body := _aimed_body()
-			if body and body.is_in_group(&"draggable"):
+			if body and body.is_in_group(&"draggable"): # Left-Click
 				_held = body
 				# Prevent riding the item we are holding
 				add_collision_exception_with(body)
@@ -52,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"throw"):
 		# A throwable that is not held (or not draggable) is shoved from where it stands
 		var body := _held if _held else _aimed_body()
-		if body and body.is_in_group(&"throwable"):
+		if body and body.is_in_group(&"throwable"): # Right-Click
 			_release()
 			# Same impulse for every item: launch speed is throw_impulse / mass
 			body.apply_central_impulse(-_camera.global_basis.z * throw_impulse)
@@ -77,14 +95,32 @@ func _process(_delta: float) -> void:
 	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
 	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
 
+	if _beam.is_visible_in_tree():
+		# Same ray as the enemies cast to find the spot lit by the lamp
+		var from := _lamp.global_position
+		var query := PhysicsRayQueryParameters3D.create(from, from - _lamp.global_basis.z * _lamp.spot_range)
+		query.exclude = [get_rid()]
+		var hit := get_world_3d().direct_space_state.intersect_ray(query)
+		var length: float = from.distance_to(hit.position) if hit else _lamp.spot_range
+		# Starts below the eye, a line seen exactly end-on would only be a dot
+		var start := Vector3(0.0, -0.15, 0.0)
+		var end := Vector3(0.0, 0.0, -length)
+		_beam.transform = Transform3D(Basis.looking_at(end - start), (start + end) / 2.0) 				.scaled_local(Vector3(1.0, 1.0, start.distance_to(end)))
 
-func _physics_process(_delta: float) -> void:
+
+func _physics_process(delta: float) -> void:
 	var input := Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * speed
 	var diff := target - linear_velocity
 	diff.y = 0.0
 	# We do not want to rotate the player rigidbody
 	apply_central_force(diff * accel * mass)
+
+	# Everytime we walk a set distance start the hear function of all ennemies
+	_total_walked += Vector2(linear_velocity.x, linear_velocity.z).length() * delta
+	if _total_walked > step_length:
+		_total_walked = 0.0
+		get_tree().call_group(&"enemies", &"hear", global_position, step_noise_radius)
 
 	if _held:
 		var hold_point := _camera.global_position - _camera.global_basis.z * hold_distance

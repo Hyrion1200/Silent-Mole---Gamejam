@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://drjbe5kropmdm"]
+
+[ext_resource type="PackedScene" uid="uid://dbr2pj0vsnh1v" path="res://assets/JAM_BLOCKOUT_v002.fbx" id="1_bq6se"]
+
+[node name="JAM_BLOCKOUT_v002" unique_id=5400725 instance=ExtResource("1_bq6se")]
+
+[node name="polySurface20" parent="group1/Mockup/pCube22" parent_id_path=PackedInt32Array(977617671) index="13" unique_id=1260781322]
+transform = Transform3D(0.14821488, -0.8112307, -0.5656298, 0.9827778, 0.18464708, -0.0073000193, 0.110363886, -0.5548064, 0.824627, 0.7072846, 0.87725675, 11.490369)

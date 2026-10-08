@@ -15,7 +15,20 @@ height = 1.8
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ke0wg"]
 
-[node name="Player" type="RigidBody3D" unique_id=704551036]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
+shading_mode = 0
+albedo_color = Color(0.2, 0.8, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_noise"]
+material = SubResource("StandardMaterial3D_debug")
+rings = 96
+ring_segments = 6
+
+[sub_resource type="BoxMesh" id="BoxMesh_beam"]
+material = SubResource("StandardMaterial3D_debug")
+size = Vector3(0.02, 0.02, 1)
+
+[node name="Player" type="RigidBody3D" unique_id=704551036 groups=["player"]]
 physics_material_override = SubResource("PhysicsMaterial_player")
 can_sleep = false
 lock_rotation = true
@@ -39,3 +52,20 @@ top_level = true
 attributes = SubResource("CameraAttributesPhysical_ke0wg")
 current = true
 fov = 37.849285
+
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1830250579 groups=["lamp"]]
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 25.0
+
+[node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("TorusMesh_noise")
+
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" groups=["debug"]]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_beam")
