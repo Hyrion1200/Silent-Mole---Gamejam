@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Texture2D" uid="uid://dfx63ja3l32u7" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" path="res://scripts/shake_settings.gd" id="4_shake"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
 friction = 0.0
@@ -16,6 +17,11 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ke0wg"]
+
+[sub_resource type="Resource" id="Resource_shake"]
+script = ExtResource("4_shake")
+amplitude = 0.15
+duration = 5.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
 shading_mode = 0
@@ -60,8 +66,7 @@ attributes = SubResource("CameraAttributesPhysical_ke0wg")
 current = true
 fov = 37.849285
 script = ExtResource("2_shake")
-shake_amplitude = 0.15
-shake_duration = 5.0
+default_shake = SubResource("Resource_shake")
 fade_out_duration = 3.0
 fade_in_duration = 10.0
 fade_in_start_ratio = 0.2

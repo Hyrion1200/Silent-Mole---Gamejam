@@ -28,6 +28,14 @@ extends RigidBody3D
 ## Distance travelled between two footsteps. We can increase it to be more lenient
 @export var step_length: float = 0.8
 
+## Time between the captured signal and the respawn, in seconds
+@export var respawn_delay: float = 5.0
+
+## Where to respawn the player, moved by the triggers with spawn_point_set
+var spawn_point: Vector3
+## Captured, placed and done turning to the captor's head. Read by the captor to send captured
+var facing_captor: bool = false
+
 var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
@@ -37,7 +45,6 @@ var _move_tween: Tween
 ## The enemy that captured the player, and the height of its head above its center
 var _captor: Node3D
 var _captor_head: float = 0.0
-var _capture_faded: bool = false
 
 @onready var _camera: Camera3D = $Camera3D
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
@@ -48,6 +55,7 @@ var _capture_faded: bool = false
 func _ready() -> void:
 	# Capture the mouse to prevent mouse from leaving the window
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	spawn_point = global_position
 	# For Debug purposes
 	var ring: TorusMesh = $NoiseRing.mesh
 	ring.outer_radius = step_noise_radius
@@ -155,6 +163,8 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 		return
 	_captor = captor
 	_captor_head = head_height
+	# Connect to the captured signal
+	captor.captured.connect(_on_captured, CONNECT_ONE_SHOT)
 	_release()
 	# A climb in progress would carry on and unfreeze the player at its end
 	if _move_tween:
@@ -168,6 +178,27 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
 	# Start the captured SFX @Pierre67
+
+
+## The captor saw the player face it --> the view fades out, then the player respawns
+func _on_captured() -> void:
+	_camera.fade_out()
+	await get_tree().create_timer(respawn_delay).timeout
+	respawn()
+
+
+## Back to the last spawn point, free to move, with every enemy back at its post
+func respawn() -> void:
+	_release()
+	if _move_tween:
+		_move_tween.kill()
+	_captor = null
+	facing_captor = false
+	linear_velocity = Vector3.ZERO
+	global_position = spawn_point
+	freeze = false
+	get_tree().call_group(&"enemies", &"reset")
+	_camera.fade_in()
 
 
 func _aimed_body() -> RigidBody3D:
@@ -195,10 +226,8 @@ func _process(delta: float) -> void:
 		var pitch := atan2(to.y, Vector2(to.x, to.z).length())
 		_yaw = rotate_toward(_yaw, yaw, capture_turn_speed * delta)
 		_pitch = rotate_toward(_pitch, pitch, capture_turn_speed * delta)
-		# The fade out only starts once the player is placed and the camera faces the head
-		if not _capture_faded and not _move_tween.is_running() and is_zero_approx(angle_difference(_yaw, yaw)) and is_equal_approx(_pitch, pitch):
-			_capture_faded = true
-			_camera.fade_out()
+		# Only once the player is placed and the camera faces the head
+		facing_captor = not _move_tween.is_running() and is_zero_approx(angle_difference(_yaw, yaw)) and is_equal_approx(_pitch, pitch)
 	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
 	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
 	var body := _aimed_body()
