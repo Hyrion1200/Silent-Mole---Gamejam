@@ -35,3 +35,5 @@ metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 navigation_mesh = SubResource("NavigationMesh_5xbjy")
 
 [node name="TextureSet" parent="NavigationRegion3D" unique_id=1151871138 instance=ExtResource("2_4nkto")]
+
+[editable path="Player"]

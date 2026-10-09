@@ -29,7 +29,7 @@ shading_mode = 0
 albedo_color = Color(0.8007495, 0.6530097, 0.9789923, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_reach"]
-material = SubResource("StandardMaterial3D_debug")
+material = SubResource("StandardMaterial3D_g2els")
 size = Vector2(0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dqkch"]
