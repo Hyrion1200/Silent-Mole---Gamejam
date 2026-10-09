@@ -10,6 +10,10 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
 friction = 0.0
 
+[sub_resource type="Resource" id="Resource_capture_shake"]
+script = ExtResource("4_shake")
+duration = 0.35
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yj3ml"]
 radius = 0.4
 height = 1.8
@@ -55,6 +59,8 @@ script = ExtResource("1_player")
 speed = 2.75
 accel = 10.0
 eye_height = 0.3
+capture_shake = SubResource("Resource_capture_shake")
+respawn_delay = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=958506263]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
@@ -74,6 +80,7 @@ fov = 37.849285
 script = ExtResource("2_shake")
 default_shake = SubResource("Resource_shake")
 fade_out_duration = 3.0
+fade_out_start_ratio = 0.6
 fade_in_duration = 4.0
 fade_in_start_ratio = 0.1
 

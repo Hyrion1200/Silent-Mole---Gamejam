@@ -4,8 +4,6 @@ extends CharacterBody3D
 
 ## Emitted when the enemy starts chasing. Not emitted again when a search turns back into a chase.
 signal detected
-## Emitted once per capture, when the caught player is placed and faces the enemy.
-signal captured
 
 enum State {
 	# Idle
@@ -76,8 +74,6 @@ var _search_origin: Vector3
 var _search_timer: float = 0.0
 ## Captured the player --> Used to deactivate the AI
 var _caught: bool = false
-## captured was emitted for the current capture
-var _captured_sent: bool = false
 ## Stops left behind since the start of the round
 var _patrol_count: int = 0
 
@@ -146,7 +142,6 @@ func hear(at: Vector3, radius: float) -> void:
 ## Called through the "enemies" group when the player respawns.
 func reset() -> void:
 	_caught = false
-	_captured_sent = false
 	awareness = 0.0
 	velocity = Vector3.ZERO
 	global_position = _home
@@ -164,17 +159,14 @@ func _physics_process(delta: float) -> void:
 	# If we end up with multiple lamp i'll change this
 	var lamp := get_tree().get_first_node_in_group(&"lamp") as SpotLight3D
 	# no line of sight check, a thin wall does not protect
-	if player and $DeathRange.overlaps_body(player):
-		# The camera is forced to look at the head
+	if not _caught and player and $DeathRange.overlaps_body(player):
+		# The player runs the rest of the death on its own: placement, camera, fade, respawn
 		player.capture(self, profile.eye_height, profile.death_placement_distance)
 		_caught = true
 	if _caught:
 		# AI off: stands there and only turns to face the player
 		var dir := player.global_position - global_position
 		rotation.y = rotate_toward(rotation.y, atan2(-dir.x, -dir.z), profile.turn_speed * delta)
-		if not _captured_sent and player.facing_captor:
-			_captured_sent = true
-			captured.emit()
 		return
 	var gain := 0.0
 	if player and _sees_body(player):

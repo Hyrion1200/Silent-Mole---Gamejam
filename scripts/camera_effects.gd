@@ -37,8 +37,9 @@ func fade_in() -> void:
 
 
 ## Hide the view to black
-func fade_out() -> void:
+func fade_out() -> float:
 	_fade_to(1.0, fade_out_duration, fade_out_start_ratio)
+	return fade_in_duration
 
 
 func _fade_to(alpha: float, fade_duration: float, start_ratio: float) -> void:
