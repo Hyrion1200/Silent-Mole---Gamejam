@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bp4ofwxpusr8i"]
+
+[ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="1_syioc"]
+
+[node name="JAM_Helmet" unique_id=1108416575 instance=ExtResource("1_syioc")]
