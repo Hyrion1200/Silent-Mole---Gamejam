@@ -310,7 +310,9 @@ func _step_toward(target: Vector3, reach: float) -> Vector3:
 	if to.length() <= reach:
 		return Vector3.ZERO
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
-	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true):
+	# The first point is the enemy itself put on the navmesh. On a slope it lands behind
+	# the enemy, which walked back to it forever --> skipped
+	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1):
 		to = point - global_position
 		to.y = 0.0
 		if to.length() > 0.1:

@@ -20,6 +20,7 @@ depth = 0.15
 script = ExtResource("1_title")
 
 [node name="Environment" parent="." unique_id=162347460 instance=ExtResource("3_env")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 39.548286)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=370744867]
 environment = SubResource("Environment_title")

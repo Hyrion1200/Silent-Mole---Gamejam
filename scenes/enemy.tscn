@@ -65,6 +65,8 @@ rings = 1
 cap_top = false
 
 [node name="Enemy" type="CharacterBody3D" unique_id=142524920 groups=["enemies"]]
+floor_constant_speed = true
+floor_snap_length = 0.3
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 
