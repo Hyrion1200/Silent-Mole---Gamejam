@@ -81,6 +81,9 @@ var _patrol_count: int = 0
 @onready var _label: Label3D = $Label3D
 @onready var _bar: MeshInstance3D = $Debug/Bar
 
+@onready var _anim: AnimationPlayer = $"miner no tex/AnimationPlayer"
+
+
 
 func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
@@ -262,18 +265,23 @@ func _set_state(new_state: State) -> void:
 	state = new_state
 	match state:
 		State.IDLE:
+			_anim.play("walk drunk")
 			# Start the idle music @Pierre67
 			return
 		State.SUSPICIOUS:
+			_anim.play("loose aggro")
 			# Start the Suspicious music @Pierre67
 			return
 		State.INVESTIGATING:
 			# Start the Alerted music @Pierre67
+			_anim.play("see player")
 			return
 		State.SEARCHING:
+			_anim.play("walk drunk")
 			# Fallback to the Alerted music @Pierre67
 			return
 		State.CHASING:
+			_anim.play("chase")
 			# Start the Found music @Pierre67
 			return
 

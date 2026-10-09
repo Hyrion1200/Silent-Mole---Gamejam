@@ -13,4 +13,4 @@ lamp_detect_time = 3.0
 forget_time = 15.0
 search_radius = 15.0
 search_point_time = 1.0
-search_cheat = 0.6
+search_cheat = 1.0

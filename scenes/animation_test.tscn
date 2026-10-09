@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://b28wujcagavo3"]
+
+[ext_resource type="PackedScene" uid="uid://c3a7c6yiaig8g" path="res://scenes/test_level.tscn" id="1_w2rpd"]
+[ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="2_sw4tn"]
+[ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="3_wh0ns"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x2dv1"]
+resource_local_to_scene = true
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cone"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.3, 0.2, 0.15)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w2rpd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_cone")
+top_radius = 0.0
+bottom_radius = 9.35
+height = 3.4031217
+radial_segments = 32
+rings = 1
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sw4tn"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_cone")
+top_radius = 9.35
+bottom_radius = 9.35
+height = 8.596878
+radial_segments = 32
+rings = 1
+cap_top = false
+
+[node name="Node3D" type="Node3D" unique_id=637703904]
+
+[node name="TestLevel" parent="." unique_id=574000196 instance=ExtResource("1_w2rpd")]
+
+[node name="Enemy3" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("2_sw4tn")]
+transform = Transform3D(-0.7759429, 0, -0.63080317, 0, 1, 0, 0.63080317, 0, -0.7759429, -13.816869, 0.9, 3.1607523)
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+
+[node name="CollisionShape3D" parent="Enemy3/DeathRange" parent_id_path=PackedInt32Array(142524920, 597506583) index="0" unique_id=921262123]
+shape = SubResource("SphereShape3D_x2dv1")
+
+[node name="Cone" parent="Enemy3/Debug" parent_id_path=PackedInt32Array(142524920, 84200304) index="0" unique_id=719398577]
+mesh = SubResource("CylinderMesh_w2rpd")
+
+[node name="Tube" parent="Enemy3/Debug" parent_id_path=PackedInt32Array(142524920, 84200304) index="3" unique_id=368716703]
+mesh = SubResource("CylinderMesh_sw4tn")
+
+[node name="Skeleton3D" parent="Enemy3/miner no tex/Armature_007" parent_id_path=PackedInt32Array(142524920, 697813067, 598176597) index="0" unique_id=996559676]
+bones/0/position = Vector3(0.5563819, 1.439549, -219.27602)
+bones/0/rotation = Quaternion(-0.72554725, 0.009303939, 0.031146087, 0.6874042)
+bones/1/rotation = Quaternion(0.3544712, -0.0218641, 0.077055864, 0.9316301)
+bones/2/rotation = Quaternion(0.04119941, -0.010284353, 0.009447997, 0.99905336)
+bones/3/rotation = Quaternion(0.041379005, -0.009670313, 0.008739609, 0.99905854)
+bones/4/rotation = Quaternion(-0.026327778, 0.025248438, -0.005974794, 0.9993166)
+bones/5/rotation = Quaternion(-0.3181642, 0.13808452, -0.08870487, 0.9337215)
+bones/7/rotation = Quaternion(-0.59541816, -0.38716462, 0.6057914, -0.3586052)
+bones/8/rotation = Quaternion(0.13375102, -0.04371042, 0.2135756, 0.9667397)
+bones/9/rotation = Quaternion(0.008771281, 0.0021675394, 0.37781116, 0.9258387)
+bones/10/rotation = Quaternion(0.06882175, -0.25421208, 0.08808919, 0.96066654)
+bones/15/rotation = Quaternion(-0.11725285, 0.00010544674, 0.013617364, 0.9930088)
+bones/16/rotation = Quaternion(0.3701042, 0.0022847762, -0.044323184, 0.9279295)
+bones/19/rotation = Quaternion(-0.10196225, 0.005667538, -0.03711817, 0.9940794)
+bones/23/rotation = Quaternion(0.5911757, -0.38019487, 0.61951476, 0.34952068)
+bones/24/rotation = Quaternion(0.19250186, 0.31894574, -0.41208887, 0.8315043)
+bones/25/rotation = Quaternion(0.009398078, -0.0024195504, -0.40422508, 0.9146082)
+bones/26/rotation = Quaternion(0.13788503, 0.14588404, -0.14940733, 0.9681854)
+bones/31/rotation = Quaternion(-0.2055198, -0.00040039024, -0.026294144, 0.9782996)
+bones/32/rotation = Quaternion(0.21521221, -0.0022010116, 0.020636749, 0.97634685)
+bones/39/rotation = Quaternion(0.04135512, 0.35631832, 0.93039256, -0.07547605)
+bones/40/rotation = Quaternion(-0.70074403, -0.04333223, 0.03267561, 0.7113455)
+bones/41/rotation = Quaternion(0.5770552, 0.08007327, 0.018915385, 0.8125502)
+bones/42/rotation = Quaternion(0.2935124, -0.049885932, 0.015798539, 0.9545221)
+bones/44/rotation = Quaternion(-0.08591795, 0.28008404, 0.9437071, 0.15358433)
+bones/45/rotation = Quaternion(-0.58893484, -0.041285526, 0.0056123855, 0.80710584)
+bones/46/rotation = Quaternion(0.7291656, -0.01444175, 0.054267354, 0.6820293)
+bones/47/rotation = Quaternion(0.3023134, 0.042518567, -0.014614694, 0.9521477)
+
+[node name="AnimationPlayer" parent="Enemy3/miner no tex" parent_id_path=PackedInt32Array(142524920, 697813067) index="1" unique_id=1999853006]
+blend_times = [&"chase", &"chase", 3.0, &"chase", &"loose aggro", 3.0, &"chase", &"mine", 3.0, &"chase", &"pulling kart", 3.0, &"chase", &"see player", 3.0, &"chase", &"sitting", 3.0, &"chase", &"t-pose", 3.0, &"chase", &"walk drunk", 3.0]
+
+[node name="PatrolPoint2" type="Marker3D" parent="Enemy3" unique_id=685170980]
+transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.5615474, 6.6634803, 0, -15.132591)
+gizmo_extents = 1.07
+script = ExtResource("3_wh0ns")
+wait = 5.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="PatrolPoint" type="Marker3D" parent="Enemy3" unique_id=1294719481]
+transform = Transform3D(0.86009645, 0, 0.5101315, 0, 1, 0, -0.5101315, 0, 0.86009645, -0.9329996, 0, -14.649002)
+gizmo_extents = 1.07
+script = ExtResource("3_wh0ns")
+wait = 2.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[editable path="Enemy3"]
+[editable path="Enemy3/miner no tex"]
