@@ -26,6 +26,11 @@ extends Resource
 	set(value):
 		view_height = value
 		emit_changed()
+## Eye level for the animated enemy
+@export var animation_eye_height: float = 1.5:
+	set(value):
+		animation_eye_height = value
+		emit_changed()
 ## Eye offset from the body center.
 @export var eye_height: float = 0.7:
 	set(value):
@@ -39,6 +44,9 @@ extends Resource
 		emit_changed()
 ## Distance from the enemy where a captured player is placed, so the enemy is not seen from too close
 @export var death_placement_distance: float = 1.5
+## How far the enemy bends over the captured player once they face it, in degrees.
+## It is way taller than the player, this brings its face down toward them
+@export_range(0.0, 60.0, 1.0) var death_lean: float = 8.0
 ## Seconds of seeing the player at point-blank to fully detect them
 ## Takes up to 4x longer at the edge of view_range
 @export var detect_time: float = 0.5

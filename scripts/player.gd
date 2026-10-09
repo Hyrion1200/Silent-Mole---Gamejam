@@ -246,6 +246,8 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 ## Placed and facing the captor --> stares at it for a while, then the view fades out
 ## as the shake grows, then the player respawns
 func _die() -> void:
+	# The captor drops its chase animation for the one where it sees the player
+	_captor.faced()
 	var tween := create_tween()
 	tween.tween_interval(death_hold)
 	tween.tween_callback(_camera.fade_out)

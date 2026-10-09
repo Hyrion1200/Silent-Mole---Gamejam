@@ -87,6 +87,10 @@ var _patrol_count: int = 0
 @onready var _bar: MeshInstance3D = $Debug/Bar
 
 @onready var _anim: AnimationPlayer = $"miner no tex/AnimationPlayer"
+@onready var _model: Node3D = $"miner no tex"
+## The model as placed in the scene, and how far it bends over the player it caught
+@onready var _model_rest: Basis = _model.basis
+var _lean: float = 0.0
 
 
 
@@ -94,6 +98,7 @@ func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
 	$Debug.visible = Engine.is_editor_hint()
 	_update_view_shape()
+	reset()
 
 
 ## Debug shape: a cone tip that widens up to view_width, then a tube up to view_range.
@@ -145,6 +150,8 @@ func hear(at: Vector3, radius: float) -> void:
 ## Called through the "enemies" group when the player respawns.
 func reset() -> void:
 	_caught = false
+	_lean = 0.0
+	_model.basis = _model_rest
 	awareness = 0.0
 	velocity = Vector3.ZERO
 	global_position = _home
@@ -152,6 +159,13 @@ func reset() -> void:
 	_patrol_count = 0
 	_patrol_timer = patrol_wait
 	_set_state(State.IDLE)
+	# Caught while already IDLE --> no state change to put the animation back
+	_anim.play("walk drunk")
+
+
+## Called by the player it caught, once they are placed and look at this enemy.
+func faced() -> void:
+	_anim.play("see player")
 
 
 func _physics_process(delta: float) -> void:
@@ -164,12 +178,17 @@ func _physics_process(delta: float) -> void:
 	# no line of sight check, a thin wall does not protect
 	if not _caught and player and $DeathRange.overlaps_body(player):
 		# The player runs the rest of the death on its own: placement, camera, fade, respawn
-		player.capture(self, profile.eye_height, profile.death_placement_distance)
+		player.capture(self, profile.animation_eye_height, profile.death_placement_distance)
 		_caught = true
 	if _caught:
 		# AI off: stands there and only turns to face the player
 		var dir := player.global_position - global_position
 		rotation.y = rotate_toward(rotation.y, atan2(-dir.x, -dir.z), profile.turn_speed * delta)
+		if _anim.assigned_animation == "see player":
+			# Cheat: way taller than the player, so it bends over them from the feet.
+			# Only the model, the collision stays upright
+			_lean = move_toward(_lean, deg_to_rad(profile.death_lean), profile.turn_speed * delta)
+			_model.basis = Basis(Vector3.LEFT, _lean) * _model_rest
 		return
 	var gain := 0.0
 	if player and _sees_body(player):
@@ -267,6 +286,7 @@ func _set_state(new_state: State) -> void:
 	if new_state == State.CHASING and state not in [State.CHASING, State.SEARCHING]:
 		detected.emit()
 	state = new_state
+	Music.report(self, THREATS[state])
 	match state:
 		State.IDLE:
 			_anim.play("walk drunk")
@@ -288,7 +308,6 @@ func _set_state(new_state: State) -> void:
 			_anim.play("chase")
 			# Start the Found music @Pierre67
 			return
-	Music.report(self, THREATS[state])
 
 
 ## Awareness decays when nothing feeds it, except while the enemy is still on its

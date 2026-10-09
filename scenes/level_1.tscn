@@ -74,4 +74,11 @@ navigation_mesh = SubResource("NavigationMesh_5xbjy")
 [node name="JAM_Helmet" parent="." unique_id=1108416575 instance=ExtResource("5_4nkto")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.135435, -1.2768956, 6.0393987)
 
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=616414141]
+transform = Transform3D(0.2166887, -0.97624075, 9.471766e-09, -4.371139e-08, 1.9106855e-15, 1, -0.97624075, -0.2166887, -4.2672838e-08, 3.7902193, 6.6115274, -44.69674)
+light_energy = 12.211
+light_volumetric_fog_energy = 0.0
+area_range = 9.764
+area_attenuation = 0.149
+
 [editable path="Node3D"]
