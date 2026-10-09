@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_nu27s"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_o2waj"]
-[ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shaders/canvas_effects/pixelization_spatial.gdshader" id="3_yofrt"]
+[ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shaders/pixelization_spatial.gdshader" id="3_yofrt"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="4_e3ky2"]
 [ext_resource type="Shader" uid="uid://dbapk0dtj85oy" path="res://shaders/colorgrading/ColorCorrection_Mini.tres" id="5_glxou"]
 
