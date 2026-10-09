@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c6ohrbes4b521"]
+
+[ext_resource type="Texture2D" uid="uid://dhd6ejil3s242" path="res://assets/_texture/_rope/Rope_001_basecolor.jpg" id="1_nsuo4"]
+[ext_resource type="Texture2D" uid="uid://b05c3caeu7v6w" path="res://assets/_texture/_rope/Rope_001_normal.jpg" id="2_40av4"]
+
+[resource]
+albedo_texture = ExtResource("1_nsuo4")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("2_40av4")
+uv1_scale = Vector3(1, 2, 1)
+texture_filter = 0

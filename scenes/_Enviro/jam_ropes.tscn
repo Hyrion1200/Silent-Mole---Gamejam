@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://vpjr5cmwbdrp"]
+
+[ext_resource type="PackedScene" uid="uid://se6eanpbhgcy" path="res://assets/_mesh/_Lookdev/JAM_Ropes.fbx" id="1_jyxl4"]
+[ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="2_sqxey"]
+
+[node name="JAM_Ropes" unique_id=1030473890 instance=ExtResource("1_jyxl4")]
+
+[node name="Rope_01" parent="Ropes" parent_id_path=PackedInt32Array(1909976852) index="0" unique_id=1553556912]
+surface_material_override/0 = ExtResource("2_sqxey")
+
+[node name="Rope_02" parent="Ropes" parent_id_path=PackedInt32Array(1909976852) index="1" unique_id=1465242539]
+surface_material_override/0 = ExtResource("2_sqxey")
