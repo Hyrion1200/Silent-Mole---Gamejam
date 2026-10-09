@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="4_shake"]
 [ext_resource type="Texture2D" uid="uid://owyxa3ttemk1" path="res://assets/_icons/UI_hand_open.png" id="5_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://b37c6otouutja" path="res://assets/_icons/UI_pointer.png" id="6_pointer"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
 friction = 0.0
@@ -90,22 +89,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
-
-[node name="Pointer" type="TextureRect" parent="Camera3D/Fade" unique_id=1648203957]
-modulate = Color(1, 1, 1, 0.13725491)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("6_pointer")
 
 [node name="Prompt" type="HBoxContainer" parent="Camera3D/Fade" unique_id=1980338411]
 visible = false
