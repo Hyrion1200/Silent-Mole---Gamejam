@@ -31,6 +31,15 @@ const ICONS: Dictionary[State, String] = {
 	State.SEARCHING: "!?",
 	State.RETURNING: "",
 }
+## Threat level reported to Music, index in Music.THREAT_LABELS
+const THREATS: Dictionary[State, int] = {
+	State.IDLE: 0,
+	State.SUSPICIOUS: 1,
+	State.INVESTIGATING: 2,
+	State.CHASING: 3,
+	State.SEARCHING: 2,
+	State.RETURNING: 0,
+}
 
 ## Tuning of this enemy, see EnemyProfile
 @export var profile: EnemyProfile:
@@ -157,7 +166,7 @@ func _physics_process(delta: float) -> void:
 	var player := get_tree().get_first_node_in_group(&"player") as CollisionObject3D
 	# If we end up with multiple lamp i'll change this
 	var lamp := get_tree().get_first_node_in_group(&"lamp") as SpotLight3D
-	# ponytail: no line of sight check, a thin wall does not protect. Add a ray if it happens
+	# no line of sight check, a thin wall does not protect
 	if player and $DeathRange.overlaps_body(player):
 		# The camera is forced to look at the head
 		player.capture(self, profile.eye_height, profile.death_placement_distance)
@@ -260,6 +269,9 @@ func _next_state(gain: float) -> State:
 
 
 func _set_state(new_state: State) -> void:
+	# Called every physics tick --> only the changes matter
+	if new_state == state:
+		return
 	if new_state == State.CHASING and state not in [State.CHASING, State.SEARCHING]:
 		detected.emit()
 	state = new_state
@@ -284,6 +296,7 @@ func _set_state(new_state: State) -> void:
 			_anim.play("chase")
 			# Start the Found music @Pierre67
 			return
+	Music.report(self, THREATS[state])
 
 
 ## Awareness decays when nothing feeds it, except while the enemy is still on its
@@ -321,7 +334,9 @@ func _step_toward(target: Vector3, reach: float) -> Vector3:
 	if to.length() <= reach:
 		return Vector3.ZERO
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
-	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true):
+	# The first point is the enemy itself put on the navmesh. On a slope it lands behind
+	# the enemy, which walked back to it forever --> skipped
+	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1):
 		to = point - global_position
 		to.y = 0.0
 		if to.length() > 0.1:

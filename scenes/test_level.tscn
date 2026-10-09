@@ -37,11 +37,11 @@ _surfaces = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_small"]
 size = Vector3(0.4, 0.4, 0.4)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw1w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dw7u0"]
 albedo_color = Color(0.82638466, 0.52687705, 0.883106, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_small"]
-material = SubResource("StandardMaterial3D_paw1w")
+material = SubResource("StandardMaterial3D_dw7u0")
 size = Vector3(0.4, 0.4, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_medium"]
@@ -105,7 +105,7 @@ point_count = 2
 [node name="TestLevel" type="Node3D" unique_id=574000196 groups=["navigation_mesh_source_group"]]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2034857156]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007949829, -0.49815905, -0.0047461987)
 navigation_mesh = SubResource("NavigationMesh_tmr53")
 
 [node name="Node3D" parent="NavigationRegion3D" unique_id=1151871138 instance=ExtResource("1_qcd3b")]

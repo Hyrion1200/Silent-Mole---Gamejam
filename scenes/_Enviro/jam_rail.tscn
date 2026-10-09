@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://wfs11yltsee7"]
+
+[ext_resource type="PackedScene" uid="uid://1trmr8dsup70" path="res://assets/_mesh/_Lookdev/JAM_rail.fbx" id="1_km08b"]
+[ext_resource type="Texture2D" uid="uid://drviinev62i7o" path="res://assets/_texture/_rails/Metal_Rail_Albedo.jpg" id="2_eqiah"]
+[ext_resource type="Texture2D" uid="uid://cgc7la82ocvjg" path="res://assets/_texture/_rails/Metal_Rail_Normal.jpg" id="3_g5l3q"]
+[ext_resource type="Material" uid="uid://bnhldeo25f1m3" path="res://scenes/_Enviro/_MAT/MAT_wood.tres" id="4_a5o3v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtog7"]
+albedo_texture = ExtResource("2_eqiah")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 3.5
+normal_texture = ExtResource("3_g5l3q")
+texture_filter = 0
+
+[node name="JAM_rail" unique_id=1035252563 instance=ExtResource("1_km08b")]
+
+[node name="Rail_chain_01" parent="." index="0" unique_id=1630417007]
+surface_material_override/0 = SubResource("StandardMaterial3D_qtog7")
+surface_material_override/1 = ExtResource("4_a5o3v")

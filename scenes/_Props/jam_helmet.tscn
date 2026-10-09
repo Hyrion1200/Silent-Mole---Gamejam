@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bp4ofwxpusr8i"]
+
+[ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="1_syioc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mqug"]
+emission_enabled = true
+emission = Color(0.9875638, 0.9792542, 0.8351617, 1)
+emission_energy_multiplier = 4.0
+
+[node name="JAM_Helmet" unique_id=1108416575 groups=["lamp_pickup"] instance=ExtResource("1_syioc")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="0" unique_id=1105721273]
+transform = Transform3D(1, 0, 0, 0, -0.9659258, -0.25881913, 0, 0.25881913, -0.9659258, 0, 0.15641302, 0.3196242)
+light_color = Color(0.92097455, 0.9130113, 0.71889204, 1)
+spot_range = 37.598
+spot_attenuation = 2.53
+spot_angle = 78.7
+spot_angle_attenuation = 0.1830108
+
+[node name="PROP_helmet" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="1" unique_id=708096661]
+surface_material_override/0 = SubResource("StandardMaterial3D_8mqug")
+
+[node name="CollisionShape3D" parent="PROPS_helmet/PROP_helmet/PROP_helmet_col" parent_id_path=PackedInt32Array(903899578) index="0" unique_id=1053847924 groups=["lamp_pickup"]]
+
+[node name="AreaLight3D" type="AreaLight3D" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="2" unique_id=1358912314]
+transform = Transform3D(-1, 0, -8.742277e-08, 3.618718e-08, 0.9103073, -0.4139331, 7.958159e-08, -0.4139331, -0.9103073, -0.05624546, 0.1480147, 0.28713363)
+light_color = Color(0.98842746, 1, 0.612347, 1)
+light_energy = 3.043
+light_volumetric_fog_energy = 2.498
+area_range = 87.144
+area_attenuation = 6.339
+area_normalize_energy = false
+area_size = Vector2(0.155, 0.155)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="2" unique_id=613269515]
+transform = Transform3D(-1, 0, -8.742277e-08, 3.618718e-08, 0.9103073, -0.4139331, 7.958159e-08, -0.4139331, -0.9103073, -0.05624546, 0.783005, -0.18233171)
+visible = false
+light_energy = 0.387
+light_volumetric_fog_energy = 2.634
+omni_range = 2.838
+omni_attenuation = 0.489

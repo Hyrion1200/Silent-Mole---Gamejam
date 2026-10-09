@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnhldeo25f1m3"]
+
+[ext_resource type="Texture2D" uid="uid://d3ygv2420tx5u" path="res://assets/_texture/_wood/Wood_Albedo.jpg" id="1_oxdei"]
+[ext_resource type="Texture2D" uid="uid://ccjaonj3ygl8v" path="res://assets/_texture/_wood/Wood_Normal.jpg" id="2_bi7iv"]
+
+[resource]
+albedo_texture = ExtResource("1_oxdei")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("2_bi7iv")
+texture_filter = 0

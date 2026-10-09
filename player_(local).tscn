@@ -1,0 +1,302 @@
+[gd_scene format=3 uid="uid://dtjsgfhp8402r"]
+
+[ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_nu27s"]
+[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_o2waj"]
+[ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shaders/pixelization_spatial.gdshader" id="3_yofrt"]
+[ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="4_e3ky2"]
+[ext_resource type="Shader" uid="uid://dbapk0dtj85oy" path="res://shaders/colorgrading/ColorCorrection_Mini.tres" id="5_glxou"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
+friction = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yj3ml"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wjyh8"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf2rc"]
+shading_mode = 0
+albedo_color = Color(0.2, 0.8, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_jneaj"]
+material = SubResource("StandardMaterial3D_sf2rc")
+rings = 96
+ring_segments = 6
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_763k3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jddww"]
+material = SubResource("StandardMaterial3D_sf2rc")
+size = Vector3(0.02, 0.02, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyc2g"]
+render_priority = 0
+shader = ExtResource("3_yofrt")
+shader_parameter/pixel_size = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6135i"]
+material = SubResource("ShaderMaterial_wyc2g")
+flip_faces = true
+size = Vector2(2, 2)
+center_offset = Vector3(0, 0.11, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gv2ai"]
+shader = ExtResource("4_e3ky2")
+shader_parameter/Pixelation = true
+shader_parameter/Pixelation_Scale = 19.60000029206352
+shader_parameter/Panini = 0.0
+shader_parameter/Chromatic_Peripheral = 0.9
+shader_parameter/Chromatic_Aberrations = 0.0
+shader_parameter/Chromatic_Darkening = 0.9
+shader_parameter/Blur_Amount = -4.0
+shader_parameter/Blur_Centered = 0.0
+shader_parameter/Bloom_Starts = 0.94999998807907
+shader_parameter/Bloom_Halation = 0.0
+shader_parameter/Bloom_Booster = 0.0
+shader_parameter/Shadows_Split = 0.3
+shader_parameter/Shadow_Color_Temp = 0.0
+shader_parameter/Shadow_Green_Tint = 0.0
+shader_parameter/Shadow_Brightness = 1.0
+shader_parameter/Shadow_Contrast = 1.0
+shader_parameter/Shadows_Saturation = 1.0
+shader_parameter/Highlights_Split = 0.7
+shader_parameter/Mid_Color_Temp = 7.500000856819
+shader_parameter/Mid_Green_Tint = 15.800000980498965
+shader_parameter/Mid_Brightness = 0.75
+shader_parameter/Mid_Contrast = 0.75
+shader_parameter/Mid_Saturation = 1.0
+shader_parameter/High_Color_Temp = 0.0
+shader_parameter/High_Green_Tint = 0.0
+shader_parameter/High_Brightness = 1.0
+shader_parameter/High_Contrast = 0.75
+shader_parameter/High_Saturation = 0.0
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = -66.19999949633944
+shader_parameter/Main_Brightness = 1.20000001788144
+shader_parameter/Main_Contrast = 1.0
+shader_parameter/Main_Saturation = 1.0
+shader_parameter/Posterization = 0.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Film_Grain = 0.0
+shader_parameter/Filter_Strenght = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3h3om"]
+shader = ExtResource("5_glxou")
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = -76.4999996498218
+shader_parameter/Main_Brightness = 1.40000002086168
+shader_parameter/Main_Contrast = 1.10000001639132
+shader_parameter/Main_Saturation = 1.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Color_Filter = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv2ai"]
+transparency = 1
+blend_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.011764706)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3sk8"]
+transparency = 1
+blend_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.05882353)
+metallic_specular = 0.0
+
+[node name="Player (local)" type="RigidBody3D" unique_id=292962811 groups=["player"]]
+physics_material_override = SubResource("PhysicsMaterial_ta1t5")
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_nu27s")
+speed = 2.75
+accel = 10.0
+eye_height = 0.3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1371587080]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_yj3ml")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1549392673]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_wjyh8")
+
+[node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1671037752 groups=["debug"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("TorusMesh_jneaj")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=518169700]
+physics_interpolation_mode = 2
+top_level = true
+attributes = SubResource("CameraAttributesPhysical_763k3")
+current = true
+fov = 37.849285
+script = ExtResource("2_o2waj")
+shake_amplitude = 0.15
+shake_duration = 5.0
+fade_out_duration = 3.0
+fade_in_duration = 10.0
+fade_in_start_ratio = 0.2
+
+[node name="Fade" type="CanvasLayer" parent="Camera3D" unique_id=2049379668]
+
+[node name="Rect" type="ColorRect" parent="Camera3D/Fade" unique_id=612743413]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1721145628 groups=["lamp"]]
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 25.0
+
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1986068746 groups=["debug"]]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_jddww")
+
+[node name="camera_effects" type="Node3D" parent="Camera3D" unique_id=395271372]
+visible = false
+
+[node name="pixelizeMesh" type="MeshInstance3D" parent="Camera3D/camera_effects" unique_id=296395877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62268e-06, 6.64, 13)
+mesh = SubResource("QuadMesh_6135i")
+
+[node name="Screen_Effect_Ultimate" type="CanvasLayer" parent="Camera3D/camera_effects" unique_id=1992351524]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/camera_effects/Screen_Effect_Ultimate" unique_id=1523863487]
+material = SubResource("ShaderMaterial_gv2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen_Effect_Colorgrading_simple" type="CanvasLayer" parent="Camera3D/camera_effects" unique_id=1403982141]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/camera_effects/Screen_Effect_Colorgrading_simple" unique_id=461680277]
+material = SubResource("ShaderMaterial_3h3om")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hero_Lights" type="Node3D" parent="Camera3D" unique_id=1282217870]
+visible = false
+
+[node name="Lights" type="Node3D" parent="Camera3D/Hero_Lights" unique_id=88895925]
+
+[node name="Set A" type="Node3D" parent="Camera3D/Hero_Lights/Lights" unique_id=1723402978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.754075, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set A" unique_id=1947120083]
+light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
+light_volumetric_fog_energy = 0.0
+omni_range = 54.667
+omni_attenuation = 1.405
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set A" unique_id=360186777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8739028, 0.8199825)
+visible = false
+light_color = Color(0.39439312, 0.34727657, 0.17704916, 1)
+light_energy = 2.6
+light_volumetric_fog_energy = 0.0
+light_negative = true
+omni_range = 10.146
+omni_attenuation = 0.26
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Hero_Lights/Lights/Set A" unique_id=275069512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8739028, 0.8199825)
+light_color = Color(0.2752364, 0.12679672, 0.026204932, 1)
+spot_range = 6.537
+spot_attenuation = -1.75
+spot_angle = 93.21
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D/Hero_Lights/Lights/Set A" unique_id=897959468]
+transform = Transform3D(5.005, 0, 0, 0, 5.005, 0, 0, 0, 5.005, 0.7083481, 0.7935209, -0.20495605)
+visible = false
+material_override = SubResource("StandardMaterial3D_gv2ai")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Camera3D/Hero_Lights/Lights/Set A" unique_id=671709864]
+transform = Transform3D(2.43, 0, 0, 0, 2.43, 0, 0, 0, 2.43, 0.7083481, 0.7935209, -0.20495605)
+visible = false
+material_override = SubResource("StandardMaterial3D_s3sk8")
+
+[node name="Set B" type="Node3D" parent="Camera3D/Hero_Lights/Lights" unique_id=448383142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.754075, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set B" unique_id=1457439419]
+light_color = Color(0.27450982, 0.1254902, 0.02745098, 1)
+light_energy = 4.14
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 12.77
+omni_attenuation = 1.056
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set B" unique_id=769560000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.03)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 2.574
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 3.162
+omni_attenuation = 0.315
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Hero_Lights/Lights/Set B" unique_id=2054699075]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, -0.08368772, 0.8199826)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 1.93
+spot_range = 4.156263
+spot_attenuation = -1.75
+spot_angle = 52.87
+
+[node name="Set C" type="Node3D" parent="Camera3D/Hero_Lights/Lights" unique_id=1711134906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.754075, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set C" unique_id=1390878699]
+light_color = Color(0.27450982, 0.1254902, 0.02745098, 1)
+light_energy = 4.14
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 12.77
+omni_attenuation = 1.056
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Camera3D/Hero_Lights/Lights/Set C" unique_id=87058705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.03)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 2.574
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 3.162
+omni_attenuation = 0.315
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Hero_Lights/Lights/Set C" unique_id=1088089695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.812, 0.82)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 6.656
+spot_range = 4.571
+spot_attenuation = -0.06
+spot_angle = 52.87
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Camera3D/Hero_Lights/Lights/Set C/SpotLight3D" unique_id=278709153]
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 6.656
+spot_range = 10.616
+spot_attenuation = -0.06
+spot_angle = 33.87

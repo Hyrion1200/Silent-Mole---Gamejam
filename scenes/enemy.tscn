@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crm1lak61ifmc"]
 
 [ext_resource type="Script" uid="uid://bpi0mc82yj0fk" path="res://scripts/enemy.gd" id="1_enemy"]
-[ext_resource type="Resource" uid="uid://bgqpxvre724xg" path="res://resources/enemy_default.tres" id="2_profile"]
+[ext_resource type="Resource" uid="uid://bgqpxvre724xg" uid="uid://bgqpxvre724xg" path="res://resources/enemy_default.tres" id="2_profile"]
 [ext_resource type="PackedScene" uid="uid://rhjvd4lw1n53" path="res://animation/Enemy/miner_no_tex.tscn" id="3_4ra3w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
@@ -18,6 +18,10 @@ height = 1.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_nose"]
 size = Vector3(0.2, 0.2, 0.4)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_death"]
+resource_local_to_scene = true
+radius = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_death"]
 resource_local_to_scene = true
@@ -60,7 +64,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
 top_radius = 9.35
 bottom_radius = 9.35
-height = 8.596878
+height = 11.596878
 radial_segments = 32
 rings = 1
 cap_top = false
@@ -4987,6 +4991,8 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody3D" unique_id=142524920 groups=["enemies"]]
+floor_constant_speed = true
+floor_snap_length = 0.3
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 
@@ -5006,11 +5012,11 @@ billboard = 1
 no_depth_test = true
 font_size = 128
 
-[node name="DeathRange" type="Area3D" parent="." unique_id=597506583]
+[node name="DeathRange" type="Area3D" parent="." unique_id=1311436096]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathRange" unique_id=921262123]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathRange" unique_id=2049062684]
 shape = SubResource("SphereShape3D_death")
 
 [node name="Debug" type="Node3D" parent="." unique_id=84200304 groups=["debug"]]
@@ -5133,3 +5139,9 @@ autoplay = &"chase"
 blend_times = [&"sitting", &"chase", 3.0, &"sitting", &"loose aggro", 3.0, &"sitting", &"mine", 3.0, &"sitting", &"pulling kart", 3.0, &"sitting", &"sitting", 3.0, &"sitting", &"t-pose", 3.0, &"sitting", &"walk drunk", 3.0]
 
 [editable path="miner no tex"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1171220631]
+visible = false
+spot_range = 100.0
+spot_attenuation = 0.4
+spot_angle_attenuation = 0.14358725
