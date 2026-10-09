@@ -287,17 +287,17 @@ material = SubResource("ShaderMaterial_e8tpv")
 layout_mode = 0
 offset_right = 1885.0
 offset_bottom = 1104.0
-texture = SubResource("CanvasTexture_4qe4i")
 mouse_filter = 2
+texture = SubResource("CanvasTexture_4qe4i")
 
 [node name="SubViewportContainer (dithered)" type="SubViewportContainer" parent="." unique_id=814842943]
 material = SubResource("ShaderMaterial_p07av")
 use_parent_material = true
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 stretch = true
 stretch_shrink = 6
-mouse_filter = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer (dithered)" unique_id=1515903766]
 handle_input_locally = false
