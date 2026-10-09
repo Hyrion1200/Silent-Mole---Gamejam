@@ -31,8 +31,13 @@ extends RigidBody3D
 ## Distance travelled between two footsteps. We can increase it to be more lenient
 @export var step_length: float = 0.8
 
-## Time between the start of the fade out and the respawn, in seconds
+## Time spent staring at the captor before the fade out and the growing shake start, in seconds
+@export var death_hold: float = 1.0
+## Time spent in the dark between the end of the fade out and the respawn, in seconds
 @export var respawn_delay: float = 5.0
+## Amplitude of the camera shake that grows from the start of the fade out to the respawn, in meters
+@export var death_shake_start: float = 0.05
+@export var death_shake_end: float = 0.8
 
 ## How long the lamp hint stays on screen once the lamp is picked up
 @export var lamp_hint_duration: float = 5.0
@@ -238,11 +243,15 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	_look_tween.tween_property(self, ^"_look_weight", 1.0, capture_turn_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
-## Placed and facing the captor --> the view fades out, then the player respawns
+## Placed and facing the captor --> stares at it for a while, then the view fades out
+## as the shake grows, then the player respawns
 func _die() -> void:
-	var fade_out_duration : float = _camera.fade_out()
-	await get_tree().create_timer(fade_out_duration + respawn_delay).timeout
-	respawn()
+	var tween := create_tween()
+	tween.tween_interval(death_hold)
+	tween.tween_callback(_camera.fade_out)
+	# The shake grows all the way to the respawn
+	tween.tween_property(_camera, ^"rumble", death_shake_end, _camera.fade_out_duration + respawn_delay).from(death_shake_start)
+	tween.tween_callback(respawn)
 
 
 ## Back to the last spawn point, free to move, with every enemy back at its post
@@ -252,6 +261,7 @@ func respawn() -> void:
 		_move_tween.kill()
 	_captor = null
 	_facing_captor = false
+	_camera.rumble = 0.0
 	linear_velocity = Vector3.ZERO
 	global_position = spawn_point
 	freeze = false

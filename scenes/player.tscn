@@ -56,6 +56,8 @@ accel = 10.0
 eye_height = 0.3
 capture_shake = SubResource("Resource_capture_shake")
 respawn_delay = 1.0
+death_shake_start = 0.02
+death_shake_end = 0.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=958506263]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
