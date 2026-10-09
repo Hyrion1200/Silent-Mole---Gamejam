@@ -117,7 +117,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if point and not freeze:
 			_climb(point)
 		elif _is_lamp_pickup(target):
-			_pick_lamp(target)
+			_pick_lamp(target.owner)
 	elif event.is_action_pressed(&"grab"):
 		if _held:
 			_release()
@@ -162,8 +162,9 @@ func _let_go() -> void:
 		_held = null
 
 
+## The ray hits the collision body inside the pickup, the group is on the root of its scene
 func _is_lamp_pickup(target: Object) -> bool:
-	return target is Node and target.is_in_group(&"lamp_pickup")
+	return target is Node and target.owner != null and target.owner.is_in_group(&"lamp_pickup")
 
 
 ## The lamp on the ground is gone

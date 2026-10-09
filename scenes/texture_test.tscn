@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://wfs11yltsee7" path="res://scenes/_Enviro/jam_rail.tscn" id="3_owcjw"]
 [ext_resource type="PackedScene" uid="uid://vpjr5cmwbdrp" path="res://scenes/_Enviro/jam_ropes.tscn" id="4_48vo2"]
 [ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="5_gnwrd"]
+[ext_resource type="PackedScene" uid="uid://g3xls81h05k" path="res://assets/_mesh/_Lookdev/JAM_Cart.fbx" id="7_b028a"]
 [ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/_Enviro/jam_wood.tscn" id="7_dsqro"]
+[ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="8_wkddb"]
 
 [node name="TextureSet" type="Node3D" unique_id=1151871138]
 
@@ -26,3 +28,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 
 [node name="JAM_Wood" parent="." unique_id=267189473 instance=ExtResource("7_dsqro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
+
+[node name="JAM_Cart" parent="." unique_id=1978242869 instance=ExtResource("7_b028a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0133705, 1.2397766e-05, 13.289236)
+
+[node name="JAM_Helmet" parent="." unique_id=1775718097 instance=ExtResource("8_wkddb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770725, 0.00013450623, 13.571976)
