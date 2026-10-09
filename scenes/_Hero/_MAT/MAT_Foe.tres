@@ -10,3 +10,4 @@ roughness = 0.0
 normal_enabled = true
 normal_scale = 5.0
 normal_texture = ExtResource("2_h2mmr")
+texture_filter = 0
