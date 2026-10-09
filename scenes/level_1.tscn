@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="2_4nkto"]
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="3_fcfvj"]
 [ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="4_pa8r4"]
+[ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="5_4nkto"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lamp"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -28,8 +29,9 @@ offset_bottom = 1081.0
 [node name="Player" parent="Node3D/SubViewportContainer (dithered)/SubViewport" parent_id_path=PackedInt32Array(1865376727, 1423005682) index="0" unique_id=704551036]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -35.741753, 2.453714, 1.7353411)
 
-[node name="LampPickup" type="Area3D" parent="." unique_id=1530927714 groups=["lamp_pickup"]]
+[node name="LampPickup" type="Area3D" parent="." unique_id=1530927714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -1.126, 5)
+visible = false
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LampPickup" unique_id=873316402]
@@ -42,7 +44,7 @@ mesh = SubResource("BoxMesh_lamp")
 light_color = Color(0.98842746, 1, 0.612347, 1)
 light_energy = 3.043
 light_volumetric_fog_energy = 2.498
-area_range = 8.975
+area_range = 29.901
 area_attenuation = 2.51
 area_normalize_energy = false
 area_size = Vector2(0.5, 0.5)
@@ -68,5 +70,8 @@ metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 navigation_mesh = SubResource("NavigationMesh_5xbjy")
 
 [node name="TextureSet" parent="NavigationRegion3D" unique_id=1151871138 instance=ExtResource("2_4nkto")]
+
+[node name="JAM_Helmet" parent="." unique_id=1108416575 instance=ExtResource("5_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.135435, -1.2768956, 6.0393987)
 
 [editable path="Node3D"]
