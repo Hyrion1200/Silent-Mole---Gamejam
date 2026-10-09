@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cswtvfqhgyfvf"]
+
+[ext_resource type="PackedScene" uid="uid://c3a7c6yiaig8g" path="res://scenes/test_level.tscn" id="1_0birr"]
+[ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="2_fadk6"]
+[ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="3_5i0hn"]
+
+[node name="Node3D" type="Node3D" unique_id=487806485]
+
+[node name="TestLevel" parent="." unique_id=574000196 instance=ExtResource("1_0birr")]
+
+[node name="Enemy" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("2_fadk6")]
+transform = Transform3D(-0.06355046, 0, -0.9979786, 0, 1, 0, 0.9979786, 0, -0.06355046, -5.948949, 0.9, 9.935488)
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+
+[node name="PatrolPoint2" type="Marker3D" parent="Enemy" unique_id=1051246847]
+transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.5615474, 6.6634803, 0, -15.132591)
+gizmo_extents = 1.07
+script = ExtResource("3_5i0hn")
+wait = 5.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="PatrolPoint" type="Marker3D" parent="Enemy" unique_id=2050182933]
+transform = Transform3D(0.86009645, 0, 0.5101315, 0, 1, 0, -0.5101315, 0, 0.86009645, -0.9329996, 0, -14.649002)
+gizmo_extents = 1.07
+script = ExtResource("3_5i0hn")
+wait = 2.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
