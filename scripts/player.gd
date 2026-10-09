@@ -218,7 +218,7 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	linear_velocity = Vector3.ZERO
 	var away := global_position - captor.global_position
 	away.y = 0.0
-	# ponytail: straight slide with no collision, can end in a wall. Add a ray if it happens
+	# Straight slide with no collision, can end in a wall
 	var place := global_position - away + away.normalized() * distance
 	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
