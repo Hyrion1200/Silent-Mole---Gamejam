@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dkrwkuqjo3r22" path="res://scripts/title_screen.gd" id="1_title"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_camera"]
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="3_env"]
-[ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="3_mykxm"]
 [ext_resource type="Shader" uid="uid://bt3ptxf5fw35q" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="3_tklts"]
 [ext_resource type="Shader" uid="uid://p6clh15i7n0e" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="4_tklts"]
 [ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="4_u26n3"]
@@ -18,6 +17,36 @@ shader_parameter/text_color = Color(0.88, 0.7861333, 0.704, 0.88235295)
 shader_parameter/warp_frequency = 10.000000475
 shader_parameter/warp_amplitude = 1.1490000545775
 shader_parameter/warp_speed = 6.8470003252325
+
+[sub_resource type="Environment" id="Environment_tklts"]
+background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_color = Color(0.5609549, 0.5609549, 0.5609549, 1)
+ambient_light_energy = 0.0
+ssil_enabled = true
+glow_levels/1 = 5.38
+glow_levels/2 = 0.53
+glow_levels/4 = 0.0
+glow_intensity = 3.93
+glow_strength = 1.05
+glow_bloom = 0.23
+glow_blend_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.16646415, 1.0979828e-07, 3.308989e-08, 1)
+fog_light_energy = 0.67
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_height = 3.15
+fog_height_density = -0.3019
+fog_depth_curve = 0.105112225
+fog_depth_begin = 0.0
+fog_depth_end = 4000.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.4530841, 0.22732484, 0.26889023, 1)
+volumetric_fog_emission_energy = 0.0
+adjustment_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8tpv"]
 shader = ExtResource("4_tklts")
@@ -266,16 +295,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.55)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 0.55)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_u26n3")
 theme_override_font_sizes/font_size = 105
 text = "Play"
 flat = true
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=1831064887]
-environment = ExtResource("3_mykxm")
+environment = SubResource("Environment_tklts")
 
 [node name="psx_pixelate_Master" type="Control" parent="." unique_id=1151284551]
 z_index = 1

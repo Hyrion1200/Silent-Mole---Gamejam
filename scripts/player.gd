@@ -31,6 +31,9 @@ extends RigidBody3D
 ## Time between the captured signal and the respawn, in seconds
 @export var respawn_delay: float = 5.0
 
+## How long the lamp hint stays on screen once the lamp is picked up
+@export var lamp_hint_duration: float = 5.0
+
 ## Steepest ground the player stands on, in degrees. Steeper --> slides down it
 @export_range(0.0, 90.0, 1.0) var max_slope: float = 45.0
 ## How far under the feet the ground is still followed. Higher --> sticks better over bumps
@@ -44,6 +47,8 @@ var spawn_point: Vector3
 ## Captured, placed and done turning to the captor's head. Read by the captor to send captured
 var facing_captor: bool = false
 
+## Picked up from the ground --> F does nothing before that
+var _has_lamp: bool = false
 var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
@@ -103,12 +108,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Captured --> We can start something if needed
 		pass
 	elif event.is_action_pressed(&"lamp"): # F
-		_lamp.visible = not _lamp.visible
+		if _has_lamp:
+			_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"interact"): # E
-		var point := _aimed(true) as ClimbPoint
+		var target := _aimed(true)
+		var point := target as ClimbPoint
 		# Prevent retriggering climibing if already climbing or freezed (death animation for ex.)
 		if point and not freeze:
 			_climb(point)
+		elif _is_lamp_pickup(target):
+			_pick_lamp(target)
 	elif event.is_action_pressed(&"grab"):
 		if _held:
 			_release()
@@ -151,6 +160,23 @@ func _let_go() -> void:
 		remove_collision_exception_with(_held)
 		_held.lock_rotation = false
 		_held = null
+
+
+func _is_lamp_pickup(target: Object) -> bool:
+	return target is Node and target.is_in_group(&"lamp_pickup")
+
+
+## The lamp on the ground is gone
+## F now works and the hint is shown for a while
+func _pick_lamp(item: Node) -> void:
+	item.queue_free()
+	_has_lamp = true
+	# Start the pickup SFX @Pierre67
+
+	# Create the UI hint for lamp_hint_duration and then hide it
+	get_tree().call_group(&"lamp_hint", &"show")
+	await get_tree().create_timer(lamp_hint_duration).timeout
+	get_tree().call_group(&"lamp_hint", &"hide")
 
 
 ## Frozen and moved by physical forces --> straight up to the point's height, then over onto it
@@ -284,9 +310,11 @@ func _process(delta: float) -> void:
 	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
 	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
 	var body := _aimed_body()
+	var target := _aimed(true)
+	# This line is starting to become horrible.
 	_prompt.visible = _captor == null and (_held != null \
 			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable"))) \
-			or (not freeze and _aimed(true) is ClimbPoint))
+			or (not freeze and target is ClimbPoint) or _is_lamp_pickup(target))
 
 	if _beam.is_visible_in_tree():
 		# Same ray as the enemies cast to find the spot lit by the lamp
