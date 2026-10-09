@@ -1,12 +1,26 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://713jvk2qo78"]
 
 [ext_resource type="Texture2D" uid="uid://kk1x6cj0b5i8" path="res://assets/_texture/_rock/Low_Albedo.jpg" id="1_xjf5s"]
+[ext_resource type="Shader" uid="uid://b4tuwxqwcay53" path="res://shaders/heightmap_Voxel.gdshader" id="2_60kbf"]
 [ext_resource type="Texture2D" uid="uid://0cljef3bvyma" path="res://assets/_texture/_rock/Low_Normal.jpg" id="2_701q7"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kveic"]
+render_priority = 0
+shader = ExtResource("2_60kbf")
+shader_parameter/albedo_map = ExtResource("1_xjf5s")
+shader_parameter/height_map = ExtResource("2_701q7")
+shader_parameter/uv_tiling = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/auto_depth = true
+shader_parameter/depth = 0.125
+shader_parameter/levels = 8
+shader_parameter/max_steps = 64
+
 [resource]
+next_pass = SubResource("ShaderMaterial_kveic")
 albedo_texture = ExtResource("1_xjf5s")
 normal_enabled = true
-normal_scale = 0.6
+normal_scale = 2.94
 normal_texture = ExtResource("2_701q7")
 uv1_scale = Vector3(0.001, 0.001, 0.001)
 uv1_triplanar = true

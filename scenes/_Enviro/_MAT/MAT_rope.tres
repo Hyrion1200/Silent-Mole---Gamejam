@@ -2,8 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://dhd6ejil3s242" path="res://assets/_texture/_rope/Rope_001_basecolor.jpg" id="1_nsuo4"]
 [ext_resource type="Texture2D" uid="uid://b05c3caeu7v6w" path="res://assets/_texture/_rope/Rope_001_normal.jpg" id="2_40av4"]
+[ext_resource type="Shader" uid="uid://cvs1qmrvneko5" path="res://shaders/swaying_3d_spacial.gdshader" id="2_lvxq4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdbbe"]
+render_priority = 0
+shader = ExtResource("2_lvxq4")
+shader_parameter/debug_mode = false
+shader_parameter/wind_direction = 90.0
+shader_parameter/wind_strenth = 3.0
+shader_parameter/sway_speed = 1.0
+shader_parameter/bendieness_multiplier = 0.0
+shader_parameter/albedo_texture = ExtResource("1_nsuo4")
 
 [resource]
+next_pass = SubResource("ShaderMaterial_hdbbe")
 albedo_texture = ExtResource("1_nsuo4")
 metallic_specular = 0.0
 roughness = 0.0

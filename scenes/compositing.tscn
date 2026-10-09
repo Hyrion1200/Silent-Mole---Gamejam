@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://bt3ptxf5fw35q" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="1_763k3"]
 [ext_resource type="Shader" uid="uid://p6clh15i7n0e" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="1_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="1_v7wuh"]
-[ext_resource type="FontFile" uid="uid://npbuct4vhvk8" path="res://textures/font/Caves-axDAx.otf" id="2_jddww"]
+[ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
 [ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="3_4wx58"]
@@ -16,14 +16,14 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1fwu"]
 shader = ExtResource("1_763k3")
-shader_parameter/text_color = Color(0.8801478, 0.78661597, 0.7038392, 1)
-shader_parameter/warp_frequency = 10.0
-shader_parameter/warp_amplitude = 1.38000006555
-shader_parameter/warp_speed = 3.562000169195
+shader_parameter/text_color = Color(0.88, 0.7861333, 0.704, 0.88235295)
+shader_parameter/warp_frequency = 10.000000475
+shader_parameter/warp_amplitude = 1.1490000545775
+shader_parameter/warp_speed = 6.8470003252325
 
 [sub_resource type="LabelSettings" id="LabelSettings_28nd1"]
-font = ExtResource("2_jddww")
-font_size = 14
+font = ExtResource("2_763k3")
+font_size = 50
 font_color = Color(0.8801478, 0.78661597, 0.7038392, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj3ml"]
@@ -41,7 +41,7 @@ shader_parameter/vignette_strength = 1.0
 shader_parameter/grain_strength = 0.86000004085
 shader_parameter/tint_color = Vector3(1, 3.29, 3.23)
 shader_parameter/tint_strength = 0.07200000342
-shader_parameter/viewport_size_override = Vector2(0, 0)
+shader_parameter/viewport_size_override = Vector2(1280, 720)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wjyh8"]
 
@@ -115,7 +115,7 @@ turbulence_noise_scale = 2.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf2rc"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.118884996, 0.13, 0.0559, 1)
+albedo_color = Color(0.12772167, 0.12015564, 0.10979589, 1)
 albedo_texture = ExtResource("10_wjyh8")
 billboard_mode = 3
 billboard_keep_scale = true
@@ -253,7 +253,7 @@ shader_parameter/Main_Saturation = 0.80000001192096
 shader_parameter/Posterization = 0.0
 shader_parameter/Vignette = 0.0
 shader_parameter/Noise = ExtResource("8_yj3ml")
-shader_parameter/Film_Grain = 0.0
+shader_parameter/Film_Grain = 0.00999999977648
 shader_parameter/Filter_Strenght = 0.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ecju1"]
@@ -308,51 +308,61 @@ collision_bounce = 0.0
 [sub_resource type="QuadMesh" id="QuadMesh_wjyh8"]
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw1w"]
+albedo_color = Color(0.82638466, 0.52687705, 0.883106, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jddww"]
+material = SubResource("StandardMaterial3D_paw1w")
+size = Vector3(0.4, 0.4, 0.4)
+
 [node name="Node3D" type="Node3D" unique_id=1865376727]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1257878426]
+[node name="SubViewportConterner text HD" type="SubViewportContainer" parent="." unique_id=1257878426]
 z_index = 4
 material = SubResource("ShaderMaterial_a1fwu")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -797.0
-offset_top = -706.0
-offset_right = 803.0
-offset_bottom = 194.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1666990988]
+[node name="SubViewport" type="SubViewport" parent="SubViewportConterner text HD" unique_id=1666990988]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="UI Text" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1058761375]
+[node name="UI Text" type="Control" parent="SubViewportConterner text HD/SubViewport" unique_id=1058761375]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -60.0
-offset_right = -3.0
-offset_bottom = 191.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Text" type="Label" parent="SubViewportContainer/SubViewport/UI Text" unique_id=850113831]
+[node name="Text" type="Label" parent="SubViewportConterner text HD/SubViewport/UI Text" unique_id=850113831]
 z_index = 6
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.440625
-anchor_top = 0.677686
-anchor_right = 0.565625
-anchor_bottom = 0.6956613
-offset_top = -35.0
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 556.0
+offset_top = 314.0
+offset_right = -556.0
+offset_bottom = 398.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 pivot_offset = Vector2(324, 104.5)
 text = "Press [F] for light"
 label_settings = SubResource("LabelSettings_28nd1")
@@ -394,10 +404,7 @@ size = Vector2i(320, 180)
 render_target_update_mode = 4
 
 [node name="3D_Scene" parent="SubViewportContainer (dithered)/SubViewport" unique_id=1151871138 instance=ExtResource("1_v7wuh")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35500145, 0, 49.398384)
-
-[node name="JAM_Wall" parent="SubViewportContainer (dithered)/SubViewport/3D_Scene" index="2" unique_id=1723334683]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13536096, 2.4077702, 55.15902)
+transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
 
 [node name="Player" parent="SubViewportContainer (dithered)/SubViewport" unique_id=704551036 instance=ExtResource("2_tv1s7")]
 transform = Transform3D(-1.0000001, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1.0000001, 0, 3.399939, 26.798784)
@@ -563,7 +570,6 @@ mesh = SubResource("BoxMesh_sf2rc")
 
 [node name="particles follow" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=241107587]
 transform = Transform3D(-0.9999999, 0, 8.742276e-08, 0, 1, 0, -8.742276e-08, 0, -0.9999999, -2.3428238e-06, -3.399939, 26.79878)
-visible = false
 
 [node name="amb dust backup" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow" unique_id=227571414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3397803, 24.815016)
@@ -789,5 +795,14 @@ draw_pass_1 = SubResource("QuadMesh_wjyh8")
 transform = Transform3D(2.2103648, 0, 0, 0, 0.27049983, 0, 0, 0, 3.6258152, 0, -2.3761544, 0)
 size = Vector3(2, 14.399414, 2)
 
+[node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2564709, 0.19999999, 22.6257)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1284647548]
+shape = SubResource("BoxShape3D_763k3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1166594766]
+mesh = SubResource("BoxMesh_jddww")
+
 [editable path="SubViewportContainer (dithered)/SubViewport/3D_Scene"]
-[editable path="SubViewportContainer (dithered)/SubViewport/3D_Scene/JAM_Poutres"]
