@@ -3,8 +3,8 @@
 [ext_resource type="Shader" uid="uid://dwq8swrddngt8" path="res://shaders/canvas_effects/dither_Canvas_item.gdshader" id="1_4wx58"]
 [ext_resource type="Shader" uid="uid://bt3ptxf5fw35q" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="1_763k3"]
 [ext_resource type="Shader" uid="uid://p6clh15i7n0e" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="1_ta1t5"]
+[ext_resource type="Environment" uid="uid://b4h8pno807qun" path="res://resources/Environment_Compositing.tres" id="1_w1x4e"]
 [ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
-[ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
 [ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
@@ -196,20 +196,10 @@ shader_parameter/Vignette = 0.0
 shader_parameter/Film_Grain = 0.0
 shader_parameter/Filter_Strenght = 0.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
-size = Vector3(0.4, 0.4, 0.4)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw1w"]
-albedo_color = Color(0.82638466, 0.52687705, 0.883106, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jddww"]
-material = SubResource("StandardMaterial3D_paw1w")
-size = Vector3(0.4, 0.4, 0.4)
-
 [node name="Node3D" type="Node3D" unique_id=1865376727]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1145896538]
-environment = ExtResource("2_ta1t5")
+environment = ExtResource("1_w1x4e")
 
 [node name="SubViewportConterner text HD" type="SubViewportContainer" parent="." unique_id=1257878426]
 z_index = 4
@@ -233,7 +223,8 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="UI Text" type="Control" parent="SubViewportConterner text HD/SubViewport" unique_id=1058761375]
+[node name="UI Text" type="Control" parent="SubViewportConterner text HD/SubViewport" unique_id=1058761375 groups=["lamp_hint"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -292,7 +283,7 @@ size = Vector2i(320, 180)
 render_target_update_mode = 4
 
 [node name="Player" parent="SubViewportContainer (dithered)/SubViewport" unique_id=704551036 instance=ExtResource("2_tv1s7")]
-transform = Transform3D(-1.0000001, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1.0000001, 0, 3.399939, 26.798784)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 
 [node name="Hero_Amb_Light" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1667485646]
 
@@ -476,12 +467,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1284647548]
-shape = SubResource("BoxShape3D_763k3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1166594766]
-mesh = SubResource("BoxMesh_jddww")

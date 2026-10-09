@@ -163,7 +163,7 @@ func _physics_process(delta: float) -> void:
 	var player := get_tree().get_first_node_in_group(&"player") as CollisionObject3D
 	# If we end up with multiple lamp i'll change this
 	var lamp := get_tree().get_first_node_in_group(&"lamp") as SpotLight3D
-	# ponytail: no line of sight check, a thin wall does not protect. Add a ray if it happens
+	# no line of sight check, a thin wall does not protect
 	if player and $DeathRange.overlaps_body(player):
 		# The camera is forced to look at the head
 		player.capture(self, profile.eye_height, profile.death_placement_distance)
