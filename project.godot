@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 FmodManager="*uid://cds10pm7hwn3p"
+Music="*uid://46hee07nkwby"
 
 [display]
 

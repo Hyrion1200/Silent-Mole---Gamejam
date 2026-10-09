@@ -16,9 +16,8 @@ text = "Taupinambourre"
 font_size = 60
 depth = 0.15
 
-[node name="TitleScreen" type="Node3D" unique_id=1931692903 node_paths=PackedStringArray("keep")]
+[node name="TitleScreen" type="Node3D" unique_id=1931692903]
 script = ExtResource("1_title")
-keep = [NodePath("FmodBankLoader"), NodePath("FmodEventEmitter3D")]
 
 [node name="Environment" parent="." unique_id=162347460 instance=ExtResource("3_env")]
 
@@ -79,17 +78,5 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "Play"
-
-[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=309356722]
-bank_paths = ["res://FMOD/Build/Desktop/Desktop/Master.bank"]
-
-[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=309248743 groups=["fmodEventEmitter"]]
-event_name = "event:/Music"
-event_guid = "{3d86c8b8-cdc6-4b9d-8359-edc68d19ea19}"
-autoplay = true
-fmod_parameters/musParameter/id = -4965400694012104773
-fmod_parameters/musParameter = "Menu"
-fmod_parameters/musParameter/labels = PackedStringArray("Nothing", "Menu", "Idle", "Suspicious", "Alerted", "Found", "Death", "Ending")
-fmod_parameters/musParameter/variant_type = 4
 
 [connection signal="pressed" from="UI/Play" to="." method="_on_play_pressed"]

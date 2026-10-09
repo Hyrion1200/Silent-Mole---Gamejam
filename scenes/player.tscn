@@ -139,6 +139,9 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("BoxMesh_beam")
 
+[node name="FmodListener3D" type="FmodListener3D" parent="Camera3D" unique_id=232891711]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
 visible = false

@@ -65,6 +65,7 @@ func _ready() -> void:
 	ring.inner_radius = step_noise_radius - 0.06
 	# Plane facing the camera at the end of the aim ray
 	$Camera3D/Reach.position.z = -reach
+	Music.follow_threats()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -169,6 +170,8 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 		return
 	_captor = captor
 	_captor_head = head_height
+	# Start the captured SFX @Pierre67
+	Music.set_state("Death")
 	# Connect to the captured signal
 	captor.captured.connect(_on_captured, CONNECT_ONE_SHOT)
 	_release()
@@ -183,7 +186,7 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	var place := global_position - away + away.normalized() * distance
 	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
-	# Start the captured SFX @Pierre67
+
 
 
 ## The captor saw the player face it --> the view fades out, then the player respawns
@@ -204,6 +207,7 @@ func respawn() -> void:
 	global_position = spawn_point
 	freeze = false
 	get_tree().call_group(&"enemies", &"reset")
+	Music.follow_threats()
 	_camera.fade_in()
 
 
