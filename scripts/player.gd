@@ -86,8 +86,6 @@ func _ready() -> void:
 	var ring: TorusMesh = $NoiseRing.mesh
 	ring.outer_radius = step_noise_radius
 	ring.inner_radius = step_noise_radius - 0.06
-	# Plane facing the camera at the end of the aim ray
-	$Camera3D/Reach.position.z = -reach
 	Music.follow_threats()
 
 
@@ -116,7 +114,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Captured --> We can start something if needed
 		pass
 	elif event.is_action_pressed(&"lamp"): # F
-		if _has_lamp:
+		# Debug --> works without having picked the lamp up
+		if _has_lamp or _debug:
 			_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
