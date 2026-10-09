@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://713jvk2qo78"]
+
+[ext_resource type="Texture2D" uid="uid://kk1x6cj0b5i8" path="res://assets/_texture/_rock/Low_Albedo.jpg" id="1_xjf5s"]
+[ext_resource type="Texture2D" uid="uid://0cljef3bvyma" path="res://assets/_texture/_rock/Low_Normal.jpg" id="2_701q7"]
+
+[resource]
+albedo_texture = ExtResource("1_xjf5s")
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("2_701q7")
+uv1_scale = Vector3(0.001, 0.001, 0.001)
+uv1_triplanar = true
+texture_filter = 0

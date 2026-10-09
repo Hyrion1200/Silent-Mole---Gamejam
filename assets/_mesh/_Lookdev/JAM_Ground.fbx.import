@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://btfoqfgq30wti"
+uid="uid://b8gohf8qvd7u7"
 path="res://.godot/imported/JAM_Ground.fbx-59dd032fa5bfba074497cb45e4727e6b.scn"
 
 [deps]
@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/JAM_Ground.fbx-59dd032fa5bfba074497cb45e4727e
 
 nodes/root_type=""
 nodes/root_name=""
-nodes/root_script=Resource("uid://d33pjcji8q75u", "res://scripts/blockout_import.gd")
+nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
 array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true

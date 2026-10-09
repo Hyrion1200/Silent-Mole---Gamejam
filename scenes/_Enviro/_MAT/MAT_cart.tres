@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://wtutikc8wnnl"]
+
+[ext_resource type="Texture2D" uid="uid://dxbjl7gt1vtvt" path="res://assets/_texture/_cart/JAM_ST_Cart_0.png" id="1_m7kg5"]
+
+[resource]
+albedo_texture = ExtResource("1_m7kg5")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0
