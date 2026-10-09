@@ -14,5 +14,5 @@ texture_filter = 0
 
 [node name="JAM_Wood" unique_id=267189473 instance=ExtResource("1_fm37m")]
 
-[node name="ENV_Wood" parent="." index="0" unique_id=95516550]
+[node name="ENV_Wood" parent="." index="0" unique_id=1584214863]
 surface_material_override/0 = SubResource("StandardMaterial3D_y0mae")
