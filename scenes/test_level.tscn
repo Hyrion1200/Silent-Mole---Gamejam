@@ -256,7 +256,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.027038, -0.03827572, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3129, 0, -3.287963)
 
 [node name="Enemy2" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
-transform = Transform3D(-0.9919228, 0, 0.126844, 0, 1, 0, -0.126844, 0, -0.9919228, 34.89942, 0.9, -4.436102)
+transform = Transform3D(-0.9919228, 0, 0.12684408, 0, 1, 0, -0.12684408, 0, -0.9919228, 34.89942, 0.9, -4.436102)
 patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
 ping_pong = false
 

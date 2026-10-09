@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="4_shake"]
 [ext_resource type="Texture2D" uid="uid://owyxa3ttemk1" path="res://assets/_icons/UI_hand_open.png" id="5_qlg0r"]
+[ext_resource type="Resource" uid="uid://d0iwunc2swpe4" path="res://resources/bob_player_camera.tres" id="5_tuyoq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
 friction = 0.0
@@ -55,6 +56,7 @@ speed = 2.75
 accel = 10.0
 eye_height = 0.3
 capture_shake = SubResource("Resource_capture_shake")
+step_length = 2.0
 respawn_delay = 1.0
 death_shake_start = 0.02
 death_shake_end = 0.01
@@ -76,6 +78,7 @@ current = true
 fov = 37.849285
 script = ExtResource("2_shake")
 default_shake = SubResource("Resource_shake")
+bob = ExtResource("5_tuyoq")
 fade_out_duration = 3.0
 fade_out_start_ratio = 0.6
 fade_in_duration = 4.0
@@ -116,22 +119,6 @@ stretch_mode = 5
 layout_mode = 2
 text = "[E] - Interact"
 
-[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
-visible = false
-light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
-light_volumetric_fog_energy = 0.0
-shadow_enabled = true
-shadow_bias = 0.1
-spot_range = 17.578
-spot_attenuation = 0.12
-spot_angle = 23.48
-
-[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
-visible = false
-cast_shadow = 0
-mesh = SubResource("BoxMesh_dqkch")
-
 [node name="Hero_light_amb" type="Node3D" parent="Camera3D" unique_id=401284020]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.072871, 1.186552)
 
@@ -151,6 +138,22 @@ spot_angle = 33.87
 
 [node name="FmodListener3D" type="FmodListener3D" parent="Camera3D" unique_id=232891711]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
+visible = false
+light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.1
+spot_range = 17.578
+spot_attenuation = 0.12
+spot_angle = 23.48
+
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_dqkch")
 
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)

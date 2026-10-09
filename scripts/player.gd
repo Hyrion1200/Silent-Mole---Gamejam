@@ -320,9 +320,13 @@ func _aimed(areas: bool = false) -> Object:
 	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Same distance as the footsteps, counted per frame --> a bob counted per physics tick would judder
+	var walked := Vector2(linear_velocity.x, linear_velocity.z).length()
+	var bob: Vector2 = _camera.walk(walked * delta / step_length, walked / speed, delta)
 	# Prevent stuttering that we would get with get_global_transform()
-	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
+	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * (eye_height + bob.y) \
+			+ Vector3.RIGHT.rotated(Vector3.UP, _yaw) * bob.x
 	if is_instance_valid(_captor):
 		# The mouse no longer drives the view, it turns to the head of the captor
 		var to := _captor.global_position + Vector3.UP * _captor_head - _camera.global_position
