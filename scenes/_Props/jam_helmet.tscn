@@ -9,6 +9,3 @@
 [node name="PROP_helmet" parent="PROPS_helmet" parent_id_path=PackedInt32Array(661879541) index="0" unique_id=1699008698]
 surface_material_override/0 = ExtResource("2_linat")
 surface_material_override/1 = ExtResource("3_saqfv")
-
-[node name="CollisionShape3D" parent="PROPS_helmet/PROP_helmet/PROP_helmet_col" parent_id_path=PackedInt32Array(2001826468) index="0" unique_id=999270458]
-visible = false
