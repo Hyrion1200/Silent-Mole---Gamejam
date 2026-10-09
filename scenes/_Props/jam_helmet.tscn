@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bp4ofwxpusr8i"]
 
 [ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="1_syioc"]
+[ext_resource type="Material" uid="uid://nbsp3pcacrjc" path="res://scenes/_Hero/_MAT/MAT_Helmet_Light.tres" id="2_linat"]
+[ext_resource type="Material" uid="uid://cokkcuppfacf0" path="res://scenes/_Hero/_MAT/MAT_Foe.tres" id="3_saqfv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mqug"]
 emission_enabled = true
@@ -8,6 +10,13 @@ emission = Color(0.9875638, 0.9792542, 0.8351617, 1)
 emission_energy_multiplier = 4.0
 
 [node name="JAM_Helmet" unique_id=1108416575 groups=["lamp_pickup"] instance=ExtResource("1_syioc")]
+
+[node name="PROP_helmet" parent="PROPS_helmet" parent_id_path=PackedInt32Array(661879541) index="0" unique_id=1699008698]
+surface_material_override/0 = ExtResource("2_linat")
+surface_material_override/1 = ExtResource("3_saqfv")
+
+[node name="CollisionShape3D" parent="PROPS_helmet/PROP_helmet/PROP_helmet_col" parent_id_path=PackedInt32Array(2001826468) index="0" unique_id=999270458]
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="0" unique_id=1105721273]
 transform = Transform3D(1, 0, 0, 0, -0.9659258, -0.25881913, 0, 0.25881913, -0.9659258, 0, 0.15641302, 0.3196242)

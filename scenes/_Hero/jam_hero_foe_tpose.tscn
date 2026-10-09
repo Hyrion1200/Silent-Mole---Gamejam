@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dh541y02l43u6"]
+
+[ext_resource type="PackedScene" uid="uid://5olup7sx3ddx" path="res://assets/_mesh/JAM_Hero_Foe_TPOSE.fbx" id="1_2ar88"]
+[ext_resource type="Material" uid="uid://nbsp3pcacrjc" path="res://scenes/_Hero/_MAT/MAT_Helmet_Light.tres" id="2_vncam"]
+[ext_resource type="Material" uid="uid://cokkcuppfacf0" path="res://scenes/_Hero/_MAT/MAT_Foe.tres" id="3_3kuqg"]
+[ext_resource type="Material" uid="uid://cntvtpkt2hhe1" path="res://scenes/_Hero/_MAT/MAT_Eyes.tres" id="4_r6qs2"]
+
+[node name="JAM_Hero_Foe_TPOSE" unique_id=1401988619 instance=ExtResource("1_2ar88")]
+
+[node name="Foe_light" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="0" unique_id=747113679]
+material_override = ExtResource("2_vncam")
+
+[node name="CollisionShape3D" parent="Foe_geo/Foe_light/Foe_light_col" parent_id_path=PackedInt32Array(689036484) index="0" unique_id=1313681699]
+visible = false
+
+[node name="Foe_body" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="1" unique_id=374859248]
+surface_material_override/0 = ExtResource("3_3kuqg")
+
+[node name="CollisionShape3D" parent="Foe_geo/Foe_body/Foe_body_col" parent_id_path=PackedInt32Array(569155155) index="0" unique_id=1395420630]
+visible = false
+
+[node name="Foe_helmet" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="2" unique_id=749383158]
+surface_material_override/0 = ExtResource("3_3kuqg")
+
+[node name="CollisionShape3D" parent="Foe_geo/Foe_helmet/Foe_helmet_col" parent_id_path=PackedInt32Array(1705545448) index="0" unique_id=679092949]
+visible = false
+
+[node name="Foe_eyes" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="3" unique_id=206031139]
+material_override = ExtResource("4_r6qs2")
+
+[node name="CollisionShape3D" parent="Foe_geo/Foe_eyes/Foe_eyes_col" parent_id_path=PackedInt32Array(1487184743) index="0" unique_id=1060733651]
+visible = false
