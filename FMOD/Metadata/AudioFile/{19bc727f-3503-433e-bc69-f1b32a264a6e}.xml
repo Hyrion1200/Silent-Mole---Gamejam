@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{19bc727f-3503-433e-bc69-f1b32a264a6e}">
+		<property name="assetPath">
+			<value>Ambiance/amb_mine_start.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>41.142854166666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{453f2612-f818-4225-8e43-0ef9440852e8}</destination>
+		</relationship>
+	</object>
+</objects>

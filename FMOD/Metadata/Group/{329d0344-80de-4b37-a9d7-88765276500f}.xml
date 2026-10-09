@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{329d0344-80de-4b37-a9d7-88765276500f}">
+		<property name="name">
+			<value>sfxPasPrio</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{558fe5da-1cb8-4633-8216-a9d9418fc7c5}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{a0ce68e2-a060-4adb-b993-dc387fac9c26}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{a889de94-05d9-4d74-a593-a8abb05a5811}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{558fe5da-1cb8-4633-8216-a9d9418fc7c5}">
+		<relationship name="effects">
+			<destination>{6ccdc9d1-d9ae-47a9-b36d-87d97718b941}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{a0ce68e2-a060-4adb-b993-dc387fac9c26}" />
+	<object class="MixerBusFader" id="{6ccdc9d1-d9ae-47a9-b36d-87d97718b941}" />
+</objects>
