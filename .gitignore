@@ -3,3 +3,5 @@
 /android/
 *.md
 *.json
+*.TMP
+*.dll
