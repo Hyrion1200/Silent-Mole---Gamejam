@@ -20,15 +20,18 @@ extends RigidBody3D
 ## Speed at which a climb point pulls the player up, in m/s.
 @export var climb_speed: float = 1.0
 
-## How fast the camera is turned toward the enemy that captured the player, in rad/s.
-@export var capture_turn_speed: float = 0.5
+## Time for the camera to snap to the enemy that captured the player, in seconds.
+## It goes about 10% past the enemy's head, then settles back on it
+@export var capture_turn_time: float = 0.45
+## Shake played when the player is caught
+@export var capture_shake: ShakeSettings
 
 ## How far a footstep is heard by enemies.
 @export var step_noise_radius: float = 6.0
 ## Distance travelled between two footsteps. We can increase it to be more lenient
 @export var step_length: float = 0.8
 
-## Time between the captured signal and the respawn, in seconds
+## Time between the start of the fade out and the respawn, in seconds
 @export var respawn_delay: float = 5.0
 
 ## How long the lamp hint stays on screen once the lamp is picked up
@@ -44,8 +47,6 @@ extends RigidBody3D
 
 ## Where to respawn the player, moved by the triggers with spawn_point_set
 var spawn_point: Vector3
-## Captured, placed and done turning to the captor's head. Read by the captor to send captured
-var facing_captor: bool = false
 
 ## Picked up from the ground --> F does nothing before that
 var _has_lamp: bool = false
@@ -58,6 +59,13 @@ var _move_tween: Tween
 ## The enemy that captured the player, and the height of its head above its center
 var _captor: Node3D
 var _captor_head: float = 0.0
+## Where the camera looked when the player was caught (pitch, yaw), and how far it has
+## turned from there to the captor's head: 0 --> 1, above 1 while it overshoots
+var _look_from: Vector2
+var _look_weight: float = 0.0
+var _look_tween: Tween
+## Captured, placed and done turning to the captor's head --> the death ending has started
+var _facing_captor: bool = false
 
 @onready var _camera: Camera3D = $Camera3D
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
@@ -78,8 +86,6 @@ func _ready() -> void:
 	var ring: TorusMesh = $NoiseRing.mesh
 	ring.outer_radius = step_noise_radius
 	ring.inner_radius = step_noise_radius - 0.06
-	# Plane facing the camera at the end of the aim ray
-	$Camera3D/Reach.position.z = -reach
 	Music.follow_threats()
 
 
@@ -108,7 +114,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Captured --> We can start something if needed
 		pass
 	elif event.is_action_pressed(&"lamp"): # F
-		if _has_lamp:
+		# Debug --> works without having picked the lamp up
+		if _has_lamp or _debug:
 			_lamp.visible = not _lamp.visible
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
@@ -200,17 +207,16 @@ func _climb(point: ClimbPoint) -> void:
 
 
 ## Caught by an enemy: frozen for good, the camera turns to the enemy's head and the view fades out.
-## head_height is the head above the captor's center. Called every tick the player is in a death range.
+## head_height is the head above the captor's center. Called once by the enemy whose death range is entered.
 ## The player is slid to distance from the captor, on the side they were caught on.
 func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	if _captor:
+		# Already caught by another enemy
 		return
 	_captor = captor
 	_captor_head = head_height
 	# Start the captured SFX @Pierre67
 	Music.set_state("Death")
-	# Connect to the captured signal
-	captor.captured.connect(_on_captured, CONNECT_ONE_SHOT)
 	_release()
 	# A climb in progress would carry on and unfreeze the player at its end
 	if _move_tween:
@@ -223,13 +229,19 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	var place := global_position - away + away.normalized() * distance
 	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
+	if capture_shake:
+		_camera.shake(capture_shake)
+	_look_from = Vector2(_pitch, _yaw)
+	# Tween.TRANS_BACK allow the overshooting
+	_look_weight = 0.0
+	_look_tween = create_tween()
+	_look_tween.tween_property(self, ^"_look_weight", 1.0, capture_turn_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
-
-## The captor saw the player face it --> the view fades out, then the player respawns
-func _on_captured() -> void:
-	_camera.fade_out()
-	await get_tree().create_timer(respawn_delay).timeout
+## Placed and facing the captor --> the view fades out, then the player respawns
+func _die() -> void:
+	var fade_out_duration : float = _camera.fade_out()
+	await get_tree().create_timer(fade_out_duration + respawn_delay).timeout
 	respawn()
 
 
@@ -239,7 +251,7 @@ func respawn() -> void:
 	if _move_tween:
 		_move_tween.kill()
 	_captor = null
-	facing_captor = false
+	_facing_captor = false
 	linear_velocity = Vector3.ZERO
 	global_position = spawn_point
 	freeze = false
@@ -296,19 +308,22 @@ func _aimed(areas: bool = false) -> Object:
 	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
 
-func _process(delta: float) -> void:
-	## Prevent stuttering that we would get with get_global_transform()
+func _process(_delta: float) -> void:
+	# Prevent stuttering that we would get with get_global_transform()
 	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
 	if is_instance_valid(_captor):
 		# The mouse no longer drives the view, it turns to the head of the captor
 		var to := _captor.global_position + Vector3.UP * _captor_head - _camera.global_position
 		var yaw := atan2(-to.x, -to.z)
 		var pitch := atan2(to.y, Vector2(to.x, to.z).length())
-		_yaw = rotate_toward(_yaw, yaw, capture_turn_speed * delta)
-		_pitch = rotate_toward(_pitch, pitch, capture_turn_speed * delta)
+		# The head moves in the view while the player is slid into place --> aimed at every frame
+		_yaw = lerp_angle(_look_from.y, yaw, _look_weight)
+		_pitch = clampf(lerpf(_look_from.x, pitch, _look_weight), -1.55, 1.55)
 		# Only once the player is placed and the camera faces the head
-		facing_captor = not _move_tween.is_running() and is_zero_approx(angle_difference(_yaw, yaw)) and is_equal_approx(_pitch, pitch)
-	_camera.rotation = Vector3(_pitch, _yaw, 0.0)
+		if not _facing_captor and not _move_tween.is_running() and not _look_tween.is_running():
+			_facing_captor = true
+			_die()
+	_camera.global_rotation = Vector3(_pitch, _yaw, 0.0)
 	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
 	var body := _aimed_body()
 	var target := _aimed(true)

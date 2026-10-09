@@ -247,7 +247,6 @@ reach = 1.5
 drag_force = 200.0
 throw_impulse = 8.0
 climb_speed = 0.6
-capture_turn_speed = 0.9
 step_noise_radius = 7.0
 
 [node name="JAM_BLOCKOUT_LVL1" parent="." unique_id=1993698397 instance=ExtResource("2_paw1w")]
