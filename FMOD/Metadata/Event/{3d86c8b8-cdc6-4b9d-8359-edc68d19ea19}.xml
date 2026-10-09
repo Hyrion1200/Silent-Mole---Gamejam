@@ -861,7 +861,6 @@
 			<destination>{5161481f-5d9e-4bcd-902d-d41b9c202663}</destination>
 			<destination>{ccb59a54-23ce-422f-9f6d-551a2ce517e3}</destination>
 			<destination>{816d7f26-79b2-4a0c-bff5-3680ff643fa1}</destination>
-			<destination>{b30edaac-d7ca-49ec-a95b-777816f3128d}</destination>
 			<destination>{e5acae7f-698a-46d8-8bef-296d6f4181f2}</destination>
 		</relationship>
 		<relationship name="audioFile">
@@ -4180,10 +4179,10 @@
 			<value>-80</value>
 		</property>
 		<property name="attackTime">
-			<value>0</value>
+			<value>0.5</value>
 		</property>
 		<property name="releaseTime">
-			<value>2000</value>
+			<value>3000</value>
 		</property>
 		<property name="finalValue">
 			<value>-80</value>
@@ -4228,17 +4227,6 @@
 		</property>
 		<property name="maximum">
 			<value>2</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{42d57716-0047-4272-85e8-d948155cd570}</destination>
-		</relationship>
-	</object>
-	<object class="ParameterCondition" id="{b30edaac-d7ca-49ec-a95b-777816f3128d}">
-		<property name="minimum">
-			<value>6</value>
-		</property>
-		<property name="maximum">
-			<value>6</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{42d57716-0047-4272-85e8-d948155cd570}</destination>
