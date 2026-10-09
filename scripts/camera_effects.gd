@@ -17,6 +17,10 @@ extends Camera3D
 ## Set before changing scene so the next camera starts black and fades in
 static var fade_in_on_ready: bool = false
 
+## Amplitude of a shake that does not fade on its own
+## Driven from outside, by the death of the player
+var rumble: float = 0.0
+
 var _shake: float = 0.0
 var _shake_settings: ShakeSettings
 var _fade_tween: Tween
@@ -37,8 +41,9 @@ func fade_in() -> void:
 
 
 ## Hide the view to black
-func fade_out() -> void:
+func fade_out() -> float:
 	_fade_to(1.0, fade_out_duration, fade_out_start_ratio)
+	return fade_in_duration
 
 
 func _fade_to(alpha: float, fade_duration: float, start_ratio: float) -> void:
@@ -64,10 +69,11 @@ func shake(settings: ShakeSettings = default_shake) -> void:
 
 
 func _process(delta: float) -> void:
-	if _shake <= 0.0:
-		return
-	_shake = maxf(_shake - delta / _shake_settings.duration, 0.0)
+	var amplitude := rumble
+	if _shake > 0.0:
+		_shake = maxf(_shake - delta / _shake_settings.duration, 0.0)
+		amplitude += _shake_settings.amplitude * _shake
 	# The offsets only move the view --> the player keeps driving position and rotation
 	# h_offset and v_offset and Camera3D properties
-	h_offset = randf_range(-1.0, 1.0) * _shake_settings.amplitude * _shake
-	v_offset = randf_range(-1.0, 1.0) * _shake_settings.amplitude * _shake
+	h_offset = randf_range(-1.0, 1.0) * amplitude
+	v_offset = randf_range(-1.0, 1.0) * amplitude

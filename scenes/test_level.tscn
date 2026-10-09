@@ -241,13 +241,12 @@ size = Vector3(10, 3, 0.5)
 material = SubResource("StandardMaterial3D_7gix3")
 
 [node name="Player" parent="." unique_id=520541980 instance=ExtResource("1_player")]
-transform = Transform3D(-0.5143874, 0, 0.85755795, 0, 1, 0, -0.85755795, 0, -0.5143874, 0, 1, 0)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 1, 12.12388)
 speed = 7.47
 reach = 1.5
 drag_force = 200.0
 throw_impulse = 8.0
 climb_speed = 0.6
-capture_turn_speed = 0.9
 step_noise_radius = 7.0
 
 [node name="JAM_BLOCKOUT_LVL1" parent="." unique_id=1993698397 instance=ExtResource("2_paw1w")]
