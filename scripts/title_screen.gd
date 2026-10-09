@@ -1,7 +1,7 @@
 extends Node3D
 
 const CameraEffects := preload("res://scripts/camera_effects.gd")
-const LEVEL: String = "res://scenes/test_level.tscn"
+const LEVEL: String = "res://scenes/level_1.tscn"
 
 @onready var _camera: CameraEffects = $Camera3D
 @onready var _play: Button = $UI/Play
