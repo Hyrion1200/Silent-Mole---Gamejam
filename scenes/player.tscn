@@ -1,47 +1,52 @@
 [gd_scene format=3 uid="uid://bu4sxdgniekf"]
 
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Texture2D" uid="uid://dfx63ja3l32u7" path="res://icon.svg" id="3_icon"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="4_shake"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
 friction = 0.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yj3ml"]
 radius = 0.4
 height = 1.8
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wjyh8"]
 radius = 0.4
 height = 1.8
 
-[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ke0wg"]
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_763k3"]
 
 [sub_resource type="Resource" id="Resource_shake"]
 script = ExtResource("4_shake")
 amplitude = 0.15
 duration = 5.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2els"]
 shading_mode = 0
 albedo_color = Color(0.8007495, 0.6530097, 0.9789923, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_reach"]
-material = SubResource("StandardMaterial3D_debug")
+material = SubResource("StandardMaterial3D_g2els")
 size = Vector2(0.1, 0.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_beam"]
-material = SubResource("StandardMaterial3D_debug")
+[sub_resource type="BoxMesh" id="BoxMesh_dqkch"]
+material = SubResource("StandardMaterial3D_g2els")
 size = Vector3(0.02, 0.02, 1)
 
-[sub_resource type="TorusMesh" id="TorusMesh_noise"]
-material = SubResource("StandardMaterial3D_debug")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf2rc"]
+shading_mode = 0
+albedo_color = Color(0.2, 0.8, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_jneaj"]
+material = SubResource("StandardMaterial3D_sf2rc")
 rings = 96
 ring_segments = 6
 
 [node name="Player" type="RigidBody3D" unique_id=704551036 groups=["player"]]
-physics_material_override = SubResource("PhysicsMaterial_player")
+physics_material_override = SubResource("PhysicsMaterial_ta1t5")
 can_sleep = false
 lock_rotation = true
 freeze_mode = 1
@@ -52,17 +57,18 @@ eye_height = 0.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=958506263]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_player")
+shape = SubResource("CapsuleShape3D_yj3ml")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1863481527]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
 visible = false
-mesh = SubResource("CapsuleMesh_player")
+mesh = SubResource("CapsuleMesh_wjyh8")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1716908041]
 physics_interpolation_mode = 2
 top_level = true
-attributes = SubResource("CameraAttributesPhysical_ke0wg")
+environment = ExtResource("2_qhqgy")
+attributes = SubResource("CameraAttributesPhysical_763k3")
 current = true
 fov = 37.849285
 script = ExtResource("2_shake")
@@ -128,19 +134,43 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_reach")
 
-[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=1830250579 groups=["lamp"]]
-light_energy = 4.0
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
+light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
+light_volumetric_fog_energy = 0.0
 shadow_enabled = true
-spot_range = 10.0
-spot_angle = 25.0
+shadow_bias = 0.1
+spot_range = 17.578
+spot_attenuation = 0.12
+spot_angle = 23.48
 
-[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=556691104 groups=["debug"]]
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
 visible = false
 cast_shadow = 0
-mesh = SubResource("BoxMesh_beam")
+mesh = SubResource("BoxMesh_dqkch")
+
+[node name="Hero_light_amb" type="Node3D" parent="Camera3D" unique_id=401284020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.072871, 1.186552)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Hero_light_amb" unique_id=2054388141]
+light_color = Color(0.17479993, 0.24162033, 0.18353586, 1)
+light_energy = 6.656
+spot_range = 4.571
+spot_attenuation = -0.06
+spot_angle = 52.87
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Camera3D/Hero_light_amb/SpotLight3D" unique_id=1157310432]
+light_color = Color(0.17479993, 0.24162033, 0.18353586, 1)
+light_energy = 6.656
+spot_range = 10.616
+spot_attenuation = -0.06
+spot_angle = 33.87
+
+[node name="FmodListener3D" type="FmodListener3D" parent="Camera3D" unique_id=232891711]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
 visible = false
 cast_shadow = 0
-mesh = SubResource("TorusMesh_noise")
+mesh = SubResource("TorusMesh_jneaj")

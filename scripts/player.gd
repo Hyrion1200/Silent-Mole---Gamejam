@@ -31,6 +31,14 @@ extends RigidBody3D
 ## Time between the captured signal and the respawn, in seconds
 @export var respawn_delay: float = 5.0
 
+## Steepest ground the player stands on, in degrees. Steeper --> slides down it
+@export_range(0.0, 90.0, 1.0) var max_slope: float = 45.0
+## How far under the feet the ground is still followed. Higher --> sticks better over bumps
+## Keep it above max_step
+@export var ground_snap: float = 0.2
+## Highest ledge the player walks over as if it was a slope --> Used for rails
+@export var max_step: float = 0.15
+
 ## Where to respawn the player, moved by the triggers with spawn_point_set
 var spawn_point: Vector3
 ## Captured, placed and done turning to the captor's head. Read by the captor to send captured
@@ -50,6 +58,8 @@ var _captor_head: float = 0.0
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
 @onready var _beam: MeshInstance3D = $Camera3D/Lamp/Beam
 @onready var _prompt: Control = $Camera3D/Fade/Prompt
+## From the center of the capsule down to the feet
+@onready var _half_height: float = $CollisionShape3D.shape.height * $CollisionShape3D.scale.y / 2.0
 
 
 func _ready() -> void:
@@ -65,6 +75,7 @@ func _ready() -> void:
 	ring.inner_radius = step_noise_radius - 0.06
 	# Plane facing the camera at the end of the aim ray
 	$Camera3D/Reach.position.z = -reach
+	Music.follow_threats()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -169,6 +180,8 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 		return
 	_captor = captor
 	_captor_head = head_height
+	# Start the captured SFX @Pierre67
+	Music.set_state("Death")
 	# Connect to the captured signal
 	captor.captured.connect(_on_captured, CONNECT_ONE_SHOT)
 	_release()
@@ -183,7 +196,7 @@ func capture(captor: Node3D, head_height: float, distance: float) -> void:
 	var place := global_position - away + away.normalized() * distance
 	_move_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_move_tween.tween_property(self, ^"global_position", place, global_position.distance_to(place) / speed)
-	# Start the captured SFX @Pierre67
+
 
 
 ## The captor saw the player face it --> the view fades out, then the player respawns
@@ -204,7 +217,41 @@ func respawn() -> void:
 	global_position = spawn_point
 	freeze = false
 	get_tree().call_group(&"enemies", &"reset")
+	Music.follow_threats()
 	_camera.fade_in()
+
+
+## Keeps the player on bumpy ground: no sliding down a slope, no take off over a bump.
+## One ray is enough --> the normal of what it hits is the slope
+## target is the horizontal velocity the player needs
+func _follow_ground(target: Vector3) -> void:
+	var query := PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * (_half_height + ground_snap))
+	query.exclude = [get_rid()]
+	# Launch a raycast to check for ground
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty() or hit.normal.y < cos(deg_to_rad(max_slope)):
+		# In the air or on a wall --> the physics alone
+		return
+
+	var normal: Vector3 = hit.normal
+	# Because there is no friction --> gravity would drag it down the slope
+	apply_central_force(-get_gravity().slide(normal) * mass * gravity_scale)
+
+	# Vertical speed of someone walking on that slope: going up faster than this is will send the player upward
+	# at the end of the slope
+	var along := -(normal.x * linear_velocity.x + normal.z * linear_velocity.z) / normal.y
+	linear_velocity.y = minf(linear_velocity.y, along)
+
+	# A low ledge is a wall for the capsule. Blocked at the feet but free max_step higher
+	# --> lifted over it, as fast as it walks
+
+	# Check 5cm ahead with a new collision
+	var ahead := target.normalized() * 0.05
+	var block := KinematicCollision3D.new()
+	# Free for further than it is high, or a slope too steep to walk on would be climbed too
+	if test_move(global_transform, ahead, block) and block.get_normal().y < cos(deg_to_rad(max_slope)) \
+			and not test_move(global_transform.translated(Vector3.UP * max_step), ahead + target.normalized() * max_step):
+		linear_velocity.y = maxf(linear_velocity.y, target.length())
 
 
 func _aimed_body() -> RigidBody3D:
@@ -261,6 +308,9 @@ func _physics_process(delta: float) -> void:
 	diff.y = 0.0
 	# We do not want to rotate the player rigidbody
 	apply_central_force(diff * accel * mass)
+	# Frozen --> moved by a tween (climb, capture), not by the physics
+	if not freeze:
+		_follow_ground(target)
 
 	# Everytime we walk a set distance start the hear function of all ennemies
 	_total_walked += Vector2(linear_velocity.x, linear_velocity.z).length() * delta

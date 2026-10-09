@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crm1lak61ifmc"]
 
 [ext_resource type="Script" uid="uid://bpi0mc82yj0fk" path="res://scripts/enemy.gd" id="1_enemy"]
-[ext_resource type="Resource" path="res://resources/enemy_default.tres" id="2_profile"]
+[ext_resource type="Resource" uid="uid://bgqpxvre724xg" path="res://resources/enemy_default.tres" id="2_profile"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
 radius = 0.4
@@ -18,6 +18,10 @@ height = 1.8
 [sub_resource type="BoxMesh" id="BoxMesh_nose"]
 size = Vector3(0.2, 0.2, 0.4)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_death"]
+resource_local_to_scene = true
+radius = 0.6
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cone"]
 transparency = 1
 cull_mode = 2
@@ -28,8 +32,8 @@ albedo_color = Color(1, 0.3, 0.2, 0.15)
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
 top_radius = 0.0
-bottom_radius = 2.165
-height = 1.2499633
+bottom_radius = 9.35
+height = 3.4031217
 radial_segments = 32
 rings = 1
 cap_bottom = false
@@ -45,10 +49,6 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_bar")
 size = Vector2(1, 0.1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_death"]
-resource_local_to_scene = true
-radius = 0.6
-
 [sub_resource type="SphereMesh" id="SphereMesh_death"]
 material = SubResource("StandardMaterial3D_cone")
 radius = 1.0
@@ -57,14 +57,16 @@ height = 2.0
 [sub_resource type="CylinderMesh" id="CylinderMesh_tube"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
-top_radius = 2.165
-bottom_radius = 2.165
-height = 10.750036
+top_radius = 9.35
+bottom_radius = 9.35
+height = 11.596878
 radial_segments = 32
 rings = 1
 cap_top = false
 
 [node name="Enemy" type="CharacterBody3D" unique_id=142524920 groups=["enemies"]]
+floor_constant_speed = true
+floor_snap_length = 0.3
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 
@@ -84,17 +86,17 @@ billboard = 1
 no_depth_test = true
 font_size = 128
 
-[node name="DeathRange" type="Area3D" parent="."]
+[node name="DeathRange" type="Area3D" parent="." unique_id=1311436096]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathRange"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathRange" unique_id=2049062684]
 shape = SubResource("SphereShape3D_death")
 
 [node name="Debug" type="Node3D" parent="." unique_id=84200304 groups=["debug"]]
 
 [node name="Cone" type="MeshInstance3D" parent="Debug" unique_id=719398577]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.7, -0.62498164)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -1.7015609)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_cone")
 
@@ -103,12 +105,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 cast_shadow = 0
 mesh = SubResource("QuadMesh_bar")
 
-[node name="DeathRange" type="MeshInstance3D" parent="Debug"]
+[node name="DeathRange" type="MeshInstance3D" parent="Debug" unique_id=1682555213]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, -0.6)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_death")
 
 [node name="Tube" type="MeshInstance3D" parent="Debug" unique_id=368716703]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.7, -6.624982)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -9.201561)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tube")

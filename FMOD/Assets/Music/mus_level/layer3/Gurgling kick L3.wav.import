@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c13nvoicdo6p0"
+path="res://.godot/imported/Gurgling kick L3.wav-6de9c0177878888424e6e696f4768f3d.sample"
+
+[deps]
+
+source_file="res://FMOD/Assets/Music/mus_level/layer3/Gurgling kick L3.wav"
+dest_files=["res://.godot/imported/Gurgling kick L3.wav-6de9c0177878888424e6e696f4768f3d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

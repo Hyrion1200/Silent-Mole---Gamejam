@@ -1,0 +1,487 @@
+[gd_scene format=3 uid="uid://bhaqrdqstlb76"]
+
+[ext_resource type="Shader" uid="uid://dwq8swrddngt8" path="res://shaders/canvas_effects/dither_Canvas_item.gdshader" id="1_4wx58"]
+[ext_resource type="Shader" uid="uid://bt3ptxf5fw35q" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="1_763k3"]
+[ext_resource type="Shader" uid="uid://p6clh15i7n0e" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="1_ta1t5"]
+[ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
+[ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
+[ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
+[ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
+[ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
+[ext_resource type="Texture2D" uid="uid://b3fgnmh4ev1vj" path="res://textures/pixel_dust_16x16.png" id="10_wjyh8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1fwu"]
+shader = ExtResource("1_763k3")
+shader_parameter/text_color = Color(0.88, 0.7861333, 0.704, 0.88235295)
+shader_parameter/warp_frequency = 10.000000475
+shader_parameter/warp_amplitude = 1.1490000545775
+shader_parameter/warp_speed = 6.8470003252325
+
+[sub_resource type="LabelSettings" id="LabelSettings_28nd1"]
+font = ExtResource("2_763k3")
+font_size = 50
+font_color = Color(0.8801478, 0.78661597, 0.7038392, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj3ml"]
+shader = ExtResource("1_ta1t5")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 5.00000021375
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 8.0
+shader_parameter/dither_strength = 0.35
+shader_parameter/chrom_aberration = 0.0
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 0.86000004085
+shader_parameter/tint_color = Vector3(1, 3.29, 3.23)
+shader_parameter/tint_strength = 0.07200000342
+shader_parameter/viewport_size_override = Vector2(1280, 720)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wjyh8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70jyu"]
+shader = ExtResource("1_4wx58")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 16
+shader_parameter/dither_size = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj3ml"]
+transparency = 1
+blend_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.011764706)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjyh8"]
+transparency = 1
+blend_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.05882353)
+metallic_specular = 0.0
+
+[sub_resource type="Gradient" id="Gradient_wjyh8"]
+offsets = PackedFloat32Array(0, 0.08806818, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.87784094, 0.87784094, 0.87784094, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jddww"]
+gradient = SubResource("Gradient_wjyh8")
+
+[sub_resource type="Curve" id="Curve_yfrd5"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(0.9973958, 1.9230804), -258.46136, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cilah"]
+curve = SubResource("Curve_yfrd5")
+
+[sub_resource type="Curve" id="Curve_sf2rc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9538472, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_763k3"]
+curve = SubResource("Curve_sf2rc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjyh8"]
+emission_shape_scale = Vector3(1.55, 1.005, 1.345)
+emission_shape = 3
+emission_box_extents = Vector3(4.475, 1.425, 12.93)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = 29.999983
+angular_velocity_max = 59.99998
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+emission_curve = SubResource("CurveTexture_cilah")
+turbulence_enabled = true
+turbulence_noise_scale = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf2rc"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.12772167, 0.12015564, 0.10979589, 1)
+albedo_texture = ExtResource("10_wjyh8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_yj3ml"]
+material = SubResource("StandardMaterial3D_sf2rc")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iouwx"]
+shader = ExtResource("6_yj3ml")
+shader_parameter/Pixelation = false
+shader_parameter/Pixelation_Scale = 0.5
+shader_parameter/Panini = 0.0
+shader_parameter/Chromatic_Peripheral = 0.9
+shader_parameter/Chromatic_Aberrations = 0.0
+shader_parameter/Chromatic_Darkening = 0.9
+shader_parameter/Blur_Amount = 0.0
+shader_parameter/Blur_Centered = 0.0
+shader_parameter/Bloom_Starts = 0.9
+shader_parameter/Bloom_Halation = 0.0
+shader_parameter/Bloom_Booster = 0.0
+shader_parameter/Shadows_Split = 0.3
+shader_parameter/Shadow_Color_Temp = 0.0
+shader_parameter/Shadow_Green_Tint = 0.0
+shader_parameter/Shadow_Brightness = 1.0
+shader_parameter/Shadow_Contrast = 1.0
+shader_parameter/Shadows_Saturation = 1.0
+shader_parameter/Highlights_Split = 0.7
+shader_parameter/Mid_Color_Temp = 0.0
+shader_parameter/Mid_Green_Tint = 0.0
+shader_parameter/Mid_Brightness = 1.0
+shader_parameter/Mid_Contrast = 1.0
+shader_parameter/Mid_Saturation = 1.0
+shader_parameter/High_Color_Temp = 0.0
+shader_parameter/High_Green_Tint = 0.0
+shader_parameter/High_Brightness = 1.0
+shader_parameter/High_Contrast = 1.0
+shader_parameter/High_Saturation = 1.0
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = 0.0
+shader_parameter/Main_Brightness = 1.0
+shader_parameter/Main_Contrast = 1.10000001639132
+shader_parameter/Main_Saturation = 0.80000001192096
+shader_parameter/Posterization = 0.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Noise = ExtResource("8_yj3ml")
+shader_parameter/Film_Grain = 0.00999999977648
+shader_parameter/Filter_Strenght = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_763k3"]
+shader = ExtResource("6_yj3ml")
+shader_parameter/Pixelation = true
+shader_parameter/Pixelation_Scale = 0.5
+shader_parameter/Panini = 0.0
+shader_parameter/Chromatic_Peripheral = 0.9
+shader_parameter/Chromatic_Aberrations = 0.0
+shader_parameter/Chromatic_Darkening = 0.9
+shader_parameter/Blur_Amount = 0.0
+shader_parameter/Blur_Centered = 0.0
+shader_parameter/Bloom_Starts = 0.9
+shader_parameter/Bloom_Halation = 0.0
+shader_parameter/Bloom_Booster = 0.0
+shader_parameter/Shadows_Split = 0.3
+shader_parameter/Shadow_Color_Temp = 0.0
+shader_parameter/Shadow_Green_Tint = 0.0
+shader_parameter/Shadow_Brightness = 1.0
+shader_parameter/Shadow_Contrast = 1.0
+shader_parameter/Shadows_Saturation = 1.0
+shader_parameter/Highlights_Split = 0.7
+shader_parameter/Mid_Color_Temp = 0.0
+shader_parameter/Mid_Green_Tint = 0.0
+shader_parameter/Mid_Brightness = 1.0
+shader_parameter/Mid_Contrast = 1.0
+shader_parameter/Mid_Saturation = 1.0
+shader_parameter/High_Color_Temp = 0.0
+shader_parameter/High_Green_Tint = 0.0
+shader_parameter/High_Brightness = 1.0
+shader_parameter/High_Contrast = 1.0
+shader_parameter/High_Saturation = 1.0
+shader_parameter/Main_Color_Temp = 4500.0
+shader_parameter/Main_Green_Tint = 0.0
+shader_parameter/Main_Brightness = 1.0
+shader_parameter/Main_Contrast = 1.0
+shader_parameter/Main_Saturation = 1.0
+shader_parameter/Posterization = 0.0
+shader_parameter/Vignette = 0.0
+shader_parameter/Film_Grain = 0.0
+shader_parameter/Filter_Strenght = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paw1w"]
+albedo_color = Color(0.82638466, 0.52687705, 0.883106, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jddww"]
+material = SubResource("StandardMaterial3D_paw1w")
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Node3D" type="Node3D" unique_id=1865376727]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1145896538]
+environment = ExtResource("2_ta1t5")
+
+[node name="SubViewportConterner text HD" type="SubViewportContainer" parent="." unique_id=1257878426]
+z_index = 4
+material = SubResource("ShaderMaterial_a1fwu")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportConterner text HD" unique_id=1666990988]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="UI Text" type="Control" parent="SubViewportConterner text HD/SubViewport" unique_id=1058761375]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="SubViewportConterner text HD/SubViewport/UI Text" unique_id=850113831]
+z_index = 6
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 556.0
+offset_top = 314.0
+offset_right = -556.0
+offset_bottom = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 104.5)
+text = "Press [F] for light"
+label_settings = SubResource("LabelSettings_28nd1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="psx_pixelate_Master" type="Control" parent="." unique_id=820211952]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="psx_pixelate_Master" unique_id=83225228]
+material = SubResource("ShaderMaterial_yj3ml")
+layout_mode = 0
+offset_right = 1885.0
+offset_bottom = 1104.0
+texture = SubResource("CanvasTexture_wjyh8")
+
+[node name="SubViewportContainer (dithered)" type="SubViewportContainer" parent="." unique_id=1830743850]
+material = SubResource("ShaderMaterial_70jyu")
+use_parent_material = true
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+stretch_shrink = 6
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer (dithered)" unique_id=1423005682]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Player" parent="SubViewportContainer (dithered)/SubViewport" unique_id=704551036 instance=ExtResource("2_tv1s7")]
+transform = Transform3D(-1.0000001, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1.0000001, 0, 3.399939, 26.798784)
+
+[node name="Hero_Amb_Light" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1667485646]
+
+[node name="Lights" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light" unique_id=154774914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3746812, 0)
+
+[node name="Set A" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights" unique_id=349127989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.754075, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set A" unique_id=1349399788]
+light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
+light_volumetric_fog_energy = 0.0
+omni_range = 54.667
+omni_attenuation = 1.405
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set A" unique_id=2124676719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8739028, 0.8199825)
+visible = false
+light_color = Color(0.39439312, 0.34727657, 0.17704916, 1)
+light_energy = 2.6
+light_volumetric_fog_energy = 0.0
+light_negative = true
+omni_range = 10.146
+omni_attenuation = 0.26
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set A" unique_id=1481883688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8739028, 0.8199825)
+light_color = Color(0.2752364, 0.12679672, 0.026204932, 1)
+spot_range = 6.537
+spot_attenuation = -1.75
+spot_angle = 93.21
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set A" unique_id=440658046]
+transform = Transform3D(5.005, 0, 0, 0, 5.005, 0, 0, 0, 5.005, 0.7083481, 0.7935209, -0.20495605)
+visible = false
+material_override = SubResource("StandardMaterial3D_yj3ml")
+
+[node name="Sprite3D2" type="Sprite3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set A" unique_id=212833739]
+transform = Transform3D(2.43, 0, 0, 0, 2.43, 0, 0, 0, 2.43, 0.7083481, 0.7935209, -0.20495605)
+visible = false
+material_override = SubResource("StandardMaterial3D_wjyh8")
+
+[node name="Set B" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights" unique_id=12157076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.754075, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set B" unique_id=940888721]
+light_color = Color(0.27450982, 0.1254902, 0.02745098, 1)
+light_energy = 4.14
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 12.77
+omni_attenuation = 1.056
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set B" unique_id=313281252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.03)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 2.574
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 3.162
+omni_attenuation = 0.315
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set B" unique_id=1025467756]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, -0.08368772, 0.8199826)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 1.93
+spot_range = 4.156263
+spot_attenuation = -1.75
+spot_angle = 52.87
+
+[node name="Set C" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights" unique_id=1383777794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.984, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set C" unique_id=1081421567]
+light_color = Color(0.27450982, 0.1254902, 0.02745098, 1)
+light_energy = 4.14
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 12.77
+omni_attenuation = 1.056
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set C" unique_id=1853917633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.03)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 2.574
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 3.162
+omni_attenuation = 0.315
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set C" unique_id=335231963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.812, 0.82)
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 6.656
+spot_range = 4.571
+spot_attenuation = -0.06
+spot_angle = 52.87
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set C/SpotLight3D" unique_id=177815544]
+light_color = Color(0.44890636, 0.22129732, 0.06989004, 1)
+light_energy = 6.656
+spot_range = 10.616
+spot_attenuation = -0.06
+spot_angle = 33.87
+
+[node name="Set D" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights" unique_id=1128615266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.984, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set D" unique_id=124803205]
+light_color = Color(0.36463022, 0.17689031, 0.18418619, 1)
+light_energy = 4.14
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 12.77
+omni_attenuation = 1.056
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set D" unique_id=301318893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.03)
+light_color = Color(0.17479993, 0.24162033, 0.18353586, 1)
+light_energy = 2.574
+light_indirect_energy = 2.099
+light_volumetric_fog_energy = 0.0
+omni_range = 13.145
+omni_attenuation = 0.315
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set D" unique_id=419774935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.812, 0.82)
+visible = false
+light_color = Color(0.17479993, 0.24162033, 0.18353586, 1)
+light_energy = 6.656
+spot_range = 4.571
+spot_attenuation = -0.06
+spot_angle = 52.87
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Hero_Amb_Light/Lights/Set D/SpotLight3D" unique_id=580462782]
+light_color = Color(0.17479993, 0.24162033, 0.18353586, 1)
+light_energy = 6.656
+spot_range = 10.616
+spot_attenuation = -0.06
+spot_angle = 33.87
+
+[node name="Particles Follow" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=241107587]
+transform = Transform3D(-0.9999999, 0, 8.742276e-08, 0, 1, 0, -8.742276e-08, 0, -0.9999999, -2.3428238e-06, -3.399939, 26.79878)
+
+[node name="Ambiant Dust" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Particles Follow" unique_id=1551794561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3397803, 24.815016)
+amount = 3000
+lifetime = 10.0
+speed_scale = 0.5
+randomness = 1.0
+fixed_fps = 10
+process_material = SubResource("ParticleProcessMaterial_wjyh8")
+draw_pass_1 = SubResource("QuadMesh_yj3ml")
+
+[node name="Camera Effects" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1895352827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09752369)
+
+[node name="Pixelize & Color grading #2" type="CanvasLayer" parent="SubViewportContainer (dithered)/SubViewport/Player/Camera Effects" unique_id=1992351524]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer (dithered)/SubViewport/Player/Camera Effects/Pixelize & Color grading #2" unique_id=1523863487]
+material = SubResource("ShaderMaterial_iouwx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pixelize & Color grading #1" type="CanvasLayer" parent="SubViewportContainer (dithered)/SubViewport/Player/Camera Effects" unique_id=2034095875]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer (dithered)/SubViewport/Player/Camera Effects/Pixelize & Color grading #1" unique_id=671550516]
+material = SubResource("ShaderMaterial_763k3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1284647548]
+shape = SubResource("BoxShape3D_763k3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1166594766]
+mesh = SubResource("BoxMesh_jddww")
