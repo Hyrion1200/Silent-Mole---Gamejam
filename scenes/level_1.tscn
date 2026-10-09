@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://sedecfdkvqsl"]
 
-[ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="1_5xbjy"]
+[ext_resource type="PackedScene" uid="uid://bhaqrdqstlb76" path="res://scenes/player_composited.tscn" id="1_5xbjy"]
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="2_4nkto"]
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="3_fcfvj"]
 [ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="4_pa8r4"]
@@ -11,8 +11,18 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [node name="Node3D" type="Node3D" unique_id=112360924]
 
-[node name="Player" parent="." unique_id=704551036 instance=ExtResource("1_5xbjy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26281, 6.81849)
+[node name="Node3D" parent="." unique_id=1865376727 instance=ExtResource("1_5xbjy")]
+
+[node name="Player" parent="Node3D/SubViewportContainer (dithered)/SubViewport" parent_id_path=PackedInt32Array(1865376727, 1423005682) index="0" unique_id=704551036]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 1.5270506, 0.81778586, 0)
+
+[node name="Camera3D" parent="Node3D/SubViewportContainer (dithered)/SubViewport/Player" index="2" unique_id=1716908041]
+transform = Transform3D(-0.9999999, 0, 8.742276e-08, 0, 1, 0, -8.742276e-08, 0, -0.9999999, 0, 0, 0)
+top_level = false
+
+[node name="CrateLight1kg" parent="Node3D/SubViewportContainer (dithered)/SubViewport" parent_id_path=PackedInt32Array(1865376727, 1423005682) index="1" unique_id=15455470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1209388, 0.2, 0)
+visible = false
 
 [node name="Enemy" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("3_fcfvj")]
 transform = Transform3D(0.2166887, 0, 0.97624075, 0, 1, 0, -0.97624075, 0, 0.2166887, -10.759974, 1.8663797, -54.588295)
@@ -36,4 +46,5 @@ navigation_mesh = SubResource("NavigationMesh_5xbjy")
 
 [node name="TextureSet" parent="NavigationRegion3D" unique_id=1151871138 instance=ExtResource("2_4nkto")]
 
-[editable path="Player"]
+[editable path="Node3D"]
+[editable path="Node3D/SubViewportContainer (dithered)/SubViewport/Player"]

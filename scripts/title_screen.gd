@@ -3,8 +3,8 @@ extends Node3D
 const CameraEffects := preload("res://scripts/camera_effects.gd")
 const LEVEL: String = "res://scenes/level_1.tscn"
 
-@onready var _camera: CameraEffects = $Camera3D
-@onready var _play: Button = $UI/Play
+@onready var _camera: CameraEffects = $"SubViewportContainer (dithered)/SubViewport/Camera3D"
+@onready var _play: Button = $"SubViewportConterner text HD/SubViewport/UI/Play"
 
 
 func _ready() -> void:
