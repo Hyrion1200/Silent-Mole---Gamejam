@@ -56,6 +56,9 @@ func _ready() -> void:
 	# Capture the mouse to prevent mouse from leaving the window
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	spawn_point = global_position
+	# The camera does not follow the rotation of the body
+	# --> starts the way the player was turned in the editor
+	_yaw = global_rotation.y
 	# For Debug purposes
 	var ring: TorusMesh = $NoiseRing.mesh
 	ring.outer_radius = step_noise_radius
@@ -82,6 +85,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera.fade_in()
 	elif _debug and event.is_action_pressed(&"fade_out"): # I
 		_camera.fade_out()
+	elif _debug and event.is_action_pressed(&"cinematic"): # O
+		# The cinematics live in the level, not under the player --> reached by group
+		get_tree().call_group(&"cinematic", &"play")
 	elif _captor:
 		# Captured --> We can start something if needed
 		pass

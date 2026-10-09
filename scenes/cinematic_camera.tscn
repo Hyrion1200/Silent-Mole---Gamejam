@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bbec0pjq13sng"]
+
+[ext_resource type="Script" uid="uid://e2xow0jgngnj" path="res://scripts/cinematic_camera.gd" id="1_cinematic"]
+[ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_camera"]
+
+[sub_resource type="Curve3D" id="Curve3D_shot"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -5),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_shot"]
+resource_name = "Main"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 11.066667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cinematic"]
+_data = {
+&"Main": SubResource("Animation_shot"),
+&"RESET": SubResource("Animation_reset")
+}
+
+[node name="CinematicCamera" type="Path3D" unique_id=473261405 groups=["cinematic"]]
+curve = SubResource("Curve3D_shot")
+debug_custom_color = Color(0, 0.6039216, 0, 1)
+script = ExtResource("1_cinematic")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=1353242021]
+loop = false
+
+[node name="Camera3D" type="Camera3D" parent="PathFollow3D" unique_id=651753811]
+fov = 37.849285
+script = ExtResource("2_camera")
+
+[node name="Fade" type="CanvasLayer" parent="PathFollow3D/Camera3D" unique_id=2009612405]
+
+[node name="Rect" type="ColorRect" parent="PathFollow3D/Camera3D/Fade" unique_id=1629337537]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=94213022]
+libraries/ = SubResource("AnimationLibrary_cinematic")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dgpivprxl740" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Texture2D" uid="uid://dfx63ja3l32u7" path="res://icon.svg" id="3_icon"]
-[ext_resource type="Script" path="res://scripts/shake_settings.gd" id="4_shake"]
+[ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="4_shake"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_player"]
 friction = 0.0

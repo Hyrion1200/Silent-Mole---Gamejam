@@ -12,10 +12,12 @@ extends Area3D
 ## Only the first time the player walks in
 @export var fire_once: bool = false
 
-## Shake the camera with these settings, empty for no shake
+## Shake the camera with these settings
 @export var camera_shake: ShakeSettings
 ## Respawn the player here from now on
 @export var spawn_point_set: bool = false
+## Play this cinematic
+@export var cinematic: CinematicCamera
 
 
 func _ready() -> void:
@@ -41,6 +43,8 @@ func _on_body_entered(body: Node3D) -> void:
 		get_viewport().get_camera_3d().shake(camera_shake)
 	if spawn_point_set:
 		body.spawn_point = global_position
+	if cinematic:
+		cinematic.play()
 	if fire_once:
 		# Delete the object we do not need it anymore
 		queue_free()
