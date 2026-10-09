@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="SnapshotGroup" id="{d2df7f9b-54b4-4fde-947b-7cad1a724113}">
+		<property name="name">
+			<value>Mix</value>
+		</property>
+		<relationship name="items">
+			<destination>{e52e4e85-027f-4fb0-b079-30fff7400330}</destination>
+			<destination>{899846b7-ae9f-4069-9ea9-dd712fc479c4}</destination>
+			<destination>{59998a0c-d321-4823-ae5d-4c35b786157e}</destination>
+			<destination>{a1f66726-cbb9-42f7-a481-9b70e381d8a2}</destination>
+		</relationship>
+	</object>
+</objects>
