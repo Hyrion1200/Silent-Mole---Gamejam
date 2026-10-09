@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cvkyw13vxsay1"
+path="res://.godot/imported/Ghosty drone L2.wav-6570ee32475e22fc85735d6b376d0e08.sample"
+
+[deps]
+
+source_file="res://FMOD/Assets/Music/mus_level/layer2/Ghosty drone L2.wav"
+dest_files=["res://.godot/imported/Ghosty drone L2.wav-6570ee32475e22fc85735d6b376d0e08.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
