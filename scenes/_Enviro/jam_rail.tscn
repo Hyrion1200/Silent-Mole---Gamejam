@@ -6,6 +6,6 @@
 
 [node name="JAM_rail" unique_id=1035252563 instance=ExtResource("1_km08b")]
 
-[node name="Rail_chain_01" parent="." index="0" unique_id=1630417007]
-surface_material_override/0 = ExtResource("2_dvhfq")
-surface_material_override/1 = ExtResource("4_a5o3v")
+[node name="ENV_Rail" parent="." index="0" unique_id=1161201417]
+surface_material_override/0 = ExtResource("4_a5o3v")
+surface_material_override/1 = ExtResource("2_dvhfq")

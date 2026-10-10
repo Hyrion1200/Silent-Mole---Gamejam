@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b4nq3yk1ntubh"]
+
+[ext_resource type="Texture2D" uid="uid://pnmcqplb8r2i" path="res://assets/_texture/_crates/Crates_Albedo.jpg" id="1_fpnx7"]
+[ext_resource type="Texture2D" uid="uid://bpgfcgclbc8jd" path="res://assets/_texture/_crates/Crates_Normal.jpg" id="2_pmefo"]
+
+[resource]
+albedo_texture = ExtResource("1_fpnx7")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource("2_pmefo")
+texture_filter = 0
