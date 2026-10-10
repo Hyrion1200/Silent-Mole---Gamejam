@@ -66,7 +66,9 @@ func _on_body_entered(body: Node3D) -> void:
 	if stinger != Stinger.Nothing:
 		stinger_on_entered.emit(stinger)
 	if camera_shake:
-		get_viewport().get_camera_3d().shake(camera_shake)
+		# The player's viewport, not ours: in the composited level the player and its camera
+		# are in a SubViewport while the triggers are in the root one, which has no camera
+		body.get_viewport().get_camera_3d().shake(camera_shake)
 	if spawn_point_set:
 		body.spawn_point = global_position
 	if cinematic:
