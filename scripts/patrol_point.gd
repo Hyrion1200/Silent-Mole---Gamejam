@@ -7,6 +7,8 @@ extends Marker3D
 
 ## Seconds the enemy stands here before walking to the next stop
 @export_range(0.0, 10.0, 0.1, "or_greater") var wait: float = 1.0
+## Animation of the enemy played while it stands here for ex. "mine". Empty --> keeps its idle one
+@export var animation: StringName
 
 
 func _ready() -> void:
