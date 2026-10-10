@@ -3,15 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://b8gohf8qvd7u7" path="res://assets/_mesh/_Lookdev/JAM_Ground.fbx" id="1_jkkql"]
 [ext_resource type="Material" uid="uid://cg36jr2hc411h" path="res://scenes/_Enviro/_MAT/MAT_ground.tres" id="2_nn04u"]
 [ext_resource type="Material" uid="uid://713jvk2qo78" path="res://scenes/_Enviro/_MAT/MAT_rock.tres" id="3_rjw6x"]
+[ext_resource type="Material" uid="uid://cab828w8kmeig" path="res://scenes/_Enviro/_MAT/MAT_groundLight.tres" id="4_rjw6x"]
 
 [node name="JAM_Ground" unique_id=1565302591 instance=ExtResource("1_jkkql")]
 
-[node name="Ground1" parent="." index="0" unique_id=1331461403]
-visible = false
-
-[node name="ground1" parent="Ground1" index="0" unique_id=615394302]
-visible = false
-
-[node name="ENV_ground" parent="." index="1" unique_id=1144209176]
+[node name="ENV_Ground" parent="." index="0" unique_id=533760570]
 surface_material_override/0 = ExtResource("2_nn04u")
 surface_material_override/1 = ExtResource("3_rjw6x")
+surface_material_override/2 = ExtResource("4_rjw6x")
