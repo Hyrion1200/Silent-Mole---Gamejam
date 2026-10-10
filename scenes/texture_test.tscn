@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bytq866si2hmg" path="res://scenes/_Props/jam_rock_02.tscn" id="14_c6rhc"]
 [ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="15_c6rhc"]
 [ext_resource type="PackedScene" uid="uid://cpkwlfpivqxtp" path="res://scenes/_Props/jam_pickaxe.tscn" id="16_5josl"]
+[ext_resource type="PackedScene" uid="uid://bsikvp4cr8j2o" path="res://scenes/_Props/jam_hanged_tope.tscn" id="17_mh4f8"]
 
 [node name="TextureSet" type="Node3D" unique_id=1151871138]
 
@@ -66,3 +67,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5324578, 0.9301925, 1.73390
 
 [node name="JAM_pickaxe" parent="." unique_id=335932595 instance=ExtResource("16_5josl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.786993, 1.2437766e-05, 5.7711697)
+
+[node name="JAM_Hanged_Tope" parent="." unique_id=951787647 instance=ExtResource("17_mh4f8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53933144, 0.39451712, 14.980804)
