@@ -19,4 +19,4 @@ walk_speed = 2.0
 investigate_at = 0.5
 search_time = 15.0
 search_radius = 18.0
-search_cheat = 1.0
+search_cheat = 0.6

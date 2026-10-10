@@ -5,8 +5,8 @@
 
 [node name="JAM_Ropes" unique_id=1030473890 instance=ExtResource("1_jyxl4")]
 
-[node name="Rope_01" parent="Ropes" parent_id_path=PackedInt32Array(732497495) index="0" unique_id=1869876654]
+[node name="Rope_01" parent="Ropes" parent_id_path=PackedInt32Array(2103392814) index="0" unique_id=108611457]
 surface_material_override/0 = ExtResource("2_sqxey")
 
-[node name="Rope_02" parent="Ropes" parent_id_path=PackedInt32Array(732497495) index="1" unique_id=1307027089]
+[node name="Rope_02" parent="Ropes" parent_id_path=PackedInt32Array(2103392814) index="1" unique_id=234889941]
 surface_material_override/0 = ExtResource("2_sqxey")
