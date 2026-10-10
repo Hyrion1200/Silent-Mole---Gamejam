@@ -27,7 +27,7 @@
 	<object class="MixerBusFader" id="{2b45d607-adf9-4675-8be0-26940f1eb4c1}" />
 	<object class="SFXReverbEffect" id="{45ed7ff4-e8ea-400d-925e-92dd0dc858ae}">
 		<property name="decayTime">
-			<value>3500</value>
+			<value>2600</value>
 		</property>
 		<property name="earlyDelay">
 			<value>21.5</value>
