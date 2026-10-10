@@ -73,7 +73,7 @@ var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
 var _total_walked: float = 0.0
-var _debug: bool = true
+var _debug: bool = false
 var _move_tween: Tween
 ## The enemy that captured the player, and the height of its head above its center
 var _captor: Node3D
@@ -104,6 +104,7 @@ var _facing_captor: bool = false
 @onready var _stinger2_emitter: FmodEventEmitter3D = $Stinger2Emitter3D
 @onready var _stinger3_emitter: FmodEventEmitter3D = $Stinger3Emitter3D
 @onready var particle_falling: GPUParticles3D = $"Particles Follow/falling debris/Particle rock"
+@onready var _wagon_stop_emitter: FmodEventEmitter3D = $WagonStopEventEmitter3D
 
 
 func _ready() -> void:
@@ -194,6 +195,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Only what cannot be dragged is thrown: shoved from where it stands
 		elif body and body.is_in_group(&"throwable"):
 			_throw(body)
+		elif body and body.is_in_group(&"throwable_cart"):
+			_push_cart(body)
 
 
 func _drag(body: RigidBody3D) -> void:
@@ -206,6 +209,15 @@ func _drag(body: RigidBody3D) -> void:
 	# Start the dragged SFX @Pierre67
 	_interact_emitter.play(false)
 
+
+func _push_cart(body: RigidBody3D) -> void:
+	_let_go()
+	# Same impulse for every item: launch speed is throw_impulse / mass
+	body.apply_central_impulse(-_camera.global_basis.z * throw_impulse)
+	# Start the throw SFX @Pierre67
+	_wagon_stop_emitter.play(false)
+	
+	
 func _throw(body: RigidBody3D) -> void:
 	_let_go()
 	# Same impulse for every item: launch speed is throw_impulse / mass
@@ -432,7 +444,7 @@ func _process(delta: float) -> void:
 	var target := _aimed(true)
 	# This line is starting to become horrible.
 	_prompt.visible = _captor == null and (_held != null \
-			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable"))) \
+			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable") or body.is_in_group(&"throwable_cart"))) \
 			or (not freeze and target is ClimbPoint) or _is_lamp_pickup(target))
 
 	if _beam.is_visible_in_tree():

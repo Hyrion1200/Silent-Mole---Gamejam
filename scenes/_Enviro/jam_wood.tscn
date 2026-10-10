@@ -5,5 +5,5 @@
 
 [node name="JAM_Wood" unique_id=267189473 instance=ExtResource("1_fm37m")]
 
-[node name="ENV_wood" parent="." index="0" unique_id=820292372]
+[node name="ENV_Wood" parent="." index="0" unique_id=2081783214]
 surface_material_override/0 = ExtResource("2_0vuvm")

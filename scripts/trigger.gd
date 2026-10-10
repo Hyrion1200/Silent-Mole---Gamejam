@@ -18,6 +18,8 @@ signal stinger_on_entered(which_stinger)
 @export var camera_shake: ShakeSettings
 ## Respawn the player here from now on
 @export var spawn_point_set: bool = false
+## Game ending
+@export var game_end: bool = false
 ## Play this cinematic
 @export var cinematic: CinematicCamera
 
@@ -73,6 +75,13 @@ func _on_body_entered(body: Node3D) -> void:
 		body.spawn_point = global_position
 	if cinematic:
 		cinematic.play()
+	if game_end:
+		body.get_viewport().get_camera_3d().fade_out_duration = 5
+		body.get_viewport().get_camera_3d().fade_out_start_ratio = 0.2
+		body.get_viewport().get_camera_3d().fade_out()
+		await get_tree().create_timer(5).timeout
+		Music.set_state("Ending")
+		get_tree().change_scene_to_file("res://scenes/Epilogue.tscn")
 	if fire_once:
 		# Delete the object we do not need it anymore
 		queue_free()

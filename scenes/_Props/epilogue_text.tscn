@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dw6uoeeerunao"]
+
+[ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="1_88ra2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3qcjx"]
+line_spacing = 13.675
+font = ExtResource("1_88ra2")
+font_size = 62
+font_color = Color(0.8801478, 0.78661597, 0.7038392, 1)
+
+[sub_resource type="Animation" id="Animation_88ra2"]
+length = 56.966667
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cvnue"]
+resource_name = "epilogue"
+length = 30.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -190), Vector2(0, -4760)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wjceq"]
+_data = {
+&"RESET": SubResource("Animation_88ra2"),
+&"epilogue": SubResource("Animation_cvnue")
+}
+
+[node name="Control" type="Control" unique_id=1900044595]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI Text" type="Control" parent="." unique_id=1449433241]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="UI Text" unique_id=2048464948]
+z_index = 6
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 427.0
+offset_top = 166.0
+offset_right = -427.0
+offset_bottom = 3380.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 104.5)
+text = "9/06/19XX
+
+A terrible accident occurred at the mine in Oklahoma City.
+
+After several miners got trapped underground after a landslide, after a mysterious explosion occurred, claiming many lives.
+
+Whistleblowers took notice, claiming that the event may have been motivated by an act of terrorism..
+
+The construction site had been built on a former mole digging sanctuary, and its desecration had caused quite a stir among the animal welfare movement.
+
+Coal mining executives are already denouncing the event as a national scandal…
+"
+label_settings = SubResource("LabelSettings_3qcjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI Text" unique_id=996271046]
+libraries/ = SubResource("AnimationLibrary_wjceq")
+speed_scale = 0.25

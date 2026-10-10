@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="4_xgl0j"]
 [ext_resource type="PackedScene" uid="uid://bijwpx5kmak24" path="res://scenes/_Enviro/jam_st_tope.tscn" id="5_jyyw2"]
 [ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/_Enviro/jam_wood.tscn" id="6_wjosx"]
+[ext_resource type="PackedScene" uid="uid://cyrp1er7ihbaa" path="res://scenes/_Props/jam_magic_crate.tscn" id="7_xybhy"]
 
 [node name="Node3D" type="Node3D" unique_id=422103721]
 
@@ -20,3 +21,6 @@
 [node name="JAM_ST_Tope" parent="." unique_id=2061323010 instance=ExtResource("5_jyyw2")]
 
 [node name="JAM_Wood" parent="." unique_id=267189473 instance=ExtResource("6_wjosx")]
+
+[node name="JAM_MagicCrate" parent="." unique_id=1098129342 instance=ExtResource("7_xybhy")]
+transform = Transform3D(-0.7824543, 0.050643977, 0.620645, 0.13603589, 0.98651534, 0.09100343, -0.607667, 0.15563606, -0.7787926, 11.859464, 0.65700984, -50.805557)

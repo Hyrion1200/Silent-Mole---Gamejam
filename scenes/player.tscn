@@ -141,6 +141,7 @@ spot_angle = 33.87
 
 [node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
+visible = false
 light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
@@ -227,3 +228,7 @@ event_guid = "{a5834a65-7f34-495b-95b5-e76940cc2147}"
 [node name="Stinger3Emitter3D" type="FmodEventEmitter3D" parent="." unique_id=484500983]
 event_name = "event:/Stinger3"
 event_guid = "{b33f638e-d027-4ed4-af03-c50e4c7429d5}"
+
+[node name="WagonStopEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=20243685]
+event_name = "event:/Enviro/wagon_stop"
+event_guid = "{b4653a82-1d35-4ef4-95d5-1bdcb7a4f535}"

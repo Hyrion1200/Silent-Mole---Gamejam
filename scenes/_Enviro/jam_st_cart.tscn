@@ -5,5 +5,8 @@
 
 [node name="JAM_ST_Cart" unique_id=118518236 instance=ExtResource("1_d16og")]
 
-[node name="ENV_ST_Cart" parent="." index="0" unique_id=1117951446]
+[node name="ENV_Cart" parent="." index="0" unique_id=2108381157]
 surface_material_override/0 = ExtResource("2_nwm5t")
+
+[node name="CollisionShape3D" parent="ENV_Cart/ENV_Cart_col" parent_id_path=PackedInt32Array(1834095517) index="0" unique_id=1039668907]
+visible = false

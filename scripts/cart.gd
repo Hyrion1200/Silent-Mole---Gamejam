@@ -4,7 +4,7 @@ extends RigidBody3D
 
 
 func _ready() -> void:
-	add_to_group(&"throwable")
+	add_to_group(&"throwable_cart")
 	# The trimesh collider from the import only works on a static body --> convex one, as for the rocks
 	var mesh: MeshInstance3D = find_children("*", "MeshInstance3D", true, false)[0]
 	for body in mesh.find_children("*", "StaticBody3D", true, false):
