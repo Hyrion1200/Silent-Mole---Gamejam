@@ -50,12 +50,10 @@ axis_lock_angular_z = true
 [node name="WagonMovementEmitter3D" type="FmodEventEmitter3D" parent="Enemy3/JAM_Cart2" unique_id=1489891242]
 event_name = "event:/Enviro/wagon_movement"
 event_guid = "{1720ee9b-c17b-4522-9727-d754008ccb18}"
-volume = 1.0
 
 [node name="WagonStopEmitter3D" type="FmodEventEmitter3D" parent="Enemy3/JAM_Cart2" unique_id=1489891243]
 event_name = "event:/Enviro/wagon_stop"
 event_guid = "{b4653a82-1d35-4ef4-95d5-1bdcb7a4f535}"
-volume = 1.0
 
 [node name="JAM_Cart3" parent="Enemy3" unique_id=1786213476 instance=ExtResource("2_imqlu")]
 transform = Transform3D(0.9994191, 0.034080323, 0, -0.034080323, 0.9994191, 0, 0, 0, 1, -0.64224625, -1.1620083, 9.266493)
