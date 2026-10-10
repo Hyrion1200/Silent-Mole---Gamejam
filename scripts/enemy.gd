@@ -62,6 +62,8 @@ const THREATS: Dictionary[State, int] = {
 
 ## How close the enemy gets to a stop of its round
 const PATROL_REACH := 0.2
+## Path points closer than this are skipped, about the radius the navmesh is baked with
+const PATH_LOOKAHEAD := 0.5
 
 ## 0 = unaware, 1 = player detected.
 var awareness: float = 0.0
@@ -373,12 +375,16 @@ func _step_toward(target: Vector3, reach: float) -> Vector3:
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
 	# The first point is the enemy itself put on the navmesh. On a slope it lands behind
 	# the enemy, which walked back to it forever --> skipped
-	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1):
+	var path := NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1)
+	# Walks to the first point further than PATH_LOOKAHEAD. Closer ones are corners it already
+	# stands on: aiming at them made it step back and forth between two of them, on the spot
+	for point in path:
 		to = point - global_position
 		to.y = 0.0
-		if to.length() > 0.1:
+		if to.length() > PATH_LOOKAHEAD:
 			return to.normalized()
-	return Vector3.ZERO
+	# Only close points left --> to is the end of the path
+	return to.normalized() if path and to.length() > 0.1 else Vector3.ZERO
 
 
 func _sees_body(body: CollisionObject3D) -> bool:

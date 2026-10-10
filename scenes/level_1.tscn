@@ -147,7 +147,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9984272, 0.16929674, 7.149
 radius = 0.94
 
 [node name="CollisionShape3D" parent="ClimbPoint" index="0" unique_id=1915792550]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6386311, -0.3398262, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293231, -0.9764341, 0)
 
 [node name="Debug" parent="ClimbPoint" index="1" unique_id=1772764577]
 transform = Transform3D(0.94, 0, 0, 0, 0.94, 0, 0, 0, 0.94, 0, 0, 0)
@@ -185,11 +185,11 @@ transform = Transform3D(0.95837444, 0, -0.2855143, 0, 1, 0, 0.2855143, 0, 0.9583
 home_animation = &"mine"
 
 [node name="Enemy3" parent="." unique_id=1473739920 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.1509914, 0, 0.9885349, 0, 1, 0, -0.9885349, 0, 0.1509914, 30.258835, -19.266758, -31.877577)
+transform = Transform3D(0.15099138, 0, 0.9885348, 0, 1, 0, -0.9885348, 0, 0.15099138, 30.258835, -19.266758, -31.877577)
 home_animation = &"mine"
 
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.26932353, 0, 0.96304953, 0, 1, 0, -0.96304953, 0, 0.26932353, 50.76535, -22.188578, -35.856213)
+transform = Transform3D(0.2693235, 0, 0.9630494, 0, 1, 0, -0.9630494, 0, 0.2693235, 50.76535, -22.188578, -35.856213)
 home_animation = &"loose aggro"
 
 [node name="Enemy5" parent="." unique_id=335271211 instance=ExtResource("3_fcfvj")]
