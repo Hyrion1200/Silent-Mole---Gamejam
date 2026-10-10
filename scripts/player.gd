@@ -18,6 +18,9 @@ signal released(body: RigidBody3D)
 ## Max force pulling a dragged item. Items heavier than about drag_force / gravity
 ## are too heavy to move.
 @export var drag_force: float = 250.0
+## Mass of a dragged item that halves the walk speed and the camera turn speed
+## Lower --> items weigh more on the player
+@export var drag_half_mass: float = 10.0
 ## Throw impulse. Launch speed is throw_impulse / mass, so heavy items land closer.
 @export var throw_impulse: float = 30.0
 
@@ -120,8 +123,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not _captor:
-		_yaw -= event.relative.x * mouse_sensitivity
-		_pitch = clampf(_pitch - event.relative.y * mouse_sensitivity, -1.55, 1.55)
+		var sensitivity := mouse_sensitivity * _burden()
+		_yaw -= event.relative.x * sensitivity
+		_pitch = clampf(_pitch - event.relative.y * sensitivity, -1.55, 1.55)
 	elif event.is_action_pressed("ui_cancel"):
 		# Check for 'ESC' to free the mouse
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -194,6 +198,11 @@ func _release() -> void:
 		_let_go()
 		# Start the SFX release @Pierre67
 		_throw_emitter.play(false)
+
+
+## How much the dragged item slows the player: 1 with free hands, 0.5 at drag_half_mass
+func _burden() -> float:
+	return drag_half_mass / (drag_half_mass + _held.mass) if _held else 1.0
 
 
 ## Stops holding the item without any SFX, shared by _release and _throw
@@ -421,7 +430,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var input := Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var sneaking := Input.is_action_pressed(&"sneak")
-	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * (slow_speed if sneaking else speed)
+	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * (slow_speed if sneaking else speed) * _burden()
 	var diff := target - linear_velocity
 	diff.y = 0.0
 	# We do not want to rotate the player rigidbody

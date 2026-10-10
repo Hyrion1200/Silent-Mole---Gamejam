@@ -81,7 +81,7 @@ navigation_mesh = SubResource("NavigationMesh_5xbjy")
 [node name="TextureSet" parent="NavigationRegion3D" unique_id=1151871138 instance=ExtResource("2_4nkto")]
 
 [node name="JAM_Helmet" parent="." unique_id=1108416575 instance=ExtResource("5_4nkto")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.135435, -0.8401472, 5.8387585)
+transform = Transform3D(-0.9997745, 0, -0.021235213, 0, 1, 0, 0.021235213, 0, -0.9997745, -27.135435, -0.9303224, 5.8387585)
 
 [node name="AreaLight3D2" type="AreaLight3D" parent="." unique_id=218493746]
 transform = Transform3D(0.04695403, -0.21154033, -0.97624075, -0.9762408, -0.21668865, -4.953853e-08, -0.21154028, 0.953046, -0.2166887, 13.210342, 4.2141314, -36.97722)
@@ -159,13 +159,13 @@ autoplay = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.831535, -13.746061, -39.216976)
 
 [node name="JAM_Rock_01" parent="." unique_id=1988803648 instance=ExtResource("8_2y5yt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.216118, 0.598088, -37.668476)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.066361, 0.598088, -37.668476)
 
 [node name="JAM_Rock_02" parent="." unique_id=1951766825 instance=ExtResource("9_2os1m")]
-transform = Transform3D(0.84738165, 0.09373876, -0.5226445, 0, 0.9842939, 0.17653772, 0.5309842, -0.14959484, 0.83407265, 14.181853, 1.3344858, -36.290485)
+transform = Transform3D(0.84738165, 0.09373876, -0.5226445, 0, 0.9842939, 0.17653772, 0.5309842, -0.14959484, 0.83407265, 14.195273, 1.4754059, -36.3119)
 
 [node name="JAM_Rock_03" parent="." unique_id=1047716793 instance=ExtResource("10_go7sj")]
-transform = Transform3D(0.9338678, 0, 0.35761842, 0, 1, 0, -0.35761842, 0, 0.9338678, 13.794154, 0.5499436, -37.024246)
+transform = Transform3D(0.9338678, 0, 0.35761842, 0, 1, 0, -0.35761842, 0, 0.9338678, 13.542523, 0.5499436, -36.927887)
 
 [node name="JAM_Rock_04" parent="." unique_id=1441787373 instance=ExtResource("9_2os1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.059643, 1.3505473, -37.39032)
@@ -185,11 +185,11 @@ transform = Transform3D(0.95837444, 0, -0.2855143, 0, 1, 0, 0.2855143, 0, 0.9583
 home_animation = &"mine"
 
 [node name="Enemy3" parent="." unique_id=1473739920 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.1509914, 0, 0.988535, 0, 1, 0, -0.988535, 0, 0.1509914, 30.258835, -19.266758, -31.877577)
+transform = Transform3D(0.1509914, 0, 0.9885349, 0, 1, 0, -0.9885349, 0, 0.1509914, 30.258835, -19.266758, -31.877577)
 home_animation = &"mine"
 
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.26932356, 0, 0.9630496, 0, 1, 0, -0.9630496, 0, 0.26932356, 50.76535, -22.188578, -35.856213)
+transform = Transform3D(0.26932353, 0, 0.96304953, 0, 1, 0, -0.96304953, 0, 0.26932353, 50.76535, -22.188578, -35.856213)
 home_animation = &"loose aggro"
 
 [node name="Enemy5" parent="." unique_id=335271211 instance=ExtResource("3_fcfvj")]

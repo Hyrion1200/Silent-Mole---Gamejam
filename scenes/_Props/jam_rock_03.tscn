@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://dohvde18xra1"]
 
 [ext_resource type="PackedScene" uid="uid://bg3da5x2a3esk" path="res://assets/_mesh/_Lookdev/JAM_Rock_03.fbx" id="1_otwbm"]
-[ext_resource type="Script" uid="uid://dyfh80nys5xbv" path="res://scripts/rock.gd" id="3_rock"]
 [ext_resource type="Material" uid="uid://cmuh07cv4wde1" path="res://scenes/_Props/_MAT/MAT_Iron.tres" id="2_y21ei"]
 
 [node name="JAM_Rock_03" unique_id=1047716793 groups=["draggable"] instance=ExtResource("1_otwbm")]
-script = ExtResource("3_rock")
+mass = 5.0
 
-[node name="PROPS_Rock_03" parent="PROPS_rock" parent_id_path=PackedInt32Array(1498075943) index="0" unique_id=1092619167]
+[node name="PROPS_Rock_03" parent="PROPS_rock" parent_id_path=PackedInt32Array(1546596823) index="0" unique_id=925589822]
 material_override = ExtResource("2_y21ei")
 
 [node name="RockEmitter3D" type="FmodEventEmitter3D" parent="." index="2" unique_id=849176454]
