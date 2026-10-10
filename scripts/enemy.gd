@@ -98,9 +98,9 @@ var _patrol_count: int = 0
 @onready var _see_player_emitter: FmodEventEmitter3D = $SeePlayerEmitter3D
 @onready var _noise_emitter: FmodEventEmitter3D = $NoiseEmitter3D
 @onready var _pickaxe_emiter: FmodEventEmitter3D = $PickaxeEmitter3D
+@onready var _kill_emitter: FmodEventEmitter3D = $KillEventEmitter3D
 
 var _lean: float = 0.0
-
 
 
 func _ready() -> void:
@@ -151,6 +151,10 @@ func _play_pickaxe() -> void:
 	_pickaxe_emiter.play(false)
 	return
 
+func _play_kill() -> void:
+	_kill_emitter.play(false)
+	return
+
 ## Called through the "enemies" group by anything that makes noise.
 ## radius is how far the noise carries.
 func hear(at: Vector3, radius: float) -> void:
@@ -189,7 +193,7 @@ func reset() -> void:
 ## Called by the player it caught, once they are placed and look at this enemy.
 func faced() -> void:
 	print("Play mine after pls")
-	_anim.animation_set_next("see player", "mine")
+	_anim.animation_set_next("see player", "hit_player")
 	print(_anim.animation_get_next("see player"))
 	_anim.play("see player")
 
