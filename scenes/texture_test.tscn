@@ -17,8 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="15_c6rhc"]
 [ext_resource type="PackedScene" uid="uid://bsikvp4cr8j2o" path="res://scenes/_Props/jam_hanged_tope.tscn" id="17_mh4f8"]
 [ext_resource type="PackedScene" uid="uid://cl6nlp12ojeys" path="res://scenes/_Props/jam_lamp.tscn" id="18_6diqf"]
-[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="7_wkddb"]
-[ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="8_owcjw"]
 
 [sub_resource type="Animation" id="Animation_wkddb"]
 length = 12.0

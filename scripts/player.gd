@@ -103,6 +103,7 @@ var _facing_captor: bool = false
 @onready var _stinger1_emitter: FmodEventEmitter3D = $Stinger1Emitter3D
 @onready var _stinger2_emitter: FmodEventEmitter3D = $Stinger2Emitter3D
 @onready var _stinger3_emitter: FmodEventEmitter3D = $Stinger3Emitter3D
+@onready var particle_falling: GPUParticles3D = $"Particles Follow/falling debris/Particle rock"
 
 
 func _ready() -> void:

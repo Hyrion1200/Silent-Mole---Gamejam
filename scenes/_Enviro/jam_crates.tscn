@@ -2,19 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://dv6qhsx17ldvc" path="res://assets/_mesh/_Lookdev/JAM_crates.fbx" id="1_p2cub"]
 [ext_resource type="Texture2D" uid="uid://pnmcqplb8r2i" path="res://assets/_texture/_crates/Crates_Albedo.jpg" id="2_fxj5s"]
+[ext_resource type="Material" uid="uid://b4nq3yk1ntubh" path="res://scenes/_Enviro/_MAT/MAT_Crates.tres" id="2_lksry"]
 [ext_resource type="Texture2D" uid="uid://bpgfcgclbc8jd" path="res://assets/_texture/_crates/Crates_Normal.jpg" id="3_lksry"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qovu8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hwkn"]
 albedo_texture = ExtResource("2_fxj5s")
 metallic_specular = 0.0
 roughness = 0.0
 normal_enabled = true
-normal_scale = 2.7
+normal_scale = 0.14
 normal_texture = ExtResource("3_lksry")
 texture_filter = 0
 
 [node name="JAM_crates" unique_id=597547364 instance=ExtResource("1_p2cub")]
 
-[node name="ENV_Crates" parent="." index="0" unique_id=710340552]
+[node name="ENV_Crates" parent="." index="0" unique_id=2136303789]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.014472485, 0.005555153, 0.015853882)
-material_override = SubResource("StandardMaterial3D_qovu8")
+material_override = ExtResource("2_lksry")
+surface_material_override/0 = SubResource("StandardMaterial3D_8hwkn")
