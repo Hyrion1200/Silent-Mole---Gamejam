@@ -116,3 +116,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53933144, 0.39451712, 14.98
 
 [node name="JAM_Lamp" parent="." unique_id=1425553412 instance=ExtResource("18_6diqf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.224511, 1.9411783, 8.48096)
+
+[node name="JAM_Cart" parent="." unique_id=1306479076 instance=ExtResource("18_ek4yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1898367, -7.1525574e-06, 12.843261)
