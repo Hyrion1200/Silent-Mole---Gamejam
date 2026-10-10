@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://btaiomtiitxwn"]
 
 [ext_resource type="PackedScene" uid="uid://g3xls81h05k" path="res://assets/_mesh/_Lookdev/JAM_Cart.fbx" id="1_iw57b"]
+[ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="2_251lf"]
 [ext_resource type="Material" uid="uid://wtutikc8wnnl" path="res://scenes/_Enviro/_MAT/MAT_cart.tres" id="2_fffo8"]
 
-[node name="JAM_Cart" unique_id=698080680 instance=ExtResource("1_iw57b")]
+[node name="JAM_Cart" unique_id=1306479076 instance=ExtResource("1_iw57b")]
 
-[node name="PROP_cart" parent="." index="0" unique_id=1511509489]
-material_override = ExtResource("2_fffo8")
-
-[node name="CollisionShape3D" parent="PROP_cart/PROP_cart_col" parent_id_path=PackedInt32Array(251579434) index="0" unique_id=232575618]
-visible = false
+[node name="PROP_cart" parent="." index="0" unique_id=392419242]
+surface_material_override/0 = ExtResource("2_251lf")
+surface_material_override/1 = ExtResource("2_fffo8")

@@ -5,8 +5,5 @@
 
 [node name="JAM_ST_Cart" unique_id=118518236 instance=ExtResource("1_d16og")]
 
-[node name="Cart_04" parent="." index="0" unique_id=1940018880]
-visible = false
-
-[node name="ENV_carts" parent="." index="1" unique_id=2050793124]
+[node name="ENV_ST_Cart" parent="." index="0" unique_id=1117951446]
 surface_material_override/0 = ExtResource("2_nwm5t")

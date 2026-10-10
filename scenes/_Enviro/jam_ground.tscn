@@ -4,10 +4,12 @@
 [ext_resource type="Material" uid="uid://cg36jr2hc411h" path="res://scenes/_Enviro/_MAT/MAT_ground.tres" id="2_nn04u"]
 [ext_resource type="Material" uid="uid://713jvk2qo78" path="res://scenes/_Enviro/_MAT/MAT_rock.tres" id="3_rjw6x"]
 [ext_resource type="Material" uid="uid://cab828w8kmeig" path="res://scenes/_Enviro/_MAT/MAT_groundLight.tres" id="4_rjw6x"]
+[ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="5_j8db2"]
 
 [node name="JAM_Ground" unique_id=1565302591 instance=ExtResource("1_jkkql")]
 
-[node name="ENV_Ground" parent="." index="0" unique_id=533760570]
+[node name="ENV_Ground" parent="." index="0" unique_id=1683253200]
 surface_material_override/0 = ExtResource("2_nn04u")
 surface_material_override/1 = ExtResource("3_rjw6x")
 surface_material_override/2 = ExtResource("4_rjw6x")
+surface_material_override/3 = ExtResource("5_j8db2")

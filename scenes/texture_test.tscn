@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://wfs11yltsee7" path="res://scenes/_Enviro/jam_rail.tscn" id="3_owcjw"]
 [ext_resource type="PackedScene" uid="uid://vpjr5cmwbdrp" path="res://scenes/_Enviro/jam_ropes.tscn" id="4_48vo2"]
 [ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="5_gnwrd"]
-[ext_resource type="PackedScene" uid="uid://g3xls81h05k" path="res://assets/_mesh/_Lookdev/JAM_Cart.fbx" id="7_b028a"]
 [ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/_Enviro/jam_wood.tscn" id="7_dsqro"]
 [ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="9_48vo2"]
 [ext_resource type="PackedScene" uid="uid://cystvfvtx530i" path="res://assets/_mesh/_Lookdev/JAM_Ropes_01.fbx" id="9_gnwrd"]
@@ -18,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkwlfpivqxtp" path="res://scenes/_Props/jam_pickaxe.tscn" id="16_5josl"]
 [ext_resource type="PackedScene" uid="uid://bsikvp4cr8j2o" path="res://scenes/_Props/jam_hanged_tope.tscn" id="17_mh4f8"]
 [ext_resource type="PackedScene" uid="uid://cl6nlp12ojeys" path="res://scenes/_Props/jam_lamp.tscn" id="18_6diqf"]
+[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="18_ek4yw"]
 
 [node name="TextureSet" type="Node3D" unique_id=1151871138]
 
@@ -35,9 +35,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 
 [node name="JAM_Wood" parent="." unique_id=267189473 instance=ExtResource("7_dsqro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
-
-[node name="JAM_Cart" parent="." unique_id=1978242869 instance=ExtResource("7_b028a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0133705, 1.2397766e-05, 13.289236)
 
 [node name="JAM_Hero_Foe_TPOSE" parent="." unique_id=1401988619 instance=ExtResource("9_owcjw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45957336, 0.7171938, 19.184965)
@@ -74,3 +71,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53933144, 0.39451712, 14.98
 
 [node name="JAM_Lamp" parent="." unique_id=1425553412 instance=ExtResource("18_6diqf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.224511, 1.9411783, 8.48096)
+
+[node name="JAM_Cart" parent="." unique_id=1306479076 instance=ExtResource("18_ek4yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1898367, -7.1525574e-06, 12.843261)

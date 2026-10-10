@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dghw7pquex4bq"]
+
+[ext_resource type="PackedScene" uid="uid://dtgc30jd5yilr" path="res://scenes/_Enviro/jam_crates.tscn" id="1_8hwkn"]
+[ext_resource type="PackedScene" uid="uid://dhlisgewn368s" path="res://scenes/_Enviro/jam_ground.tscn" id="2_xybhy"]
+[ext_resource type="PackedScene" uid="uid://wfs11yltsee7" path="res://scenes/_Enviro/jam_rail.tscn" id="3_x6ogj"]
+[ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="4_xgl0j"]
+[ext_resource type="PackedScene" uid="uid://bijwpx5kmak24" path="res://scenes/_Enviro/jam_st_tope.tscn" id="5_jyyw2"]
+[ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/_Enviro/jam_wood.tscn" id="6_wjosx"]
+
+[node name="Node3D" type="Node3D" unique_id=422103721]
+
+[node name="JAM_crates" parent="." unique_id=597547364 instance=ExtResource("1_8hwkn")]
+
+[node name="JAM_Ground" parent="." unique_id=1565302591 instance=ExtResource("2_xybhy")]
+
+[node name="JAM_rail" parent="." unique_id=1035252563 instance=ExtResource("3_x6ogj")]
+
+[node name="JAM_ST_Cart" parent="." unique_id=118518236 instance=ExtResource("4_xgl0j")]
+
+[node name="JAM_ST_Tope" parent="." unique_id=2061323010 instance=ExtResource("5_jyyw2")]
+
+[node name="JAM_Wood" parent="." unique_id=267189473 instance=ExtResource("6_wjosx")]
