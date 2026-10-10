@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://s84td8fqrlcl"]
+
+[ext_resource type="PackedScene" uid="uid://bn5aosa0qqmvm" path="res://assets/JAM_SittedTope.fbx" id="1_w0o2u"]
+[ext_resource type="Material" uid="uid://dnj3efh1wm6ng" path="res://scenes/_Hero/_MAT/MAT_Tope.tres" id="2_vj07a"]
+
+[node name="JAM_SittedTope" unique_id=1134421782 instance=ExtResource("1_w0o2u")]
+
+[node name="Tope_13" parent="." index="0" unique_id=633972941]
+surface_material_override/0 = ExtResource("2_vj07a")

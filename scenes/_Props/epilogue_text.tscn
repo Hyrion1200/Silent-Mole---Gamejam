@@ -10,6 +10,7 @@ font_color = Color(0.8801478, 0.78661597, 0.7038392, 1)
 
 [sub_resource type="Animation" id="Animation_88ra2"]
 length = 56.966667
+step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dw6uoeeerunao" path="res://scenes/_Props/epilogue_text.tscn" id="3_h5l3m"]
 [ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="4_ruax6"]
 [ext_resource type="Shader" uid="uid://dwq8swrddngt8" path="res://shaders/canvas_effects/dither_Canvas_item.gdshader" id="5_glcdr"]
+[ext_resource type="Script" uid="uid://srlycnryc1sg" path="res://scripts/ending.gd" id="6_ag7vi"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_co7hn"]
 [ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="7_ld0ua"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="8_6ska3"]
@@ -332,6 +333,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 stretch = true
 stretch_shrink = 6
+script = ExtResource("6_ag7vi")
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer (dithered)" unique_id=1118081832]
 handle_input_locally = false
