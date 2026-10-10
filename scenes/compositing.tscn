@@ -80,7 +80,7 @@ material = SubResource("StandardMaterial3D_debug")
 size = Vector3(0.02, 0.02, 1)
 
 [sub_resource type="Gradient" id="Gradient_wjyh8"]
-offsets = PackedFloat32Array(0, 0.08806818, 1)
+offsets = PackedFloat32Array(0, 0.79622644, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.87784094, 0.87784094, 0.87784094, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jddww"]
@@ -101,7 +101,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_763k3"]
 curve = SubResource("Curve_sf2rc")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjyh8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfrd5"]
 emission_shape_scale = Vector3(1.55, 1.005, 1.345)
 emission_shape = 3
 emission_box_extents = Vector3(4.475, 1.425, 12.93)
@@ -128,11 +128,11 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_yj3ml"]
+[sub_resource type="QuadMesh" id="QuadMesh_qf328"]
 material = SubResource("StandardMaterial3D_sf2rc")
 size = Vector2(0.05, 0.05)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jneaj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkqf4"]
 transparency = 1
 albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
 albedo_texture = ExtResource("14_jddww")
@@ -141,7 +141,10 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sf2rc"]
+[sub_resource type="CurveTexture" id="CurveTexture_qbdn1"]
+curve = SubResource("Curve_sf2rc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vjl11"]
 lifetime_randomness = 1.0
 emission_shape_scale = Vector3(2.91, 1.665, 5.335)
 emission_shape = 3
@@ -154,13 +157,13 @@ linear_accel_max = 39.999996
 use_scale_3d = true
 scale_3d_min = Vector3(1, 0.5, 1)
 scale_3d_max = Vector3(2, 2, 1)
-scale_curve = SubResource("CurveTexture_763k3")
+scale_curve = SubResource("CurveTexture_qbdn1")
 color = Color(0.601223, 0.601223, 0.60122293, 1)
 collision_mode = 1
 collision_friction = 1.0
 collision_bounce = 0.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_nsuo4"]
+[sub_resource type="BoxMesh" id="BoxMesh_yjuvr"]
 size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wyc2g"]
@@ -325,16 +328,16 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_wyc2g"]
 material = SubResource("StandardMaterial3D_3oqcw")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfrd5"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yv1uq"]
 emission_shape = 1
-emission_sphere_radius = 1.0
-gravity = Vector3(0, 0, 0)
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 2, 0)
 scale_curve = SubResource("CurveTexture_763k3")
 color = Color(0.50140685, 0.50140643, 0.5014065, 1)
 color_ramp = SubResource("GradientTexture1D_jddww")
 alpha_curve = SubResource("CurveTexture_cilah")
 
-[sub_resource type="QuadMesh" id="QuadMesh_qf328"]
+[sub_resource type="QuadMesh" id="QuadMesh_j6763"]
 material = SubResource("StandardMaterial3D_3oqcw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
@@ -353,14 +356,20 @@ size = Vector3(0.4, 0.4, 0.4)
 transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
 
 [node name="JAM_Ropes" parent="3D_Scene" index="3" unique_id=1030473890]
-transform = Transform3D(0.9997797, 0, -0.0209424, 0, 1, 0, 0.0209424, 0, 0.9997797, 0.2845745, 0, 0.19820404)
+transform = Transform3D(0.99977964, 0, -0.0209424, 0, 1, 0, 0.0209424, 0, 0.99977964, 0.2845745, 0, 0.19820404)
 visible = false
 
-[node name="Rope_A" parent="3D_Scene" unique_id=366578359 instance=ExtResource("2_yfrd5")]
-transform = Transform3D(0.010000018, 0, 0, 0, 0.0100000035, 0, 0, 0, 0.010000015, 0.8639283, 3.4011471, -7.168597)
+[node name="Rope_A_pivot" parent="3D_Scene" unique_id=366578359 instance=ExtResource("2_yfrd5")]
+transform = Transform3D(0.009974638, -0.0007077056, -7.8167395e-05, 0.00070536614, 0.009971444, -0.00026988395, 9.7044016e-05, 0.00026368504, 0.009996067, 0.8639283, 3.4011471, -7.168597)
 
-[node name="Rope_B" parent="3D_Scene" unique_id=1886197140 instance=ExtResource("3_qf328")]
+[node name="Rope_A" parent="3D_Scene/Rope_A_pivot" index="0" unique_id=366578359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Rope_B_pivot" parent="3D_Scene" unique_id=1886197140 instance=ExtResource("3_qf328")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 1.0434227, 4.4832554, -8.76193)
+
+[node name="Rope_B" parent="3D_Scene/Rope_B_pivot" index="0" unique_id=1886197140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="JAM_Hero_Foe_TPOSE" parent="." unique_id=1401988619 instance=ExtResource("2_jddww")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2471207, 0, 14.599305)
@@ -622,23 +631,23 @@ lifetime = 10.0
 speed_scale = 0.5
 randomness = 1.0
 fixed_fps = 10
-process_material = SubResource("ParticleProcessMaterial_wjyh8")
-draw_pass_1 = SubResource("QuadMesh_yj3ml")
+process_material = SubResource("ParticleProcessMaterial_yfrd5")
+draw_pass_1 = SubResource("QuadMesh_qf328")
 
 [node name="falling debris" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow" unique_id=566447433]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.342824e-06, 0, 53.59757)
 
 [node name="Particle rock" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow/falling debris" unique_id=257737272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.770247e-14, 5.833324, 26.193266)
-material_override = SubResource("StandardMaterial3D_jneaj")
+material_override = SubResource("StandardMaterial3D_jkqf4")
 emitting = false
 amount = 5000
 lifetime = 4.5
 one_shot = true
 randomness = 1.0
 collision_base_size = 0.0
-process_material = SubResource("ParticleProcessMaterial_sf2rc")
-draw_pass_1 = SubResource("BoxMesh_nsuo4")
+process_material = SubResource("ParticleProcessMaterial_vjl11")
+draw_pass_1 = SubResource("BoxMesh_yjuvr")
 
 [node name="JAM_ST_Cart2" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow/falling debris/Particle rock" unique_id=118518236 instance=ExtResource("11_7f81l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0883706, -0.049987603, 13.269236)
@@ -838,16 +847,18 @@ transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0
 
 [node name="dust puff backup" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=1993482595]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
-visible = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_gv2ai")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
 [node name="dust puff2" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=489423618]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
-amount = 100
-process_material = SubResource("ParticleProcessMaterial_yfrd5")
-draw_pass_1 = SubResource("QuadMesh_qf328")
+visible = false
+amount = 10
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yv1uq")
+draw_pass_1 = SubResource("QuadMesh_j6763")
 
 [node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2564709, 0.19999999, 22.6257)
@@ -860,5 +871,5 @@ shape = SubResource("BoxShape3D_763k3")
 mesh = SubResource("BoxMesh_jddww")
 
 [editable path="3D_Scene"]
-[editable path="3D_Scene/Rope_A"]
-[editable path="3D_Scene/Rope_B"]
+[editable path="3D_Scene/Rope_A_pivot"]
+[editable path="3D_Scene/Rope_B_pivot"]

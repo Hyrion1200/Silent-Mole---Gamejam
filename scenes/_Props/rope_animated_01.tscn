@@ -82,12 +82,14 @@ _data = {
 &"swing A": SubResource("Animation_4tvw8")
 }
 
-[node name="Rope_A" type="MeshInstance3D" unique_id=366578359]
+[node name="Rope_A_pivot" type="Node3D" unique_id=1118103361]
+
+[node name="Rope_A" type="MeshInstance3D" parent="." unique_id=366578359]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 mesh = SubResource("ArrayMesh_lxur5")
 surface_material_override/0 = ExtResource("1_4tvw8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1087563636]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rope_A" unique_id=1087563636]
 libraries/ = SubResource("AnimationLibrary_67lu5")
 autoplay = &"swing A"
 speed_scale = 4.0
