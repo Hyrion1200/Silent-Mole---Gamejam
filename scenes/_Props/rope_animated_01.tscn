@@ -1,10 +1,12 @@
 [gd_scene format=4 uid="uid://bgw6nue4wsyu2"]
 
 [ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="1_4tvw8"]
+[ext_resource type="Texture2D" uid="uid://dhd6ejil3s242" path="res://assets/_texture/_rope/Rope_001_basecolor.jpg" id="1_67lu5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rf1k3"]
 resource_name = "Rope"
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_67lu5")
 roughness = 0.2
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
