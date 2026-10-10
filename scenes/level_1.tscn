@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="3_fcfvj"]
 [ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="4_pa8r4"]
 [ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="5_4nkto"]
+[ext_resource type="PackedScene" uid="uid://cjlrs3c2535tc" path="res://scenes/trigger.tscn" id="6_fcfvj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lamp"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -87,5 +88,50 @@ light_energy = 12.211
 light_volumetric_fog_energy = 0.0
 area_range = 9.764
 area_attenuation = 0.149
+
+[node name="Tunnel Enter #1" parent="." unique_id=1808192201 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.11659014, 0, 0, 0, 1, 0, 0, 0, -1.5924993, -20.09844, -0.2768972, 5.3254604)
+ambient_level = 3
+
+[node name="Tunnel Out" parent="Tunnel Enter #1" unique_id=733649559 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.0015848388, 0, 0, 0, 0.9999991, 0, 0, 0, -1.0531951, 133.93526, -0.012960076, -1.3368559)
+ambient_level = 3
+
+[node name="Start Enter #1" parent="." unique_id=15377828 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.0135932565, 0, 0, 0, 0.99999964, 0, 0, 0, 2.5994143, -21.167805, -0.5537944, 5.5978856)
+
+[node name="Start Out #1" parent="Start Enter #1" unique_id=1549379930 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.116590135, 0, 0, 0, 0.768089, 0, 0, 0, -0.570688, 1309.8676, 1.2835407, 0.68416095)
+
+[node name="Start #2" parent="." unique_id=740707227 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.11977754, 0, 2.3255494, 0, 2.108478, 0, -0.10013904, 0, 2.781618, 15.786667, 1.4242573, -36.63254)
+
+[node name="Tunnel #2" parent="." unique_id=1206914297 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(-0.1305141, 0.019135874, 1.2182782, 0.00014102207, -3.9998376, 0.0179379, 0.10025056, 0.030539148, 1.5860254, 16.342794, 0.03821261, -37.76028)
+ambient_level = 3
+
+[node name="Corridor" parent="." unique_id=1777314238 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(-0.18828112, 0, 1.9013537, 0, 4.1038337, 0, 0.084086396, 0, 4.2573943, 24.710026, -5.3236914, -42.76815)
+ambient_level = 1
+
+[node name="Tunnel #3" parent="." unique_id=1041767697 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(0.11208157, 0, 0.75616586, 0, 2.5088558, 0, -0.04795898, 0, 1.7671826, 23.027292, -4.1779933, -42.12653)
+ambient_level = 3
+
+[node name="Tunnel #4" parent="." unique_id=1289886927 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(1.7927375, 0, -0.03637099, 0, 2.391223, 0, 1.2537634, 0, 0.052006327, 48.449303, -4.6815934, -59.729675)
+ambient_level = 3
+
+[node name="Corridor #2" parent="." unique_id=1733457667 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(3.176245, 0, 0.017679343, 0, 2.079092, 0, 1.6921693, 0, -0.033184577, 47.648193, -4.4741306, -58.691914)
+ambient_level = 1
+
+[node name="Large #1" parent="." unique_id=2003796587 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(3.601397, -0.012755694, -0.12065472, 0.027853202, 2.868073, 0.00036561448, 2.387532, -0.0142183285, 0.18199351, 50.83483, -4.308796, -71.819496)
+ambient_level = 2
+
+[node name="Tunnel #5" parent="." unique_id=1711227340 instance=ExtResource("6_fcfvj")]
+transform = Transform3D(2.8802495, 0, -0.019431246, 0, 2.8213577, 0, 0.7399706, 0, 0.07563387, 50.94424, -4.5316877, -68.988464)
+ambient_level = 3
 
 [editable path="Node3D"]

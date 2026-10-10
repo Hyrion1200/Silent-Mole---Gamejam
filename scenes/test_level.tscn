@@ -304,7 +304,6 @@ radius = 0.5
 [node name="Trigger2" parent="." unique_id=1808192201 instance=ExtResource("7_ahbqi")]
 transform = Transform3D(-4.371139e-08, 0, -8.875, 0, 1, 0, 1, 0, -3.8793857e-07, -15.1061, 0, 3.0595665)
 size = Vector3(1, 1, 1)
-fire_once = true
 camera_shake = SubResource("Resource_du5ex")
 spawn_point_set = true
 ambient_level = 1

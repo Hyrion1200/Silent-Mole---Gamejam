@@ -339,16 +339,23 @@ func _aimed(areas: bool = false) -> Object:
 	query.hit_from_inside = areas
 	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
-
+enum Ambient {
+	START = 0,
+	CORRIDOR,
+	LARGE,
+	TUNNEL,
+	NOTHING
+}
 func _on_trigger_signal(ambient_level) -> void:
+	print("Ambient level received : " + str(ambient_level))
 	var ambient_name = "Start"
-	if ambient_level == 1:
+	if ambient_level == Ambient.CORRIDOR:
 		ambient_name = "Corridor"
-	elif ambient_level == 2:
+	elif ambient_level == Ambient.LARGE:
 		ambient_name = "Large"
-	elif ambient_level == 3:
+	elif ambient_level == Ambient.TUNNEL:
 		ambient_name = "Tunnel"
-	elif ambient_level == 4:
+	elif ambient_level == Ambient.NOTHING:
 		ambient_name = "Nothing"
 	_ambient_emitter.set_parameter("ambParameter", ambient_name)
 

@@ -19,15 +19,22 @@ signal trigger_on_entered(ambient_level)
 @export var spawn_point_set: bool = false
 ## Play this cinematic
 @export var cinematic: CinematicCamera
+
+enum Ambient {
+	START = 0,
+	CORRIDOR,
+	LARGE,
+	TUNNEL,
+	NOTHING
+}
 ## Which ambient parameter should be playing from AmbientEmitter3D
-@export var ambient_level: int = 0
+@export var ambient_level: Ambient = Ambient.START
 
 
 func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
 	$Debug.visible = Engine.is_editor_hint()
 	_update_size()
-	trigger_on_entered.emit(ambient_level)
 	if not Engine.is_editor_hint():
 		body_entered.connect(_on_body_entered)
 
@@ -39,8 +46,10 @@ func _update_size() -> void:
 	box.size = size
 	$Debug.scale = size
 
-
 func _on_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+	trigger_on_entered.emit(ambient_level)
 	if not body.is_in_group(&"player"):
 		return
 	if camera_shake:
