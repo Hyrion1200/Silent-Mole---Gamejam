@@ -443,8 +443,8 @@ size = Vector3(0.4, 0.4, 0.4)
 [node name="3D_Scene" parent="." unique_id=1151871138 instance=ExtResource("1_v7wuh")]
 transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
 
-[node name="JAM_Ropes" parent="3D_Scene" index="3" unique_id=1030473890]
-transform = Transform3D(0.99977946, 0, -0.020942396, 0, 1, 0, 0.020942396, 0, 0.99977946, 0.2845745, 0, 0.19820404)
+[node name="JAM_Ropes" parent="3D_Scene" index="12" unique_id=1030473890]
+transform = Transform3D(0.9997794, 0, -0.020942394, 0, 1, 0, 0.020942394, 0, 0.9997794, 0.2845745, 0, 0.19820404)
 visible = false
 
 [node name="Rope_A_pivot" parent="3D_Scene" unique_id=366578359 instance=ExtResource("2_yfrd5")]
@@ -931,11 +931,9 @@ spot_angle = 33.87
 
 [node name="Particles" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=1737147823]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0, 0)
-visible = false
 
 [node name="dust puff backup" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=1993482595]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
-visible = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_gv2ai")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
@@ -993,6 +991,7 @@ draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
 [node name="dust puff amb explode wip" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=707794700]
 transform = Transform3D(-0.11000848, 0.032580595, -4.0911617, -3.0839057, 0.0010572681, 0.16074109, 0.0484457, 0.14128494, 0.9422275, 0.77314097, 2.423854, 19.624804)
+visible = false
 amount = 5000
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_qbdn1")
