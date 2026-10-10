@@ -17,6 +17,9 @@ extends Camera3D
 @export_range(0.0, 1.0) var fade_in_start_ratio: float = 0.5
 
 @onready var _shake_emitter: FmodEventEmitter3D = $ShakeEmitter3D
+
+@onready var particle_rock: GPUParticles3D = $"../Particles Follow/falling debris/Particle rock"
+
 ## Set before changing scene so the next camera starts black and fades in
 static var fade_in_on_ready: bool = false
 
@@ -79,6 +82,7 @@ func shake(settings: ShakeSettings = default_shake) -> void:
 	_shake = 1.0
 	# Start a sound here @Pierre67
 	if settings.play_sound:
+		particle_rock.set_emitting(true)
 		_shake_emitter.play(false)
 		_shake_emitter.set_parameter("RumbleState", "On")
 		_playing_shake_sound = true
@@ -109,6 +113,7 @@ func _process(delta: float) -> void:
 		amplitude += _shake_settings.amplitude * _shake
 	elif _playing_shake_sound:
 		print("playing rumbe state off")
+		particle_rock.set_emitting(false)
 		_playing_shake_sound = false
 		_shake_emitter.set_parameter("RumbleState", "Off")
 	# The offsets only move the view --> the player keeps driving position and rotation

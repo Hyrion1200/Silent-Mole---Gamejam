@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b37c6otouutja" path="res://assets/_icons/UI_pointer.png" id="4_8h3f4"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
 [ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
+[ext_resource type="Texture2D" uid="uid://5m0km58h5wom" path="res://assets/_texture/_ground/Ground_Albedo.jpg" id="9_xa6gc"]
 [ext_resource type="Texture2D" uid="uid://b3fgnmh4ev1vj" path="res://textures/pixel_dust_16x16.png" id="10_wjyh8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1fwu"]
@@ -115,6 +116,44 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_yj3ml"]
 material = SubResource("StandardMaterial3D_sf2rc")
 size = Vector2(0.05, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qkkk"]
+transparency = 1
+albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
+albedo_texture = ExtResource("9_xa6gc")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xb2ao"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9538472, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qbdn1"]
+curve = SubResource("Curve_xb2ao")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v4o3k"]
+lifetime_randomness = 1.0
+emission_shape_scale = Vector3(2.91, 1.665, 5.335)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1.095, 1)
+angle_min = -336.5
+angle_max = 273.5
+gravity = Vector3(0, -100, 0)
+linear_accel_min = 9.999997
+linear_accel_max = 39.999996
+use_scale_3d = true
+scale_3d_min = Vector3(1, 0.5, 1)
+scale_3d_max = Vector3(2, 2, 1)
+scale_curve = SubResource("CurveTexture_qbdn1")
+color = Color(0.601223, 0.601223, 0.60122293, 1)
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_fbraa"]
+size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iouwx"]
 shader = ExtResource("6_yj3ml")
@@ -459,6 +498,25 @@ randomness = 1.0
 fixed_fps = 10
 process_material = SubResource("ParticleProcessMaterial_wjyh8")
 draw_pass_1 = SubResource("QuadMesh_yj3ml")
+
+[node name="falling debris" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Particles Follow" unique_id=1878610050]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -4.244942e-06, 0, 4.443516)
+
+[node name="Particle rock" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Particles Follow/falling debris" unique_id=1494434195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.770247e-14, 5.833324, 26.193266)
+material_override = SubResource("StandardMaterial3D_2qkkk")
+emitting = false
+amount = 5000
+lifetime = 4.5
+one_shot = true
+randomness = 1.0
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_v4o3k")
+draw_pass_1 = SubResource("BoxMesh_fbraa")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="SubViewportContainer (dithered)/SubViewport/Player/Particles Follow/falling debris" unique_id=646807637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3690648, -1.799389, 26.175797)
+size = Vector3(12.06, 18.54, 20.66)
 
 [node name="Camera Effects" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1895352827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09752369)
