@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bytq866si2hmg" path="res://scenes/_Props/jam_rock_02.tscn" id="9_2os1m"]
 [ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="10_go7sj"]
 [ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="11_2os1m"]
+[ext_resource type="Script" uid="uid://753x8fejqhve" path="res://scripts/cart.gd" id="12_cart"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lamp"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -162,13 +163,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.831535, -13.746061, -39.21
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.066361, 0.598088, -37.668476)
 
 [node name="JAM_Rock_02" parent="." unique_id=1951766825 instance=ExtResource("9_2os1m")]
-transform = Transform3D(0.84738165, 0.09373876, -0.5226445, 0, 0.9842939, 0.17653772, 0.5309842, -0.14959484, 0.83407265, 14.195273, 1.4754059, -36.3119)
+transform = Transform3D(0.84738165, 0.09373876, -0.5226445, 0, 0.9842939, 0.17653772, 0.5309842, -0.14959484, 0.83407265, 13.883304, 1.2521192, -36.229527)
 
 [node name="JAM_Rock_03" parent="." unique_id=1047716793 instance=ExtResource("10_go7sj")]
-transform = Transform3D(0.9338678, 0, 0.35761842, 0, 1, 0, -0.35761842, 0, 0.9338678, 13.542523, 0.5499436, -36.927887)
+transform = Transform3D(0.9338678, 0, 0.35761842, 0, 1, 0, -0.35761842, 0, 0.9338678, 13.772796, 0.5499436, -37.016068)
 
 [node name="JAM_Rock_04" parent="." unique_id=1441787373 instance=ExtResource("9_2os1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.059643, 1.3505473, -37.39032)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.950145, 1.3505471, -37.3096)
 
 [node name="AreaLight3D3" type="AreaLight3D" parent="." unique_id=1711884315]
 transform = Transform3D(0.9338679, -0.35761842, 0, 0, -4.371139e-08, 1, -0.35761842, -0.9338678, -5.2154064e-08, 49.38129, -12.053062, -45.249214)
@@ -185,11 +186,11 @@ transform = Transform3D(0.95837444, 0, -0.2855143, 0, 1, 0, 0.2855143, 0, 0.9583
 home_animation = &"mine"
 
 [node name="Enemy3" parent="." unique_id=1473739920 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.15099138, 0, 0.9885348, 0, 1, 0, -0.9885348, 0, 0.15099138, 30.258835, -19.266758, -31.877577)
+transform = Transform3D(0.15099137, 0, 0.98853475, 0, 1, 0, -0.98853475, 0, 0.15099137, 30.258835, -19.266758, -31.877577)
 home_animation = &"mine"
 
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.2693235, 0, 0.9630494, 0, 1, 0, -0.9630494, 0, 0.2693235, 50.76535, -22.188578, -35.856213)
+transform = Transform3D(0.2693235, 0, 0.96304935, 0, 1, 0, -0.96304935, 0, 0.2693235, 50.76535, -22.188578, -35.856213)
 home_animation = &"loose aggro"
 
 [node name="Enemy5" parent="." unique_id=335271211 instance=ExtResource("3_fcfvj")]
@@ -198,7 +199,7 @@ home_animation = &"mine"
 
 [node name="Enemy6" parent="." unique_id=88543833 node_paths=PackedStringArray("patrol") instance=ExtResource("3_fcfvj")]
 transform = Transform3D(0.83609587, 0, -0.54858357, 0, 1, 0, 0.54858357, 0, 0.83609587, 54.34704, -20.984652, -22.813457)
-patrol = [null, null, null]
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2"), NodePath("PatrolPoint3")]
 patrol_wait = 0.0
 
 [node name="PatrolPoint" type="Marker3D" parent="Enemy6" unique_id=1505210135]
@@ -221,6 +222,15 @@ metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="JAM_Cart" parent="." unique_id=698080680 instance=ExtResource("11_2os1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.690502, -22.965477, -35.880775)
+
+[node name="JAM_Cart2" parent="." unique_id=711892748 instance=ExtResource("11_2os1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7688465, 0.10329342, -6.8033247)
+axis_lock_linear_x = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 20.0
+script = ExtResource("12_cart")
 
 [editable path="Node3D"]
 [editable path="ClimbPoint"]
