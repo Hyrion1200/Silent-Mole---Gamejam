@@ -31,6 +31,9 @@
 		<property name="ceiling">
 			<value>-1</value>
 		</property>
+		<property name="release">
+			<value>62</value>
+		</property>
 	</object>
 	<object class="LoudnessMeter" id="{b0ddd669-6489-4911-aec2-59fc2dc12aaa}" />
 </objects>

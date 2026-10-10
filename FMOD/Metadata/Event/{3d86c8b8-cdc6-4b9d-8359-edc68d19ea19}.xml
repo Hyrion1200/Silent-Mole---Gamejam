@@ -913,7 +913,7 @@
 			<value>85.713333333333338</value>
 		</property>
 		<property name="volume">
-			<value>-3</value>
+			<value>-6.5</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{d963b387-aa3b-44ad-b9af-0c1d2a431e87}</destination>
@@ -1012,9 +1012,6 @@
 		<property name="length">
 			<value>19.464166666666681</value>
 		</property>
-		<property name="volume">
-			<value>3</value>
-		</property>
 		<relationship name="triggerConditions">
 			<destination>{150e0ded-4f9f-467a-b90a-2d3c86271cf5}</destination>
 			<destination>{bbf372b6-ae4c-4fc1-9f72-2b835be724ba}</destination>
@@ -1057,7 +1054,7 @@
 			<value>1.4000000000000001</value>
 		</property>
 		<property name="volume">
-			<value>5</value>
+			<value>1.5</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{04291b9e-9392-47d1-9149-81fd4add4947}</destination>
@@ -1133,6 +1130,9 @@
 		</property>
 		<property name="length">
 			<value>99.875</value>
+		</property>
+		<property name="volume">
+			<value>-3</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{6d25b425-674a-41dd-b31f-09dd0caf859b}</destination>
