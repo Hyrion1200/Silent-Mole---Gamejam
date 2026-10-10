@@ -227,3 +227,7 @@ event_guid = "{a5834a65-7f34-495b-95b5-e76940cc2147}"
 [node name="Stinger3Emitter3D" type="FmodEventEmitter3D" parent="." unique_id=484500983]
 event_name = "event:/Stinger3"
 event_guid = "{b33f638e-d027-4ed4-af03-c50e4c7429d5}"
+
+[node name="WagonStopEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=20243685]
+event_name = "event:/Enviro/wagon_stop"
+event_guid = "{b4653a82-1d35-4ef4-95d5-1bdcb7a4f535}"
