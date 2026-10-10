@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cp5k1h0s2bedq" path="res://assets/_texture/_mole/JAM_Hero_Tope_standardSurface1_Normal.1001.jpg" id="2_014de"]
 
 [resource]
+albedo_color = Color(1.7581433, 1.7581433, 1.7581433, 1)
 albedo_texture = ExtResource("1_erruv")
-metallic_specular = 0.18
+metallic = 0.32
+metallic_specular = 0.2
 roughness = 0.0
 normal_enabled = true
 normal_scale = 1.6
