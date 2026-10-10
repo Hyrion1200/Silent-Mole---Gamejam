@@ -24,6 +24,36 @@ search_time = 15.0
 search_radius = 18.0
 search_cheat = 0.6
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_imqlu"]
+resource_local_to_scene = true
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cone"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.3, 0.2, 0.15)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p8esl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_cone")
+top_radius = 0.0
+bottom_radius = 2.95
+height = 0.11461667
+radial_segments = 32
+rings = 1
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sv1qx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_cone")
+top_radius = 2.95
+bottom_radius = 2.95
+height = 14.885384
+radial_segments = 32
+rings = 1
+cap_top = false
+
 [node name="Pulling Kart" type="Node3D" unique_id=9425232]
 script = ExtResource("3_wagon")
 
@@ -32,6 +62,21 @@ profile = SubResource("Resource_imqlu")
 home_animation = &"pulling kart"
 teleport_to_start = true
 default_walking_animation = "pulling kart"
+
+[node name="CollisionShape3D" parent="Enemy3/DeathRange" parent_id_path=PackedInt32Array(142524920, 1311436096) index="0" unique_id=2049062684]
+shape = SubResource("SphereShape3D_imqlu")
+
+[node name="Cone" parent="Enemy3/Debug" parent_id_path=PackedInt32Array(142524920, 84200304) index="0" unique_id=719398577]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.33898306, 0, 1, -1.481742e-08, 0, 0.4, -0.057308335)
+mesh = SubResource("CylinderMesh_p8esl")
+
+[node name="Tube" parent="Enemy3/Debug" parent_id_path=PackedInt32Array(142524920, 84200304) index="3" unique_id=368716703]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.33898306, 0, 1, -1.481742e-08, 0, 0.4, -7.557308)
+mesh = SubResource("CylinderMesh_sv1qx")
+
+[node name="Skeleton3D" parent="Enemy3/miner no tex/Armature_007" parent_id_path=PackedInt32Array(142524920, 697813067, 598176597) index="0" unique_id=996559676]
+bones/0/rotation = Quaternion(-0.48612785, 0.06636264, -0.016707046, 0.87120414)
+bones/1/rotation = Quaternion(0.09375494, 0.020754911, 0.02793211, 0.99498695)
 
 [node name="JAM_Cart" parent="Enemy3" unique_id=698080680 instance=ExtResource("2_imqlu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56103325, -1.076364, 3.147585)
@@ -61,3 +106,6 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+
+[editable path="Enemy3"]
+[editable path="Enemy3/miner no tex"]
