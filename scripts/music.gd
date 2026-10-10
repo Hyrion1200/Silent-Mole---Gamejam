@@ -11,8 +11,12 @@ var _label := "Menu"
 # False while a music set by set_state() plays --> the enemies' reports are only stored
 var _threats_enabled := false
 
-@onready var _emitter: FmodEventEmitter3D = $FmodEventEmitter3D
+@onready var _emitter: FmodEventEmitter3D = $MusicEmitter3D
+@onready var _start_emitter: FmodEventEmitter3D = $SilentMoleEmitter3D
 
+func on_start() -> void:
+	# Sound
+	_start_emitter.play(false)
 
 ## For the music that does not depend on the enemies: Menu, Nothing, Death, Ending
 ## The enemies cannot change the music anymore, until follow_threats()

@@ -4,14 +4,14 @@
 [ext_resource type="Material" uid="uid://cg36jr2hc411h" path="res://scenes/_Enviro/_MAT/MAT_ground.tres" id="2_nn04u"]
 [ext_resource type="Material" uid="uid://713jvk2qo78" path="res://scenes/_Enviro/_MAT/MAT_rock.tres" id="3_rjw6x"]
 
-[node name="JAM_Ground" unique_id=1565302591 instance=ExtResource("1_jkkql")]
+[node name="JAM_Ground" unique_id=1565302591 groups=["dirt_ground"] instance=ExtResource("1_jkkql")]
 
-[node name="Ground1" parent="." index="0" unique_id=1110183794]
+[node name="Ground1" parent="." index="0" unique_id=1569270697]
 visible = false
 
-[node name="ground1" parent="Ground1" index="0" unique_id=1989371312]
+[node name="ground1" parent="Ground1" index="0" unique_id=1852300406]
 visible = false
 
-[node name="ENV_ground" parent="." index="1" unique_id=1150491321]
+[node name="ENV_ground" parent="." index="1" unique_id=118359937]
 surface_material_override/0 = ExtResource("2_nn04u")
 surface_material_override/1 = ExtResource("3_rjw6x")

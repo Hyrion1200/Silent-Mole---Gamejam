@@ -2,6 +2,7 @@
 class_name Trigger
 extends Area3D
 ## Invisible box that starts the ticked events when the player walks in
+signal trigger_on_entered(ambient_level)
 
 ## Size of the box the player has to walk in.
 @export var size: Vector3 = Vector3.ONE * 2.0:
@@ -18,12 +19,15 @@ extends Area3D
 @export var spawn_point_set: bool = false
 ## Play this cinematic
 @export var cinematic: CinematicCamera
+## Which ambient parameter should be playing from AmbientEmitter3D
+@export var ambient_level: int = 0
 
 
 func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
 	$Debug.visible = Engine.is_editor_hint()
 	_update_size()
+	trigger_on_entered.emit(ambient_level)
 	if not Engine.is_editor_hint():
 		body_entered.connect(_on_body_entered)
 

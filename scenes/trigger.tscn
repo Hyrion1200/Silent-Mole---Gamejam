@@ -15,7 +15,7 @@ albedo_color = Color(1, 0.6, 0.2, 0.15)
 [sub_resource type="BoxMesh" id="BoxMesh_zone"]
 material = SubResource("StandardMaterial3D_zone")
 
-[node name="Trigger" type="Area3D" unique_id=1808192201]
+[node name="Trigger" type="Area3D" unique_id=1808192201 groups=["trigger"]]
 monitorable = false
 script = ExtResource("1_trigger")
 
