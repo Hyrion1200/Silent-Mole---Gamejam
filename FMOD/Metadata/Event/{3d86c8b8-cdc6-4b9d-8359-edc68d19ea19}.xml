@@ -869,7 +869,10 @@
 			<value>210</value>
 		</property>
 		<property name="length">
-			<value>80.789479166666666</value>
+			<value>85.713333333333338</value>
+		</property>
+		<property name="volume">
+			<value>-3</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{d963b387-aa3b-44ad-b9af-0c1d2a431e87}</destination>
@@ -963,7 +966,7 @@
 			<value>310</value>
 		</property>
 		<property name="length">
-			<value>14.473687500000011</value>
+			<value>19.464166666666681</value>
 		</property>
 		<property name="volume">
 			<value>3</value>
@@ -4001,7 +4004,7 @@
 	</object>
 	<object class="TransitionMarker" id="{6a896c72-11ce-4f60-b7e1-5fd1ecd8b148}">
 		<property name="position">
-			<value>319</value>
+			<value>318</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{222fc480-c2dc-43ac-88f6-b96930f0a09e}</destination>
