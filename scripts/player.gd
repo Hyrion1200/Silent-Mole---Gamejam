@@ -54,7 +54,7 @@ var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
 var _total_walked: float = 0.0
-var _debug: bool = false
+var _debug: bool = true
 var _move_tween: Tween
 ## The enemy that captured the player, and the height of its head above its center
 var _captor: Node3D

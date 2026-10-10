@@ -1,18 +1,21 @@
 [gd_scene format=3 uid="uid://dik4oj7jpddyg"]
 
-[ext_resource type="Shader" path="res://shaders/canvas_effects/dither_Canvas_item.gdshader" id="1_4wx58"]
-[ext_resource type="Shader" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="1_763k3"]
-[ext_resource type="Shader" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="1_ta1t5"]
+[ext_resource type="Shader" uid="uid://dwq8swrddngt8" path="res://shaders/canvas_effects/dither_Canvas_item.gdshader" id="1_4wx58"]
+[ext_resource type="Shader" uid="uid://bt3ptxf5fw35q" path="res://shaders/canvas_effects/wavy_text_canvas_item.gdshader" id="1_763k3"]
+[ext_resource type="Shader" uid="uid://p6clh15i7n0e" path="res://shaders/canvas_effects/dither_buckshot_Canvas_item.gdshader" id="1_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="1_v7wuh"]
-[ext_resource type="FontFile" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
-[ext_resource type="Environment" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
+[ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
+[ext_resource type="PackedScene" uid="uid://dh541y02l43u6" path="res://scenes/_Hero/jam_hero_foe_tpose.tscn" id="2_jddww"]
+[ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="3_4wx58"]
-[ext_resource type="Shader" path="res://shaders/pixelization_spatial.gdshader" id="5_ta1t5"]
-[ext_resource type="Shader" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
-[ext_resource type="Texture2D" path="res://textures/noise_pixel.png" id="8_yj3ml"]
-[ext_resource type="Texture2D" path="res://textures/pixel_dust_16x16.png" id="10_wjyh8"]
-[ext_resource type="Texture2D" path="res://textures/pixel_block_16x16.png" id="11_sf2rc"]
+[ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shaders/pixelization_spatial.gdshader" id="5_ta1t5"]
+[ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
+[ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
+[ext_resource type="Texture2D" uid="uid://b3fgnmh4ev1vj" path="res://textures/pixel_dust_16x16.png" id="10_wjyh8"]
+[ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="11_7f81l"]
+[ext_resource type="Texture2D" uid="uid://dc34kyunkgrvt" path="res://textures/Smoke_spr.png" id="12_tyw7k"]
+[ext_resource type="Texture2D" uid="uid://5m0km58h5wom" path="res://assets/_texture/_ground/Ground_Albedo.jpg" id="14_jddww"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1fwu"]
 shader = ExtResource("1_763k3")
@@ -82,8 +85,8 @@ colors = PackedColorArray(0, 0, 0, 1, 0.87784094, 0.87784094, 0.87784094, 1, 1, 
 gradient = SubResource("Gradient_wjyh8")
 
 [sub_resource type="Curve" id="Curve_yfrd5"]
-_limits = [0.0, 100.0, 0.0, 1.0]
-_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(0.9973958, 1.9230804), -258.46136, 0.0, 0, 0]
+_limits = [0.0, 1.9230804, 0.0, 174.2]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.9973958, 1.9230804), -258.46136, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_cilah"]
@@ -96,7 +99,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_763k3"]
 curve = SubResource("Curve_sf2rc")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jneaj"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjyh8"]
 emission_shape_scale = Vector3(1.55, 1.005, 1.345)
 emission_shape = 3
 emission_box_extents = Vector3(4.475, 1.425, 12.93)
@@ -127,21 +130,36 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_sf2rc")
 size = Vector2(0.05, 0.05)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjyh8"]
-emission_shape_scale = Vector3(1.55, 1.005, 1.345)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jneaj"]
+transparency = 1
+albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
+albedo_texture = ExtResource("14_jddww")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sf2rc"]
+lifetime_randomness = 1.0
+emission_shape_scale = Vector3(2.91, 1.665, 5.335)
 emission_shape = 3
-emission_box_extents = Vector3(4.475, 1.425, 12.93)
-initial_velocity_min = 1.0
-initial_velocity_max = 2.0
-angular_velocity_min = 29.999983
-angular_velocity_max = 59.99998
-gravity = Vector3(0, 0, 0)
+emission_box_extents = Vector3(1, 1.095, 1)
+angle_min = -336.5
+angle_max = 273.5
+gravity = Vector3(0, -100, 0)
+linear_accel_min = 9.999997
+linear_accel_max = 39.999996
+use_scale_3d = true
+scale_3d_min = Vector3(1, 0.5, 1)
+scale_3d_max = Vector3(2, 2, 1)
 scale_curve = SubResource("CurveTexture_763k3")
-color = Color(0.50140685, 0.50140643, 0.5014065, 1)
-color_ramp = SubResource("GradientTexture1D_jddww")
-emission_curve = SubResource("CurveTexture_cilah")
-turbulence_enabled = true
-turbulence_noise_scale = 2.0
+color = Color(0.601223, 0.601223, 0.60122293, 1)
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nsuo4"]
+size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wyc2g"]
 render_priority = 0
@@ -283,30 +301,27 @@ specular_mode = 2
 albedo_color = Color(1, 1, 1, 0.05882353)
 metallic_specular = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jneaj"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gv2ai"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_cilah")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oqcw"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(0, 0, 0, 1)
-albedo_texture = ExtResource("11_sf2rc")
+albedo_texture = ExtResource("12_tyw7k")
 billboard_mode = 3
 billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
+particles_anim_h_frames = 5
+particles_anim_v_frames = 4
 particles_anim_loop = false
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sf2rc"]
-emission_shape = 3
-emission_box_extents = Vector3(1, 1.095, 1)
-linear_accel_min = 9.999997
-linear_accel_max = 39.999996
-scale_min = 0.5
-scale_max = 2.0
-collision_mode = 1
-collision_friction = 1.0
-collision_bounce = 0.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_wjyh8"]
-size = Vector2(0.1, 0.1)
+[sub_resource type="QuadMesh" id="QuadMesh_wyc2g"]
+material = SubResource("StandardMaterial3D_3oqcw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
 size = Vector3(0.4, 0.4, 0.4)
@@ -319,6 +334,15 @@ material = SubResource("StandardMaterial3D_paw1w")
 size = Vector3(0.4, 0.4, 0.4)
 
 [node name="Node3D" type="Node3D" unique_id=1865376727]
+
+[node name="3D_Scene" parent="." unique_id=1151871138 instance=ExtResource("1_v7wuh")]
+transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
+
+[node name="JAM_Ropes" parent="3D_Scene" index="3" unique_id=1030473890]
+transform = Transform3D(0.99978054, 0, -0.020942418, 0, 1, 0, 0.020942418, 0, 0.99978054, 0.2845745, 0, 0.19820404)
+
+[node name="JAM_Hero_Foe_TPOSE" parent="." unique_id=1401988619 instance=ExtResource("2_jddww")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2471207, 0, 14.599305)
 
 [node name="SubViewportConterner text HD" type="SubViewportContainer" parent="." unique_id=1257878426]
 z_index = 4
@@ -403,11 +427,10 @@ handle_input_locally = false
 size = Vector2i(320, 180)
 render_target_update_mode = 4
 
-[node name="3D_Scene" parent="SubViewportContainer (dithered)/SubViewport" unique_id=1151871138 instance=ExtResource("1_v7wuh")]
-transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
-
 [node name="Player" parent="SubViewportContainer (dithered)/SubViewport" unique_id=704551036 instance=ExtResource("2_tv1s7")]
-transform = Transform3D(-1.0000001, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1.0000001, 0, 3.399939, 26.798784)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 3.399939, 26.798784)
+capture_shake = null
+respawn_delay = 5.0
 
 [node name="Hero_Amb_Light" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1667485646]
 
@@ -571,17 +594,6 @@ mesh = SubResource("BoxMesh_sf2rc")
 [node name="particles follow" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=241107587]
 transform = Transform3D(-0.9999999, 0, 8.742276e-08, 0, 1, 0, -8.742276e-08, 0, -0.9999999, -2.3428238e-06, -3.399939, 26.79878)
 
-[node name="amb dust backup" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow" unique_id=227571414]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3397803, 24.815016)
-visible = false
-amount = 3000
-lifetime = 10.0
-speed_scale = 0.5
-randomness = 1.0
-fixed_fps = 10
-process_material = SubResource("ParticleProcessMaterial_jneaj")
-draw_pass_1 = SubResource("QuadMesh_yj3ml")
-
 [node name="amb dust2" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow" unique_id=1551794561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.3397803, 24.815016)
 amount = 3000
@@ -591,6 +603,28 @@ randomness = 1.0
 fixed_fps = 10
 process_material = SubResource("ParticleProcessMaterial_wjyh8")
 draw_pass_1 = SubResource("QuadMesh_yj3ml")
+
+[node name="falling debris" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow" unique_id=566447433]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.342824e-06, 0, 53.59757)
+
+[node name="Particle rock" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow/falling debris" unique_id=257737272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.770247e-14, 5.833324, 26.193266)
+material_override = SubResource("StandardMaterial3D_jneaj")
+emitting = false
+amount = 5000
+lifetime = 4.5
+one_shot = true
+randomness = 1.0
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_sf2rc")
+draw_pass_1 = SubResource("BoxMesh_nsuo4")
+
+[node name="JAM_ST_Cart2" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow/falling debris/Particle rock" unique_id=118518236 instance=ExtResource("11_7f81l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0883706, -0.049987603, 13.269236)
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="SubViewportContainer (dithered)/SubViewport/Player/particles follow/falling debris" unique_id=42348822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3690648, -1.799389, 26.175797)
+size = Vector3(12.06, 18.54, 20.66)
 
 [node name="camera_effects" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport/Player" unique_id=1895352827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09752369)
@@ -781,17 +815,11 @@ spot_angle = 33.87
 [node name="Particles" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=1737147823]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0, 0)
 
-[node name="falling debris" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=257737272]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.086772, 32.90679)
-material_override = SubResource("StandardMaterial3D_jneaj")
-amount = 25
-collision_base_size = 0.0
-process_material = SubResource("ParticleProcessMaterial_sf2rc")
-draw_pass_1 = SubResource("QuadMesh_wjyh8")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionHeightField3D" parent="SubViewportContainer (dithered)/SubViewport/Particles/falling debris" unique_id=1978519466]
-transform = Transform3D(2.2103648, 0, 0, 0, 0.27049983, 0, 0, 0, 3.6258152, 0, -2.3761544, 0)
-size = Vector3(2, 14.399414, 2)
+[node name="dust puff" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=1993482595]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_gv2ai")
+draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
 [node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2564709, 0.19999999, 22.6257)
@@ -803,4 +831,4 @@ shape = SubResource("BoxShape3D_763k3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer (dithered)/SubViewport/CrateLight1kg" unique_id=1166594766]
 mesh = SubResource("BoxMesh_jddww")
 
-[editable path="SubViewportContainer (dithered)/SubViewport/3D_Scene"]
+[editable path="3D_Scene"]

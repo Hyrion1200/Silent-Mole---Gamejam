@@ -7,26 +7,26 @@
 
 [node name="JAM_Hero_Foe_TPOSE" unique_id=1401988619 instance=ExtResource("1_2ar88")]
 
-[node name="Foe_light" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="0" unique_id=747113679]
+[node name="Foe_light" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="0" unique_id=1691752457]
 material_override = ExtResource("2_vncam")
 
-[node name="CollisionShape3D" parent="Foe_geo/Foe_light/Foe_light_col" parent_id_path=PackedInt32Array(689036484) index="0" unique_id=1313681699]
+[node name="CollisionShape3D" parent="Foe_geo/Foe_light/Foe_light_col" parent_id_path=PackedInt32Array(479059842) index="0" unique_id=1485317073]
 visible = false
 
-[node name="Foe_body" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="1" unique_id=374859248]
+[node name="Foe_body" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="1" unique_id=2004501211]
 surface_material_override/0 = ExtResource("3_3kuqg")
 
-[node name="CollisionShape3D" parent="Foe_geo/Foe_body/Foe_body_col" parent_id_path=PackedInt32Array(569155155) index="0" unique_id=1395420630]
+[node name="CollisionShape3D" parent="Foe_geo/Foe_body/Foe_body_col" parent_id_path=PackedInt32Array(934990723) index="0" unique_id=637143495]
 visible = false
 
-[node name="Foe_helmet" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="2" unique_id=749383158]
+[node name="Foe_helmet" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="2" unique_id=242004340]
 surface_material_override/0 = ExtResource("3_3kuqg")
 
-[node name="CollisionShape3D" parent="Foe_geo/Foe_helmet/Foe_helmet_col" parent_id_path=PackedInt32Array(1705545448) index="0" unique_id=679092949]
+[node name="CollisionShape3D" parent="Foe_geo/Foe_helmet/Foe_helmet_col" parent_id_path=PackedInt32Array(1015434066) index="0" unique_id=1783527253]
 visible = false
 
-[node name="Foe_eyes" parent="Foe_geo" parent_id_path=PackedInt32Array(20294737) index="3" unique_id=206031139]
+[node name="Foe_eyes" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="3" unique_id=720382811]
 material_override = ExtResource("4_r6qs2")
 
-[node name="CollisionShape3D" parent="Foe_geo/Foe_eyes/Foe_eyes_col" parent_id_path=PackedInt32Array(1487184743) index="0" unique_id=1060733651]
+[node name="CollisionShape3D" parent="Foe_geo/Foe_eyes/Foe_eyes_col" parent_id_path=PackedInt32Array(1970276650) index="0" unique_id=1927339095]
 visible = false
