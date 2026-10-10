@@ -162,7 +162,7 @@ transform = Transform3D(0.94, 0, 0, 0, 0.94, 0, 0, 0, 0.94, 0, 0, 0)
 event_name = "event:/Enemy/enemy_mine_group"
 event_guid = "{544c9f7e-cc81-4fc2-9587-509fbd3f3855}"
 autoplay = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.831535, -13.746061, -39.216976)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.791927, -19.77683, -33.624187)
 
 [node name="JAM_Rock_01" parent="." unique_id=1988803648 instance=ExtResource("8_2y5yt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.066361, 0.598088, -37.668476)
@@ -187,15 +187,15 @@ area_range = 45.17
 area_attenuation = -0.186
 
 [node name="Enemy2" parent="." unique_id=1856803609 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.95837444, 0, -0.2855143, 0, 1, 0, 0.2855143, 0, 0.95837444, 54.891483, -21.292667, -49.34081)
+transform = Transform3D(0.8495922, 0, 0.5274401, 0, 1, 0, -0.5274401, 0, 0.8495922, 35.653194, -21.292667, -50.659725)
 home_animation = &"mine"
 
 [node name="Enemy3" parent="." unique_id=1473739920 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.15099117, 0, 0.98853344, 0, 1, 0, -0.98853344, 0, 0.15099117, 30.258835, -19.266758, -31.877577)
+transform = Transform3D(0.15099113, 0, 0.9885332, 0, 1, 0, -0.9885332, 0, 0.15099113, 30.258835, -19.266758, -31.877577)
 home_animation = &"mine"
 
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.26932335, 0, 0.96304893, 0, 1, 0, -0.96304893, 0, 0.26932335, 50.76535, -22.188578, -35.856213)
+transform = Transform3D(0.26932335, 0, 0.96304893, 0, 1, 0, -0.96304893, 0, 0.26932335, 50.68466, -22.188578, -36.534)
 home_animation = &"loose aggro"
 
 [node name="Enemy5" parent="." unique_id=335271211 instance=ExtResource("3_fcfvj")]
@@ -226,7 +226,7 @@ wait = 0.0
 metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="JAM_Cart" parent="." unique_id=698080680 instance=ExtResource("11_2os1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.690502, -22.965477, -35.880775)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.690502, -22.965477, -36.892025)
 
 [node name="JAM_Cart2" parent="." unique_id=711892748 instance=ExtResource("11_2os1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7688465, 0.10329342, -6.8033247)
