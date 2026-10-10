@@ -62,6 +62,8 @@ const THREATS: Dictionary[State, int] = {
 
 ## How close the enemy gets to a stop of its round
 const PATROL_REACH := 0.2
+## Path points closer than this are skipped, about the radius the navmesh is baked with
+const PATH_LOOKAHEAD := 0.5
 
 ## 0 = unaware, 1 = player detected.
 var awareness: float = 0.0
@@ -373,12 +375,16 @@ func _step_toward(target: Vector3, reach: float) -> Vector3:
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
 	# The first point is the enemy itself put on the navmesh. On a slope it lands behind
 	# the enemy, which walked back to it forever --> skipped
-	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1):
+	var path := NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1)
+	# Walks to the first point further than PATH_LOOKAHEAD. Closer ones are corners it already
+	# stands on: aiming at them made it step back and forth between two of them, on the spot
+	for point in path:
 		to = point - global_position
 		to.y = 0.0
-		if to.length() > 0.1:
+		if to.length() > PATH_LOOKAHEAD:
 			return to.normalized()
-	return Vector3.ZERO
+	# Only close points left --> to is the end of the path
+	return to.normalized() if path and to.length() > 0.1 else Vector3.ZERO
 
 
 func _sees_body(body: CollisionObject3D) -> bool:
@@ -394,16 +400,25 @@ func _sees_lamp(lamp: SpotLight3D, holder: CollisionObject3D) -> bool:
 	# one ray along the beam axis, the edges of the light cone are ignored
 	# otherwise it is way too hard for the player
 	var from := lamp.global_position
-	var query := PhysicsRayQueryParameters3D.create(from, from - lamp.global_basis.z * lamp.spot_range)
+	var to := from - lamp.global_basis.z * lamp.spot_range
+	var query := PhysicsRayQueryParameters3D.create(from, to)
 	if holder:
 		query.exclude = [holder.get_rid()]
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	# Where the beam stops: on what it lit, or at the end of its range
+	var end: Vector3 = hit.position if hit else to
+	# The model is way bigger than the collision --> a beam passing near the line from
+	# its center to its head lands on the enemy
+	var head := global_position + Vector3.UP * profile.animation_eye_height
+	var near := Geometry3D.get_closest_points_between_segments(from, end, global_position, head)
+	var on_body := near[0].distance_to(near[1]) <= profile.lamp_body_radius
+	if not on_body and hit.is_empty():
 		return false
 	# Pull the spot off the surface so the sight ray does not hit the lit wall itself
-	var spot: Vector3 = hit.position + hit.normal * 0.05
-	# A beam landing on the enemy is noticed even from behind
-	if hit.collider == self or _sees(spot):
+	var spot: Vector3 = near[0] if on_body else hit.position + hit.normal * 0.05
+	# A beam landing on the enemy is noticed even from behind.
+	# A lit spot is seen at any height, so the floor in front of the enemy counts
+	if on_body or _sees(spot, null, false):
 		if awareness < profile.investigate_at:
 			# Not suspicious enough yet --> only looks at the light
 			_focus = spot
@@ -416,13 +431,14 @@ func _sees_lamp(lamp: SpotLight3D, holder: CollisionObject3D) -> bool:
 
 
 ## True if point is inside the vision cone with nothing but target in the way.
-func _sees(point: Vector3, target: CollisionObject3D = null) -> bool:
+## flat = false ignores view_height: the vision is as tall as it is wide
+func _sees(point: Vector3, target: CollisionObject3D = null, flat: bool = true) -> bool:
 	var eye := global_position + Vector3.UP * profile.eye_height
 	var to := point - eye
 	# Distance along the view axis, and away from it
 	var ahead := to.dot(-global_basis.z)
 	# Height counts for more than width, which squashes the vision down to view_height
-	var aside := Vector2(to.dot(global_basis.x), to.dot(global_basis.y) * profile.view_width / profile.view_height).length()
+	var aside := Vector2(to.dot(global_basis.x), to.dot(global_basis.y) * (profile.view_width / profile.view_height if flat else 1.0)).length()
 	if ahead <= 0.0 or ahead > profile.view_range or aside > minf(ahead * tan(deg_to_rad(profile.view_half_angle)), profile.view_width):
 		return false
 	var query := PhysicsRayQueryParameters3D.create(eye, point)

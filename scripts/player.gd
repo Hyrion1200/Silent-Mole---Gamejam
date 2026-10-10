@@ -1,5 +1,9 @@
 extends RigidBody3D
 
+## An item starts being dragged / stops being held (released or thrown)
+signal dragged(body: RigidBody3D)
+signal released(body: RigidBody3D)
+
 @export var speed: float = 6.0
 ## How fast velocity converges to the target, in 1/s.
 @export var accel: float = 12.0
@@ -14,6 +18,9 @@ extends RigidBody3D
 ## Max force pulling a dragged item. Items heavier than about drag_force / gravity
 ## are too heavy to move.
 @export var drag_force: float = 250.0
+## Mass of a dragged item that halves the walk speed and the camera turn speed
+## Lower --> items weigh more on the player
+@export var drag_half_mass: float = 10.0
 ## Throw impulse. Launch speed is throw_impulse / mass, so heavy items land closer.
 @export var throw_impulse: float = 30.0
 
@@ -116,8 +123,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not _captor:
-		_yaw -= event.relative.x * mouse_sensitivity
-		_pitch = clampf(_pitch - event.relative.y * mouse_sensitivity, -1.55, 1.55)
+		var sensitivity := mouse_sensitivity * _burden()
+		_yaw -= event.relative.x * sensitivity
+		_pitch = clampf(_pitch - event.relative.y * sensitivity, -1.55, 1.55)
 	elif event.is_action_pressed("ui_cancel"):
 		# Check for 'ESC' to free the mouse
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -152,27 +160,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
 		var point := target as ClimbPoint
+		var body := _aimed_body()
+		if _held:
+			_release()
 		# Prevent retriggering climibing if already climbing or freezed (death animation for ex.)
-		if point and not freeze:
+		elif point and not freeze:
 			_climb(point)
 		elif _is_lamp_pickup(target):
 			_pick_lamp(target.owner)
-	elif event.is_action_pressed(&"grab"):
-		if _held:
-			_release()
-		else:
-			var body := _aimed_body()
-			if body and body.is_in_group(&"draggable"): # Left-Click
-				_drag(body)
-	elif event.is_action_pressed(&"throw"):
-		# A throwable that is not held (or not draggable) is shoved from where it stands
-		var body := _held if _held else _aimed_body()
-		if body and body.is_in_group(&"throwable"): # Right-Click
+		elif body and body.is_in_group(&"draggable"):
+			_drag(body)
+		# Only what cannot be dragged is thrown: shoved from where it stands
+		elif body and body.is_in_group(&"throwable"):
 			_throw(body)
 
 
 func _drag(body: RigidBody3D) -> void:
 	_held = body
+	dragged.emit(body)
 	# Prevent riding the item we are holding
 	add_collision_exception_with(body)
 	# Prevent the held item from spinning
@@ -195,11 +200,17 @@ func _release() -> void:
 		_throw_emitter.play(false)
 
 
+## How much the dragged item slows the player: 1 with free hands, 0.5 at drag_half_mass
+func _burden() -> float:
+	return drag_half_mass / (drag_half_mass + _held.mass) if _held else 1.0
+
+
 ## Stops holding the item without any SFX, shared by _release and _throw
 func _let_go() -> void:
 	if _held:
 		remove_collision_exception_with(_held)
 		_held.lock_rotation = false
+		released.emit(_held)
 		_held = null
 
 
@@ -395,7 +406,7 @@ func _process(delta: float) -> void:
 			_facing_captor = true
 			_die()
 	_camera.global_rotation = Vector3(_pitch, _yaw, 0.0)
-	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
+	# Same rays as the keys, so the prompt shows exactly when E would work
 	var body := _aimed_body()
 	var target := _aimed(true)
 	# This line is starting to become horrible.
@@ -419,7 +430,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var input := Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var sneaking := Input.is_action_pressed(&"sneak")
-	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * (slow_speed if sneaking else speed)
+	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * (slow_speed if sneaking else speed) * _burden()
 	var diff := target - linear_velocity
 	diff.y = 0.0
 	# We do not want to rotate the player rigidbody
