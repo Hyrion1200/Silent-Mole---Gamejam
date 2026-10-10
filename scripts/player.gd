@@ -1,5 +1,9 @@
 extends RigidBody3D
 
+## An item starts being dragged / stops being held (released or thrown)
+signal dragged(body: RigidBody3D)
+signal released(body: RigidBody3D)
+
 @export var speed: float = 6.0
 ## How fast velocity converges to the target, in 1/s.
 @export var accel: float = 12.0
@@ -173,6 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _drag(body: RigidBody3D) -> void:
 	_held = body
+	dragged.emit(body)
 	# Prevent riding the item we are holding
 	add_collision_exception_with(body)
 	# Prevent the held item from spinning
@@ -200,6 +205,7 @@ func _let_go() -> void:
 	if _held:
 		remove_collision_exception_with(_held)
 		_held.lock_rotation = false
+		released.emit(_held)
 		_held = null
 
 
