@@ -4,8 +4,9 @@ const CameraEffects := preload("res://scripts/camera_effects.gd")
 const LEVEL: String = "res://scenes/level_1.tscn"
 
 @onready var _camera: CameraEffects = $"SubViewportContainer (dithered)/SubViewport/Camera3D"
+@onready var _fade: ColorRect = $"SubViewportContainer (dithered)/SubViewport/Camera3D/Fade/Rect"
+@onready var _ui: Control = $"SubViewportConterner text HD/SubViewport/UI"
 @onready var _play: Button = $"SubViewportConterner text HD/SubViewport/UI/Play"
-@onready var _start_emitter: FmodEventEmitter3D = $SilentMoleEmitter3D
 
 
 func _ready() -> void:
@@ -13,6 +14,11 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_play.grab_focus()
 	Music.set_state("Menu")
+
+
+func _process(_delta: float) -> void:
+	# Keep the same alpha
+	_ui.modulate.a = 1.0 - _fade.color.a
 
 
 func _on_play_pressed() -> void:
