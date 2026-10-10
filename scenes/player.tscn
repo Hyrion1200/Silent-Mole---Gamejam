@@ -55,6 +55,7 @@ script = ExtResource("1_player")
 speed = 2.75
 accel = 10.0
 eye_height = 0.3
+climb_speed = 2.0
 capture_shake = SubResource("Resource_capture_shake")
 step_length = 2.0
 respawn_delay = 1.0
@@ -137,7 +138,6 @@ spot_attenuation = -0.06
 spot_angle = 33.87
 
 [node name="FmodListener3D" type="FmodListener3D" parent="Camera3D" unique_id=232891711]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
@@ -154,6 +154,14 @@ spot_angle = 23.48
 visible = false
 cast_shadow = 0
 mesh = SubResource("BoxMesh_dqkch")
+
+[node name="ShakeEmitter3D" type="FmodEventEmitter3D" parent="Camera3D" unique_id=268715796]
+event_name = "event:/Enviro/mine_rumble"
+event_guid = "{857b2204-8ae0-494c-9b42-7c928bf1e025}"
+fmod_parameters/RumbleState/id = -8932665378506704393
+fmod_parameters/RumbleState = "On"
+fmod_parameters/RumbleState/labels = PackedStringArray("On", "Off")
+fmod_parameters/RumbleState/variant_type = 4
 
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
@@ -196,3 +204,7 @@ fmod_parameters/ambParameter/id = 4630294301019446100
 fmod_parameters/ambParameter = "Start"
 fmod_parameters/ambParameter/labels = PackedStringArray("Start", "Corridor", "Large", "Nothing")
 fmod_parameters/ambParameter/variant_type = 4
+
+[node name="ClimbEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1869728550]
+event_name = "event:/Player/player_climb"
+event_guid = "{12098461-aa89-4ff4-85d7-55209c25bb0e}"

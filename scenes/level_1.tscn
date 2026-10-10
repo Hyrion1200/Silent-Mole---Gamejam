@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="4_pa8r4"]
 [ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="5_4nkto"]
 [ext_resource type="PackedScene" uid="uid://cjlrs3c2535tc" path="res://scenes/trigger.tscn" id="6_fcfvj"]
+[ext_resource type="PackedScene" uid="uid://cd33yuh14n65y" path="res://scenes/climb_point.tscn" id="7_pa8r4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lamp"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -134,4 +135,21 @@ ambient_level = 2
 transform = Transform3D(2.8802495, 0, -0.019431246, 0, 2.8213577, 0, 0.7399706, 0, 0.07563387, 50.94424, -4.5316877, -68.988464)
 ambient_level = 3
 
+[node name="ClimbPoint" parent="." unique_id=179765345 instance=ExtResource("7_pa8r4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9984272, 0.16929674, 7.149072)
+radius = 0.94
+
+[node name="CollisionShape3D" parent="ClimbPoint" index="0" unique_id=1915792550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6386311, -0.3398262, 0)
+
+[node name="Debug" parent="ClimbPoint" index="1" unique_id=1772764577]
+transform = Transform3D(0.94, 0, 0, 0, 0.94, 0, 0, 0, 0.94, 0, 0, 0)
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=819786389]
+event_name = "event:/Enemy/enemy_mine_group"
+event_guid = "{544c9f7e-cc81-4fc2-9587-509fbd3f3855}"
+autoplay = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.831535, -13.746061, -39.216976)
+
 [editable path="Node3D"]
+[editable path="ClimbPoint"]

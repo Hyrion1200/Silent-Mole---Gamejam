@@ -84,6 +84,7 @@ var _facing_captor: bool = false
 @onready var _interact_emitter: FmodEventEmitter3D = $InteractEmitter3D
 @onready var _throw_emitter: FmodEventEmitter3D = $ThrowEmitter3D
 @onready var _ambient_emitter: FmodEventEmitter3D = $AmbientEmitter3D
+@onready var _climb_emitter: FmodEventEmitter3D = $ClimbEmitter3D
 
 
 func _ready() -> void:
@@ -133,13 +134,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Debug --> works without having picked the lamp up
 		if _has_lamp or _debug:
 			_lamp.visible = not _lamp.visible
-		# Play light event
-		if (_lamp.visible):
-			_light_on_emitter.play(false)
-			_light_off_emitter.stop()
-		else:
-			_light_off_emitter.play(false)
-			_light_on_emitter.stop()
+			# Play light event
+			if (_lamp.visible):
+				_light_on_emitter.play(false)
+				_light_off_emitter.stop()
+			else:
+				_light_off_emitter.play(false)
+				_light_on_emitter.stop()
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
 		var point := target as ClimbPoint
@@ -229,7 +230,8 @@ func _climb(point: ClimbPoint) -> void:
 	_move_tween.tween_property(self, ^"global_position", top, above.distance_to(top) / climb_speed)
 	_move_tween.tween_callback(set_freeze_enabled.bind(false))
 	# Start the climb SFX @Pierre67
-
+	_climb_emitter.play(false)
+	
 
 ## Caught by an enemy: frozen for good, the camera turns to the enemy's head and the view fades out.
 ## head_height is the head above the captor's center. Called once by the enemy whose death range is entered.

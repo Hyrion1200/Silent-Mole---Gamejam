@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://blqqtvbyut2vk" path="res://assets/_mesh/_Blockout/JAM_HERO_PRX.fbx" id="3_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="4_enemy"]
 [ext_resource type="Script" uid="uid://dw7oldyemxdx6" path="res://scripts/patrol_point.gd" id="6_7gix3"]
-[ext_resource type="PackedScene" path="res://scenes/climb_point.tscn" id="6_qcd3b"]
-[ext_resource type="PackedScene" uid="uid://bintkcf5gav7" path="res://scenes/trigger.tscn" id="7_ahbqi"]
+[ext_resource type="PackedScene" uid="uid://cd33yuh14n65y" path="res://scenes/climb_point.tscn" id="6_qcd3b"]
+[ext_resource type="PackedScene" uid="uid://cjlrs3c2535tc" path="res://scenes/trigger.tscn" id="7_ahbqi"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="8_7gix3"]
 [ext_resource type="PackedScene" uid="uid://bbec0pjq13sng" path="res://scenes/cinematic_camera.tscn" id="10_4asn1"]
 [ext_resource type="PackedScene" uid="uid://wfs11yltsee7" path="res://scenes/_Enviro/jam_rail.tscn" id="11_fyxdr"]
@@ -95,6 +95,7 @@ background_energy_multiplier = 0.19
 script = ExtResource("8_7gix3")
 amplitude = 0.1
 duration = 6.0
+play_sound = true
 metadata/_custom_type_script = "uid://c0u1743dtcnvc"
 
 [sub_resource type="Curve3D" id="Curve3D_4asn1"]

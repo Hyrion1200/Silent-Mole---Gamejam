@@ -1,10 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cd33yuh14n65y"]
 
-[ext_resource type="Script" path="res://scripts/climb_point.gd" id="1_climb"]
+[ext_resource type="Script" uid="uid://b061hntcqdyhl" path="res://scripts/climb_point.gd" id="1_climb"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_range"]
-resource_local_to_scene = true
-radius = 0.75
+[sub_resource type="SphereShape3D" id="SphereShape3D_h73xf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_range"]
 transparency = 1
@@ -17,14 +15,14 @@ material = SubResource("StandardMaterial3D_range")
 radius = 1.0
 height = 2.0
 
-[node name="ClimbPoint" type="Area3D"]
+[node name="ClimbPoint" type="Area3D" unique_id=952650059]
 monitoring = false
 script = ExtResource("1_climb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_range")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1915792550]
+shape = SubResource("SphereShape3D_h73xf")
 
-[node name="Debug" type="MeshInstance3D" parent="." groups=["debug"]]
+[node name="Debug" type="MeshInstance3D" parent="." unique_id=1772764577 groups=["debug"]]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_range")

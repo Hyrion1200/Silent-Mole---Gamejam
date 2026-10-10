@@ -12,7 +12,6 @@ bank_paths = ["res://FMOD/Build/Desktop/Desktop/Master.bank"]
 event_name = "event:/Music"
 event_guid = "{3d86c8b8-cdc6-4b9d-8359-edc68d19ea19}"
 autoplay = true
-volume = 0.0
 fmod_parameters/musParameter/id = -4965400694012104773
 fmod_parameters/musParameter = "Menu"
 fmod_parameters/musParameter/labels = PackedStringArray("Nothing", "Menu", "Idle", "Suspicious", "Alerted", "Found", "Death", "Ending")

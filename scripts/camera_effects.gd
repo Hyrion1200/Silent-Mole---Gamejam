@@ -16,6 +16,7 @@ extends Camera3D
 ## 0.1 is linear, higher makes the fade in start slow then rush to the view
 @export_range(0.0, 1.0) var fade_in_start_ratio: float = 0.5
 
+@onready var _shake_emitter: FmodEventEmitter3D = $ShakeEmitter3D
 ## Set before changing scene so the next camera starts black and fades in
 static var fade_in_on_ready: bool = false
 
@@ -33,6 +34,8 @@ var _bob_steps: float = 0.0
 ## It follows the speed of the player with a delay (bob.fade_time), or the view would snap
 ## back to its place when the player stops in the middle of a step
 var _bob_amount: float = 0.0
+
+var _playing_shake_sound = false
 
 @onready var _fade: ColorRect = $Fade/Rect
 
@@ -75,6 +78,11 @@ func shake(settings: ShakeSettings = default_shake) -> void:
 	_shake_settings = settings
 	_shake = 1.0
 	# Start a sound here @Pierre67
+	if settings.play_sound:
+		_shake_emitter.play(false)
+		_shake_emitter.set_parameter("RumbleState", "On")
+		_playing_shake_sound = true
+		print("Shaking...")
 
 
 ## Advances the bob and returns where it puts the view: x sideways, y up, in meters
@@ -99,6 +107,10 @@ func _process(delta: float) -> void:
 	if _shake > 0.0:
 		_shake = maxf(_shake - delta / _shake_settings.duration, 0.0)
 		amplitude += _shake_settings.amplitude * _shake
+	elif _playing_shake_sound:
+		print("playing rumbe state off")
+		_playing_shake_sound = false
+		_shake_emitter.set_parameter("RumbleState", "Off")
 	# The offsets only move the view --> the player keeps driving position and rotation
 	# h_offset and v_offset and Camera3D properties
 	h_offset = randf_range(-1.0, 1.0) * amplitude

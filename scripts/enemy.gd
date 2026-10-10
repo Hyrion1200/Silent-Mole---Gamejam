@@ -90,6 +90,11 @@ var _patrol_count: int = 0
 @onready var _model: Node3D = $"miner no tex"
 ## The model as placed in the scene, and how far it bends over the player it caught
 @onready var _model_rest: Basis = _model.basis
+@onready var _footstep_emitter: FmodEventEmitter3D = $FootstepEmitter3D
+@onready var _see_player_emitter: FmodEventEmitter3D = $SeePlayerEmitter3D
+@onready var _noise_emitter: FmodEventEmitter3D = $NoiseEmitter3D
+@onready var _pickaxe_emiter: FmodEventEmitter3D = $PickaxeEmitter3D
+
 var _lean: float = 0.0
 
 
@@ -98,6 +103,8 @@ func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
 	$Debug.visible = Engine.is_editor_hint()
 	_update_view_shape()
+	if (not Engine.is_editor_hint()):
+		_noise_emitter.play(false)
 	reset()
 
 
@@ -127,6 +134,18 @@ func _update_view_shape() -> void:
 		tube.bottom_radius = cone.bottom_radius
 		$Debug/Tube.position = Vector3(0.0, profile.eye_height, -(tip + profile.view_range) / 2.0)
 
+
+func _play_footstep() -> void:
+	_footstep_emitter.play(false)
+	return
+
+func _play_see_player() -> void:
+	_see_player_emitter.play(false)
+	return
+	
+func _play_pickaxe() -> void:
+	_pickaxe_emiter.play(false)
+	return
 
 ## Called through the "enemies" group by anything that makes noise.
 ## radius is how far the noise carries.
@@ -209,6 +228,7 @@ func _physics_process(delta: float) -> void:
 	var post := stop.global_position if stop else _home
 	match state:
 		State.IDLE:
+			_noise_emitter.play(false)
 			move = _step_toward(post, PATROL_REACH) * patrol_speed
 			if move == Vector3.ZERO:
 				_patrol_timer -= delta
@@ -222,6 +242,7 @@ func _physics_process(delta: float) -> void:
 			move = _step_toward(_focus, profile.stop_distance) * profile.walk_speed
 			_forget(gain, delta)
 		State.CHASING:
+			_noise_emitter.stop()
 			move = _step_toward(_focus, profile.stop_distance) * profile.run_speed
 			if gain <= 0.0 and move == Vector3.ZERO:
 				# Got to the last place it saw or heard the player: search around it
@@ -290,23 +311,19 @@ func _set_state(new_state: State) -> void:
 	match state:
 		State.IDLE:
 			_anim.play("walk drunk")
-			# Start the idle music @Pierre67
 			return
 		State.SUSPICIOUS:
 			_anim.play("loose aggro")
-			# Start the Suspicious music @Pierre67
 			return
 		State.INVESTIGATING:
-			# Start the Alerted music @Pierre67
 			_anim.play("see player")
+			_anim.animation_set_next("see player", "walk drunk")
 			return
 		State.SEARCHING:
 			_anim.play("walk drunk")
-			# Fallback to the Alerted music @Pierre67
 			return
 		State.CHASING:
 			_anim.play("chase")
-			# Start the Found music @Pierre67
 			return
 
 
