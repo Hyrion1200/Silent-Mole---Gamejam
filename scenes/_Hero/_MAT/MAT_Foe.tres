@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://rv53jy1080gr" path="res://assets/_texture/_foe/Hero_Foe_TPOSE_standardSurface1_Normal.jpg" id="2_h2mmr"]
 
 [resource]
-albedo_color = Color(1.8247963, 1.8247963, 1.8247963, 1)
+albedo_color = Color(3.061103, 3.061103, 3.061103, 1)
 albedo_texture = ExtResource("1_03iqb")
+metallic = 0.34
 roughness = 0.0
 normal_enabled = true
 normal_scale = 5.0

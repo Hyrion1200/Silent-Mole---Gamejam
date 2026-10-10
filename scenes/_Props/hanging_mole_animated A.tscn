@@ -41,7 +41,7 @@ _data = {
 &"swing": SubResource("Animation_33quc")
 }
 
-[node name="hanging_mole_pivot" type="Node3D" unique_id=1438203654]
+[node name="hanging_mole_pivot A" type="Node3D" unique_id=1438203654]
 
 [node name="anchor" type="Node3D" parent="." unique_id=29561761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9309883, 0)
@@ -53,3 +53,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9309883, 0)
 libraries/ = SubResource("AnimationLibrary_qqma4")
 autoplay = &"swing"
 speed_scale = 3.0
+
+[editable path="anchor/JAM_Hanged_Tope"]

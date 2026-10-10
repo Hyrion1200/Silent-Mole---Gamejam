@@ -2,19 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://5olup7sx3ddx" path="res://assets/_mesh/JAM_Hero_Foe_TPOSE.fbx" id="1_2ar88"]
 [ext_resource type="Material" uid="uid://nbsp3pcacrjc" path="res://scenes/_Hero/_MAT/MAT_Helmet_Light.tres" id="2_vncam"]
-[ext_resource type="Material" uid="uid://cokkcuppfacf0" path="res://scenes/_Hero/_MAT/MAT_Foe.tres" id="3_3kuqg"]
+[ext_resource type="Material" uid="uid://dpskturblkqfr" path="res://scenes/_Hero/_MAT/MAT_Foe_V2.tres" id="3_2ar88"]
 [ext_resource type="Material" uid="uid://cntvtpkt2hhe1" path="res://scenes/_Hero/_MAT/MAT_Eyes.tres" id="4_r6qs2"]
 
 [node name="JAM_Hero_Foe_TPOSE" unique_id=1401988619 instance=ExtResource("1_2ar88")]
 
-[node name="Foe_light" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="0" unique_id=1691752457]
+[node name="Foe_light" parent="Foe_geo" parent_id_path=PackedInt32Array(2113900470) index="0" unique_id=434213778]
 material_override = ExtResource("2_vncam")
 
-[node name="Foe_body" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="1" unique_id=2004501211]
-surface_material_override/0 = ExtResource("3_3kuqg")
+[node name="Foe_body" parent="Foe_geo" parent_id_path=PackedInt32Array(2113900470) index="1" unique_id=2096196147]
+surface_material_override/0 = ExtResource("3_2ar88")
 
-[node name="Foe_helmet" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="2" unique_id=242004340]
-surface_material_override/0 = ExtResource("3_3kuqg")
+[node name="Foe_helmet" parent="Foe_geo" parent_id_path=PackedInt32Array(2113900470) index="2" unique_id=610534595]
+surface_material_override/0 = ExtResource("3_2ar88")
 
-[node name="Foe_eyes" parent="Foe_geo" parent_id_path=PackedInt32Array(1132731576) index="3" unique_id=720382811]
+[node name="Foe_eyes" parent="Foe_geo" parent_id_path=PackedInt32Array(2113900470) index="3" unique_id=13453501]
 material_override = ExtResource("4_r6qs2")
