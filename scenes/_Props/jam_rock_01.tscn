@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dewac0kje1mpe"]
+
+[ext_resource type="PackedScene" uid="uid://dl4b4vi6apnj5" path="res://assets/_mesh/_Lookdev/JAM_Rock_01.fbx" id="1_skolw"]
+[ext_resource type="Material" uid="uid://cmuh07cv4wde1" path="res://scenes/_Props/_MAT/MAT_Iron.tres" id="2_ltuwo"]
+
+[node name="JAM_Rock_01" unique_id=1988803648 instance=ExtResource("1_skolw")]
+
+[node name="PROPS_Rock_01" parent="PROPS_rock" parent_id_path=PackedInt32Array(82666295) index="0" unique_id=1572907534]
+material_override = ExtResource("2_ltuwo")

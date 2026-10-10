@@ -17,8 +17,56 @@
 	<object class="MixerBusEffectChain" id="{be97953c-f4f8-4fc9-936a-4f1b91f7c71b}">
 		<relationship name="effects">
 			<destination>{cd96d9d9-d7a9-4dfd-8241-c69768325630}</destination>
+			<destination>{45f2035e-d393-4aaf-ae7e-b63cebdd7322}</destination>
+			<destination>{c4a034f8-8163-4332-aa34-07df8946546d}</destination>
+			<destination>{049ac884-d325-4f5e-a27c-5dc4738b9308}</destination>
+			<destination>{15a3ad91-ce5a-45da-9223-313aa109c6af}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b3519028-620d-4da3-9c1a-b16e9c337e48}" />
 	<object class="MixerBusFader" id="{cd96d9d9-d7a9-4dfd-8241-c69768325630}" />
+	<object class="MixerSend" id="{45f2035e-d393-4aaf-ae7e-b63cebdd7322}">
+		<property name="level">
+			<value>-15</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{1d994d39-609a-4c0e-a7e0-d6f7639f423a}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{c4a034f8-8163-4332-aa34-07df8946546d}">
+		<property name="level">
+			<value>-15</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{a042f5ee-ee91-4474-9ab9-dab2d311289f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{049ac884-d325-4f5e-a27c-5dc4738b9308}">
+		<property name="level">
+			<value>-15</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{cfe9973e-d07b-4636-a01c-5e6aab4a7fcb}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{15a3ad91-ce5a-45da-9223-313aa109c6af}">
+		<property name="level">
+			<value>-15</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{42f35590-1cab-4d26-ab39-a08ce07165ad}</destination>
+		</relationship>
+	</object>
 </objects>

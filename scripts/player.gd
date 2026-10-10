@@ -31,6 +31,13 @@ extends RigidBody3D
 ## Distance travelled between two footsteps. We can increase it to be more lenient
 @export var step_length: float = 0.8
 
+## Speed while the sneak key (Ctrl) is held
+@export var slow_speed: float = 1.2
+## How far a footstep is heard by enemies while sneaking
+@export var slow_step_noise_radius: float = 2.5
+## Distance travelled between two footsteps while sneaking
+@export var slow_step_length: float = 1.5
+
 ## Time spent staring at the captor before the fade out and the growing shake start, in seconds
 @export var death_hold: float = 1.0
 ## Time spent in the dark between the end of the fade out and the respawn, in seconds
@@ -59,7 +66,7 @@ var _held: RigidBody3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
 var _total_walked: float = 0.0
-var _debug: bool = false
+var _debug: bool = true
 var _move_tween: Tween
 ## The enemy that captured the player, and the height of its head above its center
 var _captor: Node3D
@@ -79,6 +86,7 @@ var _facing_captor: bool = false
 ## From the center of the capsule down to the feet
 @onready var _half_height: float = $CollisionShape3D.shape.height * $CollisionShape3D.scale.y / 2.0
 @onready var _footsteps_emitter: FmodEventEmitter3D = $FootstepsEmitter3D
+@onready var _slow_footsteps_emitter: FmodEventEmitter3D = $SlowFootstepsEmitter3D
 @onready var _light_on_emitter: FmodEventEmitter3D = $LightOnEmitter3D
 @onready var _light_off_emitter: FmodEventEmitter3D = $LightOffEmitter3D
 @onready var _interact_emitter: FmodEventEmitter3D = $InteractEmitter3D
@@ -365,7 +373,12 @@ func _on_trigger_signal(ambient_level) -> void:
 func _process(delta: float) -> void:
 	# Same distance as the footsteps, counted per frame --> a bob counted per physics tick would judder
 	var walked := Vector2(linear_velocity.x, linear_velocity.z).length()
-	var bob: Vector2 = _camera.walk(walked * delta / step_length, walked / speed, delta)
+	var sneaking := Input.is_action_pressed(&"sneak")
+	# Over the full speed even while sneaking --> the slow walk bobs less
+	var bob: Vector2 = _camera.walk(walked * delta / (slow_step_length if sneaking else step_length), walked / speed, delta)
+	# The debug ring shows how far the next footstep carries
+	var carry := (slow_step_noise_radius if sneaking else step_noise_radius) / step_noise_radius
+	$NoiseRing.scale = Vector3(carry, 1.0, carry)
 	# Prevent stuttering that we would get with get_global_transform()
 	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * (eye_height + bob.y) \
 			+ Vector3.RIGHT.rotated(Vector3.UP, _yaw) * bob.x
@@ -405,7 +418,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var input := Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
-	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * speed
+	var sneaking := Input.is_action_pressed(&"sneak")
+	var target := Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, _yaw) * (slow_speed if sneaking else speed)
 	var diff := target - linear_velocity
 	diff.y = 0.0
 	# We do not want to rotate the player rigidbody
@@ -416,21 +430,22 @@ func _physics_process(delta: float) -> void:
 
 	# Everytime we walk a set distance start the hear function of all ennemies
 	_total_walked += Vector2(linear_velocity.x, linear_velocity.z).length() * delta
-	if _total_walked > step_length:
+	if _total_walked > (slow_step_length if sneaking else step_length):
 		_total_walked = 0.0
-		get_tree().call_group(&"enemies", &"hear", global_position, step_noise_radius)
+		get_tree().call_group(&"enemies", &"hear", global_position, slow_step_noise_radius if sneaking else step_noise_radius)
 		# Play footstep @Pierre67
+		var footsteps := _slow_footsteps_emitter if sneaking else _footsteps_emitter
 		var ground_raycast: RayCast3D = $GroundCheck
 		if ground_raycast.is_colliding():
 			var collider = ground_raycast.get_collider()
 			if collider and collider.is_in_group("wood_ground"):
-				_footsteps_emitter.set_parameter("footstepParameter", "Wood")
+				footsteps.set_parameter("footstepParameter", "Wood")
 			elif collider and collider.is_in_group("metal_ground"):
-				_footsteps_emitter.set_parameter("footstepParameter", "Metal")
+				footsteps.set_parameter("footstepParameter", "Metal")
 			else:
-				_footsteps_emitter.set_parameter("footstepParameter", "Dirt")
+				footsteps.set_parameter("footstepParameter", "Dirt")
 
-		_footsteps_emitter.play(false)
+		footsteps.play(false)
 
 	if _held:
 		var hold_point := _camera.global_position - _camera.global_basis.z * hold_distance

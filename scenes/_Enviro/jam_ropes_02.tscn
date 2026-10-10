@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://n7d1i8xihwfy"]
+
+[ext_resource type="PackedScene" uid="uid://bl6o8whxnt18y" path="res://assets/_mesh/_Lookdev/JAM_Ropes_02.fbx" id="1_x06ma"]
+[ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="2_mtsf8"]
+
+[node name="JAM_Ropes_02" unique_id=2060482828 instance=ExtResource("1_x06ma")]
+
+[node name="Rope_02" parent="." index="0" unique_id=264337934]
+surface_material_override/0 = ExtResource("2_mtsf8")

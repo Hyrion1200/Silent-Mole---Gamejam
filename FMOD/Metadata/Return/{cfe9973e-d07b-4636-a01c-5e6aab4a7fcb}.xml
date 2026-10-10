@@ -36,10 +36,13 @@
 			<value>25</value>
 		</property>
 		<property name="HFDecayRatio">
-			<value>51</value>
+			<value>65.5</value>
 		</property>
 		<property name="earlyLateMix">
 			<value>34</value>
+		</property>
+		<property name="wetLevel">
+			<value>-3</value>
 		</property>
 	</object>
 </objects>

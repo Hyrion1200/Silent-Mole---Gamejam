@@ -29,7 +29,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
 top_radius = 9.35
 bottom_radius = 9.35
-height = 8.596878
+height = 11.596878
 radial_segments = 32
 rings = 1
 cap_top = false
@@ -37,12 +37,13 @@ cap_top = false
 [node name="Node3D" type="Node3D" unique_id=637703904]
 
 [node name="TestLevel" parent="." unique_id=574000196 instance=ExtResource("1_w2rpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00090408325, 0.012653112, -0.00481081)
 
 [node name="Enemy3" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("2_sw4tn")]
 transform = Transform3D(-0.7759429, 0, -0.63080317, 0, 1, 0, 0.63080317, 0, -0.7759429, -13.816869, 0.9, 3.1607523)
 patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
 
-[node name="CollisionShape3D" parent="Enemy3/DeathRange" parent_id_path=PackedInt32Array(142524920, 597506583) index="0" unique_id=921262123]
+[node name="CollisionShape3D" parent="Enemy3/DeathRange" parent_id_path=PackedInt32Array(142524920, 1311436096) index="0" unique_id=2049062684]
 shape = SubResource("SphereShape3D_x2dv1")
 
 [node name="Cone" parent="Enemy3/Debug" parent_id_path=PackedInt32Array(142524920, 84200304) index="0" unique_id=719398577]
@@ -82,13 +83,14 @@ bones/46/rotation = Quaternion(0.7291656, -0.01444175, 0.054267354, 0.6820293)
 bones/47/rotation = Quaternion(0.3023134, 0.042518567, -0.014614694, 0.9521477)
 
 [node name="AnimationPlayer" parent="Enemy3/miner no tex" parent_id_path=PackedInt32Array(142524920, 697813067) index="1" unique_id=1999853006]
-blend_times = [&"chase", &"chase", 3.0, &"chase", &"loose aggro", 3.0, &"chase", &"mine", 3.0, &"chase", &"pulling kart", 3.0, &"chase", &"see player", 3.0, &"chase", &"sitting", 3.0, &"chase", &"t-pose", 3.0, &"chase", &"walk drunk", 3.0]
+blend_times = [&"chase", &"chase", 3.0, &"chase", &"loose aggro", 3.0, &"chase", &"mine", 3.0, &"chase", &"pulling kart", 3.0, &"chase", &"see player", 3.0, &"chase", &"sitting", 3.0, &"chase", &"t-pose", 3.0, &"chase", &"walk drunk", 3.0, &"sitting", &"chase", 3.0, &"sitting", &"loose aggro", 3.0, &"sitting", &"mine", 3.0, &"sitting", &"pulling kart", 3.0, &"sitting", &"sitting", 3.0, &"sitting", &"t-pose", 3.0, &"sitting", &"walk drunk", 3.0]
 
 [node name="PatrolPoint2" type="Marker3D" parent="Enemy3" unique_id=685170980]
 transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.5615474, 6.6634803, 0, -15.132591)
 gizmo_extents = 1.07
 script = ExtResource("3_wh0ns")
 wait = 5.0
+animation = &"mine"
 metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="PatrolPoint" type="Marker3D" parent="Enemy3" unique_id=1294719481]

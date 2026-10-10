@@ -55,6 +55,8 @@ const THREATS: Dictionary[State, int] = {
 @export var patrol_speed: float = 1.5
 ## Seconds spent at the starting position, the other stops have their own wait
 @export_range(0.0, 10.0, 0.1, "or_greater") var patrol_wait: float = 1.0
+## Animation played while it stands at the starting position for ex. "mine"; Empty --> keeps its idle one
+@export var home_animation: StringName
 ## Walks the round backward once at the last stop. Off --> goes straight back to the start
 @export var ping_pong: bool = true
 
@@ -230,6 +232,13 @@ func _physics_process(delta: float) -> void:
 		State.IDLE:
 			_noise_emitter.play(false)
 			move = _step_toward(post, PATROL_REACH) * patrol_speed
+			# Standing at a stop that has an animation --> plays it, back to the walk once it leaves.
+			# Checked every tick, so it also comes back after a state change played something else
+			var anim: StringName = stop.animation if stop else home_animation
+			if move != Vector3.ZERO or not _anim.has_animation(anim):
+				anim = &"walk drunk"
+			if _anim.assigned_animation != anim:
+				_anim.play(anim)
 			if move == Vector3.ZERO:
 				_patrol_timer -= delta
 				if _patrol_timer <= 0.0:
