@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cab828w8kmeig"]
+
+[ext_resource type="Texture2D" uid="uid://5m0km58h5wom" path="res://assets/_texture/_ground/Ground_Albedo.jpg" id="1_wvnc6"]
+[ext_resource type="Texture2D" uid="uid://bhld4x8ifa2n0" path="res://assets/_texture/_ground/Ground_Normal.jpg" id="2_7p04w"]
+
+[resource]
+albedo_color = Color(1.380357, 1.380357, 1.380357, 1)
+albedo_texture = ExtResource("1_wvnc6")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 2.5
+normal_texture = ExtResource("2_7p04w")
+uv1_scale = Vector3(0.001, 0.001, 0.001)
+uv1_triplanar = true
