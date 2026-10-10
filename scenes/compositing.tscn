@@ -368,18 +368,6 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_wyc2g"]
 material = SubResource("StandardMaterial3D_3oqcw")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yv1uq"]
-emission_shape = 1
-emission_sphere_radius = 0.5
-gravity = Vector3(0, 2, 0)
-scale_curve = SubResource("CurveTexture_763k3")
-color = Color(0.50140685, 0.50140643, 0.5014065, 1)
-color_ramp = SubResource("GradientTexture1D_jddww")
-alpha_curve = SubResource("CurveTexture_cilah")
-
-[sub_resource type="QuadMesh" id="QuadMesh_j6763"]
-material = SubResource("StandardMaterial3D_3oqcw")
-
 [sub_resource type="CurveTexture" id="CurveTexture_yfrd5"]
 curve = SubResource("Curve_yfrd5")
 
@@ -387,6 +375,8 @@ curve = SubResource("Curve_yfrd5")
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 0.5, 0)
+radial_accel_min = -9.050002
+radial_accel_max = 4.9399977
 scale_curve = SubResource("CurveTexture_763k3")
 color = Color(0.50140685, 0.50140643, 0.5014065, 1)
 color_ramp = SubResource("GradientTexture1D_jddww")
@@ -398,16 +388,6 @@ size = Vector2(2, 2)
 
 [sub_resource type="CurveTexture" id="CurveTexture_jkqf4"]
 curve = SubResource("Curve_yfrd5")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cilah"]
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-gravity = Vector3(0, -0.285, 0)
-scale_min = 0.19999999
-scale_curve = SubResource("CurveTexture_763k3")
-color = Color(0.50140685, 0.50140643, 0.5014065, 1)
-color_ramp = SubResource("GradientTexture1D_jddww")
-alpha_curve = SubResource("CurveTexture_jkqf4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qf328"]
 emission_shape = 3
@@ -432,14 +412,55 @@ alpha_curve = SubResource("CurveTexture_jkqf4")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qbdn1"]
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
-gravity = Vector3(0, -0.285, 0)
-radial_accel_min = 8.019998
-radial_accel_max = 30.389997
+gravity = Vector3(0, 12.875, 0)
+radial_accel_min = -3.9100022
+radial_accel_max = -0.47000223
 scale_min = 0.19999999
 scale_curve = SubResource("CurveTexture_763k3")
 color = Color(0.34407577, 0.34407577, 0.34407565, 1)
 color_ramp = SubResource("GradientTexture1D_jddww")
 alpha_curve = SubResource("CurveTexture_jkqf4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lyy8g"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+radial_velocity_min = 0.09997764
+radial_velocity_max = 0.49997765
+gravity = Vector3(0, -1.185, 0)
+radial_accel_min = -3.9100022
+radial_accel_max = -0.47000223
+scale_min = 0.19999999
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.34407577, 0.34407577, 0.34407565, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_jkqf4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yjuvr"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 33.329998
+damping_min = 12.558001
+damping_max = 100.00001
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_cilah")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yv1uq"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 2, 0)
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_cilah")
+
+[sub_resource type="QuadMesh" id="QuadMesh_j6763"]
+material = SubResource("StandardMaterial3D_3oqcw")
 
 [node name="Node3D" type="Node3D" unique_id=1865376727]
 
@@ -956,32 +977,27 @@ mesh = SubResource("BoxMesh_jddww")
 
 [node name="hanging_mole_pivot A" parent="." unique_id=1438203654 instance=ExtResource("17_yfrd5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6226387, 1.9038162, 21.52862)
+visible = false
 
 [node name="hanging_mole_pivot B" parent="." unique_id=1985958050 instance=ExtResource("18_jkqf4")]
 transform = Transform3D(0.9999216, -0.00043041178, 0.012511899, 0, 0.99940884, 0.03437986, -0.0125193, -0.034377165, 0.9993305, 0.44055772, 2.4116204, 22.801847)
+visible = false
 
 [node name="hanging_mole_pivot C" parent="." unique_id=1373370599 instance=ExtResource("19_qbdn1")]
 transform = Transform3D(1, 0, 0, 0, 0.9988014, 0.048946504, 0, -0.048946504, 0.9988014, 0, 2.36101, 20.569149)
+visible = false
 
 [node name="Particles" type="Node3D" parent="." unique_id=1737147823]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0, 0)
 
-[node name="dust puff backup" type="GPUParticles3D" parent="Particles" unique_id=1993482595]
+[node name="dust puff simple loop" type="GPUParticles3D" parent="Particles" unique_id=1993482595]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
+visible = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_gv2ai")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
-[node name="dust puff2" type="GPUParticles3D" parent="Particles" unique_id=489423618]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
-visible = false
-amount = 10
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_yv1uq")
-draw_pass_1 = SubResource("QuadMesh_j6763")
-
-[node name="dust puff pulse" type="GPUParticles3D" parent="Particles" unique_id=287589640]
+[node name="dust puff pulse loop" type="GPUParticles3D" parent="Particles" unique_id=287589640]
 transform = Transform3D(-0.063897826, 0.2474256, -3.1678114, -1.4782811, -0.058752384, 0, -0.13545033, 0.52449167, 1.4943948, -0.54544705, 1.461762, 19.532724)
 visible = false
 amount = 200
@@ -990,14 +1006,6 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_yfrd5")
 draw_pass_1 = SubResource("QuadMesh_qf328")
-
-[node name="dust puff amb" type="GPUParticles3D" parent="Particles/dust puff pulse" unique_id=858261916]
-transform = Transform3D(0.8246124, -0.19591093, 0, 0.5656979, 0.28557748, 0, 1.8626451e-09, -2.5802644e-09, 1, -0.9716061, 1.4901159e-08, -1.8097577e-09)
-amount = 1000
-lifetime = 3.76
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_cilah")
-draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
 [node name="dust puff amb wall" type="GPUParticles3D" parent="Particles" unique_id=1265816136]
 transform = Transform3D(-0.11000848, 0.032580595, -4.0911617, -3.0839057, 0.0010572681, 0.16074109, 0.0484457, 0.14128494, 0.9422275, 0.77314097, 2.423854, 19.624804)
@@ -1023,14 +1031,35 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_qbdn1")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
 
-[node name="dust puff amb explode wip" type="GPUParticles3D" parent="Particles" unique_id=707794700]
-transform = Transform3D(-0.11000848, 0.032580595, -4.0911617, -3.0839057, 0.0010572681, 0.16074109, 0.0484457, 0.14128494, 0.9422275, 0.77314097, 2.423854, 19.624804)
+[node name="dust puff amb wall vacum" type="GPUParticles3D" parent="Particles" unique_id=707794700]
+transform = Transform3D(-0.11000848, 0.106714636, -4.0911617, -3.0839057, 0.003462981, 0.16074109, 0.0484457, 0.46276537, 0.9422275, 0.69854164, 0.3325851, 19.657656)
 visible = false
 amount = 5000
 randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_qbdn1")
+process_material = SubResource("ParticleProcessMaterial_lyy8g")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
+
+[node name="Collision particle" type="Node3D" parent="Particles" unique_id=1887544617]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
+visible = false
+
+[node name="dust puff rock collision normal" type="GPUParticles3D" parent="Particles/Collision particle" unique_id=1108168095]
+amount = 10
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yjuvr")
+draw_pass_1 = SubResource("QuadMesh_wyc2g")
+
+[node name="dust puff rock collision  small" type="GPUParticles3D" parent="Particles/Collision particle" unique_id=489423618]
+visible = false
+amount = 10
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yv1uq")
+draw_pass_1 = SubResource("QuadMesh_j6763")
 
 [editable path="3D_Scene"]
 [editable path="3D_Scene/Rope_A_pivot"]
 [editable path="3D_Scene/Rope_B_pivot"]
+[editable path="hanging_mole_pivot A"]
+[editable path="hanging_mole_pivot A/anchor/JAM_Hanged_Tope"]
