@@ -35,6 +35,9 @@
 		<property name="lateDelay">
 			<value>43</value>
 		</property>
+		<property name="density">
+			<value>65.5</value>
+		</property>
 		<property name="earlyLateMix">
 			<value>22</value>
 		</property>
