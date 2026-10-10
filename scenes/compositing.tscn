@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dh541y02l43u6" path="res://scenes/_Hero/jam_hero_foe_tpose.tscn" id="2_jddww"]
 [ext_resource type="Environment" uid="uid://ccerd7b1bux2g" path="res://shaders/environment/Environment_1_2.tres" id="2_ta1t5"]
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
+[ext_resource type="PackedScene" uid="uid://bgw6nue4wsyu2" path="res://scenes/_Props/rope_animated_01.tscn" id="2_yfrd5"]
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="3_4wx58"]
+[ext_resource type="PackedScene" uid="uid://dk1bj6g4tpihy" path="res://scenes/_Props/rope_animated_02.tscn" id="3_qf328"]
 [ext_resource type="Shader" uid="uid://bh8avq2ikt07f" path="res://shaders/pixelization_spatial.gdshader" id="5_ta1t5"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
 [ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
@@ -323,6 +325,18 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_wyc2g"]
 material = SubResource("StandardMaterial3D_3oqcw")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfrd5"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_cilah")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qf328"]
+material = SubResource("StandardMaterial3D_3oqcw")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_763k3"]
 size = Vector3(0.4, 0.4, 0.4)
 
@@ -339,7 +353,14 @@ size = Vector3(0.4, 0.4, 0.4)
 transform = Transform3D(0.9929838, 0, 0.1182505, 0, 1, 0, -0.1182505, 0, 0.9929838, -1.8980794, 0, 19.539707)
 
 [node name="JAM_Ropes" parent="3D_Scene" index="3" unique_id=1030473890]
-transform = Transform3D(0.99978054, 0, -0.020942418, 0, 1, 0, 0.020942418, 0, 0.99978054, 0.2845745, 0, 0.19820404)
+transform = Transform3D(0.9997797, 0, -0.0209424, 0, 1, 0, 0.0209424, 0, 0.9997797, 0.2845745, 0, 0.19820404)
+visible = false
+
+[node name="Rope_A" parent="3D_Scene" unique_id=366578359 instance=ExtResource("2_yfrd5")]
+transform = Transform3D(0.010000018, 0, 0, 0, 0.0100000035, 0, 0, 0, 0.010000015, 0.8639283, 3.4011471, -7.168597)
+
+[node name="Rope_B" parent="3D_Scene" unique_id=1886197140 instance=ExtResource("3_qf328")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 1.0434227, 4.4832554, -8.76193)
 
 [node name="JAM_Hero_Foe_TPOSE" parent="." unique_id=1401988619 instance=ExtResource("2_jddww")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2471207, 0, 14.599305)
@@ -815,11 +836,18 @@ spot_angle = 33.87
 [node name="Particles" type="Node3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=1737147823]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0, 0)
 
-[node name="dust puff" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=1993482595]
+[node name="dust puff backup" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=1993482595]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
+visible = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_gv2ai")
 draw_pass_1 = SubResource("QuadMesh_wyc2g")
+
+[node name="dust puff2" type="GPUParticles3D" parent="SubViewportContainer (dithered)/SubViewport/Particles" unique_id=489423618]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.38911313, 2.569612, 19.62218)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_yfrd5")
+draw_pass_1 = SubResource("QuadMesh_qf328")
 
 [node name="CrateLight1kg" type="RigidBody3D" parent="SubViewportContainer (dithered)/SubViewport" unique_id=15455470 groups=["draggable", "throwable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2564709, 0.19999999, 22.6257)
@@ -832,3 +860,5 @@ shape = SubResource("BoxShape3D_763k3")
 mesh = SubResource("BoxMesh_jddww")
 
 [editable path="3D_Scene"]
+[editable path="3D_Scene/Rope_A"]
+[editable path="3D_Scene/Rope_B"]
