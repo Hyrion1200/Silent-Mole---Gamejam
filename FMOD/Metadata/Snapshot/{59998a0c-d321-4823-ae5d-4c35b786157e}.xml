@@ -4,9 +4,6 @@
 		<property name="name">
 			<value>Found</value>
 		</property>
-		<property name="behavior">
-			<value>1</value>
-		</property>
 		<relationship name="mixer">
 			<destination>{47e45b2f-86fe-4c56-9479-60716d5d1079}</destination>
 		</relationship>
