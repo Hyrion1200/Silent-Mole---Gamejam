@@ -120,22 +120,6 @@ stretch_mode = 5
 layout_mode = 2
 text = "[E] - Interact"
 
-[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
-visible = false
-light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
-light_volumetric_fog_energy = 0.0
-shadow_enabled = true
-shadow_bias = 0.1
-spot_range = 17.578
-spot_attenuation = 0.12
-spot_angle = 23.48
-
-[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
-visible = false
-cast_shadow = 0
-mesh = SubResource("BoxMesh_dqkch")
-
 [node name="Hero_light_amb" type="Node3D" parent="Camera3D" unique_id=401284020]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.072871, 1.186552)
 
