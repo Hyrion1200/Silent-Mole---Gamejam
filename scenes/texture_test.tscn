@@ -17,8 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="15_c6rhc"]
 [ext_resource type="PackedScene" uid="uid://bsikvp4cr8j2o" path="res://scenes/_Props/jam_hanged_tope.tscn" id="17_mh4f8"]
 [ext_resource type="PackedScene" uid="uid://cl6nlp12ojeys" path="res://scenes/_Props/jam_lamp.tscn" id="18_6diqf"]
-[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="7_wkddb"]
-[ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="8_owcjw"]
 
 [sub_resource type="Animation" id="Animation_wkddb"]
 length = 12.0
@@ -116,6 +114,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53933144, 0.39451712, 14.98
 
 [node name="JAM_Lamp" parent="." unique_id=1425553412 instance=ExtResource("18_6diqf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.224511, 1.9411783, 8.48096)
-
-[node name="JAM_Cart" parent="." unique_id=1306479076 instance=ExtResource("18_ek4yw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1898367, -7.1525574e-06, 12.843261)
