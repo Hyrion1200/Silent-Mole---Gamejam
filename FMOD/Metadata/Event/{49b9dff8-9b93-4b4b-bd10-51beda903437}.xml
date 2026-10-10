@@ -160,6 +160,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{2c45e248-017d-4dd8-93c5-cb2558915c0a}" />
 	<object class="MultiSound" id="{f4b0c10b-0b01-47e7-9db3-7d33f111c9a9}">
+		<relationship name="modulators">
+			<destination>{7c88f83a-8f2e-410a-b94f-8d2467783f18}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{541191f3-8792-43d6-8507-62624da9c3c8}</destination>
 			<destination>{725d7041-5f51-4481-881b-5d652e5b0b28}</destination>
@@ -312,6 +315,14 @@
 	<object class="ThreeEQEffect" id="{4c778b4a-a10d-495b-8cf6-5a23178f6e95}">
 		<property name="lowGain">
 			<value>-9</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{7c88f83a-8f2e-410a-b94f-8d2467783f18}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>2.5</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{541191f3-8792-43d6-8507-62624da9c3c8}">
