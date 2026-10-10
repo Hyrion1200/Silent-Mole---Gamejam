@@ -60,9 +60,6 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3ba4d498-2bc2-430b-ae09-5439edaf74a0}">
-		<property name="maxVoices">
-			<value>2</value>
-		</property>
 		<property name="voiceStealing">
 			<value>4</value>
 		</property>
@@ -108,6 +105,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{393da932-a69f-4ffc-a595-041db331e0f2}" />
 	<object class="MultiSound" id="{79009938-9c1a-444d-9dcd-5d8460f0c82f}">
+		<property name="volume">
+			<value>6.5</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{9ac3ccc7-f135-4f47-ab95-2b38deb58c3c}</destination>
 		</relationship>
@@ -120,7 +120,17 @@
 	</object>
 	<object class="MixerBusFader" id="{5cf2571e-7ba1-42ea-b1a7-ee98b998d225}" />
 	<object class="MixerBusFader" id="{78985628-8a3e-485c-97af-fa7e26303c9c}" />
-	<object class="SpatialiserEffect" id="{9d9e81e9-1c9b-4d4c-94da-0b674bbe59ed}" />
+	<object class="SpatialiserEffect" id="{9d9e81e9-1c9b-4d4c-94da-0b674bbe59ed}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="maximumDistance">
+			<value>30</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{9ac3ccc7-f135-4f47-ab95-2b38deb58c3c}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
