@@ -343,6 +343,8 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.6544843, 2, 18.953295)
 current = true
 fov = 37.849285
 script = ExtResource("2_camera")
+fade_out_duration = 4.0
+fade_out_start_ratio = 0.4
 
 [node name="Fade" type="CanvasLayer" parent="SubViewportContainer (dithered)/SubViewport/Camera3D" unique_id=1112681068]
 

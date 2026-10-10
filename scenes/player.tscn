@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://nsm1v3rojuev" path="res://scripts/camera_effects.gd" id="2_shake"]
 [ext_resource type="Script" uid="uid://c0u1743dtcnvc" path="res://scripts/shake_settings.gd" id="4_shake"]
 [ext_resource type="Texture2D" uid="uid://owyxa3ttemk1" path="res://assets/_icons/UI_hand_open.png" id="5_qlg0r"]
+[ext_resource type="Resource" uid="uid://d0iwunc2swpe4" path="res://resources/bob_player_camera.tres" id="5_tuyoq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ta1t5"]
 friction = 0.0
@@ -54,7 +55,9 @@ script = ExtResource("1_player")
 speed = 2.75
 accel = 10.0
 eye_height = 0.3
+climb_speed = 2.0
 capture_shake = SubResource("Resource_capture_shake")
+step_length = 2.0
 respawn_delay = 1.0
 death_shake_start = 0.02
 death_shake_end = 0.01
@@ -76,6 +79,7 @@ current = true
 fov = 37.849285
 script = ExtResource("2_shake")
 default_shake = SubResource("Resource_shake")
+bob = ExtResource("5_tuyoq")
 fade_out_duration = 3.0
 fade_out_start_ratio = 0.6
 fade_in_duration = 4.0
@@ -116,22 +120,6 @@ stretch_mode = 5
 layout_mode = 2
 text = "[E] - Interact"
 
-[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
-visible = false
-light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
-light_volumetric_fog_energy = 0.0
-shadow_enabled = true
-shadow_bias = 0.1
-spot_range = 17.578
-spot_attenuation = 0.12
-spot_angle = 23.48
-
-[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
-visible = false
-cast_shadow = 0
-mesh = SubResource("BoxMesh_dqkch")
-
 [node name="Hero_light_amb" type="Node3D" parent="Camera3D" unique_id=401284020]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.072871, 1.186552)
 
@@ -150,10 +138,73 @@ spot_attenuation = -0.06
 spot_angle = 33.87
 
 [node name="FmodListener3D" type="FmodListener3D" parent="Camera3D" unique_id=232891711]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+
+[node name="Lamp" type="SpotLight3D" parent="Camera3D" unique_id=2019701887 groups=["lamp"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26087093, 0.366552)
+visible = false
+light_color = Color(1.7216666, 1.1742265, 0.47037494, 1)
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.1
+spot_range = 17.578
+spot_attenuation = 0.12
+spot_angle = 23.48
+
+[node name="Beam" type="MeshInstance3D" parent="Camera3D/Lamp" unique_id=1119996555 groups=["debug"]]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_dqkch")
+
+[node name="ShakeEmitter3D" type="FmodEventEmitter3D" parent="Camera3D" unique_id=268715796]
+event_name = "event:/Enviro/mine_rumble"
+event_guid = "{857b2204-8ae0-494c-9b42-7c928bf1e025}"
+fmod_parameters/RumbleState/id = -8932665378506704393
+fmod_parameters/RumbleState = "On"
+fmod_parameters/RumbleState/labels = PackedStringArray("On", "Off")
+fmod_parameters/RumbleState/variant_type = 4
 
 [node name="NoiseRing" type="MeshInstance3D" parent="." unique_id=1723994288 groups=["debug"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("TorusMesh_jneaj")
+
+[node name="FootstepsEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=978898096]
+event_name = "event:/Player/player_footsteps"
+event_guid = "{49b9dff8-9b93-4b4b-bd10-51beda903437}"
+fmod_parameters/footstepParameter/id = -2439879591509651875
+fmod_parameters/footstepParameter = "Dirt"
+fmod_parameters/footstepParameter/labels = PackedStringArray("Dirt", "Metal", "Wood")
+fmod_parameters/footstepParameter/variant_type = 4
+
+[node name="GroundCheck" type="RayCast3D" parent="." unique_id=1353919531]
+collide_with_areas = true
+
+[node name="LightOnEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=2056538025]
+event_name = "event:/Player/player_lightOn"
+event_guid = "{46e0e96b-adeb-48b6-b226-d1568e887a46}"
+
+[node name="LightOffEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1047552757]
+event_name = "event:/Player/player_lightOff"
+event_guid = "{426157c1-7e30-4bd8-9024-182fd9590394}"
+
+[node name="InteractEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=447165870]
+event_name = "event:/Player/player_interact"
+event_guid = "{2ea13759-d0a3-4a49-9280-74ae328ff98f}"
+
+[node name="ThrowEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1314369069]
+event_name = "event:/Player/player_throw"
+event_guid = "{7644aa68-0302-4a75-ba6e-4ccc2de93176}"
+
+[node name="AmbientEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=322695450]
+event_name = "event:/Ambiance/ambiances"
+event_guid = "{c6173b08-93f4-4ea7-88e9-03c2ef0521da}"
+autoplay = true
+fmod_parameters/ambParameter/id = 4630294301019446100
+fmod_parameters/ambParameter = "Start"
+fmod_parameters/ambParameter/labels = PackedStringArray("Start", "Corridor", "Large", "Nothing")
+fmod_parameters/ambParameter/variant_type = 4
+
+[node name="ClimbEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1869728550]
+event_name = "event:/Player/player_climb"
+event_guid = "{12098461-aa89-4ff4-85d7-55209c25bb0e}"

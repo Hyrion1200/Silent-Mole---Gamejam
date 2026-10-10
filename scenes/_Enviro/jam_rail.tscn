@@ -14,8 +14,12 @@ normal_scale = 3.5
 normal_texture = ExtResource("3_g5l3q")
 texture_filter = 0
 
-[node name="JAM_rail" unique_id=1035252563 instance=ExtResource("1_km08b")]
+[node name="JAM_rail" unique_id=1035252563 groups=["wood_ground"] instance=ExtResource("1_km08b")]
 
-[node name="Rail_chain_01" parent="." index="0" unique_id=1630417007]
+[node name="Rail_chain_01" parent="." index="0" unique_id=1983822372]
 surface_material_override/0 = SubResource("StandardMaterial3D_qtog7")
 surface_material_override/1 = ExtResource("4_a5o3v")
+
+[node name="Rail_chain_01_col" parent="Rail_chain_01" index="0" unique_id=1676164452 groups=["wood_ground"]]
+
+[node name="CollisionShape3D" parent="Rail_chain_01/Rail_chain_01_col" index="0" unique_id=608682704 groups=["wood_ground"]]

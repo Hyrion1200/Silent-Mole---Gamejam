@@ -78,6 +78,13 @@ var _facing_captor: bool = false
 @onready var _prompt: Control = $Camera3D/Fade/Prompt
 ## From the center of the capsule down to the feet
 @onready var _half_height: float = $CollisionShape3D.shape.height * $CollisionShape3D.scale.y / 2.0
+@onready var _footsteps_emitter: FmodEventEmitter3D = $FootstepsEmitter3D
+@onready var _light_on_emitter: FmodEventEmitter3D = $LightOnEmitter3D
+@onready var _light_off_emitter: FmodEventEmitter3D = $LightOffEmitter3D
+@onready var _interact_emitter: FmodEventEmitter3D = $InteractEmitter3D
+@onready var _throw_emitter: FmodEventEmitter3D = $ThrowEmitter3D
+@onready var _ambient_emitter: FmodEventEmitter3D = $AmbientEmitter3D
+@onready var _climb_emitter: FmodEventEmitter3D = $ClimbEmitter3D
 
 
 func _ready() -> void:
@@ -92,6 +99,11 @@ func _ready() -> void:
 	ring.outer_radius = step_noise_radius
 	ring.inner_radius = step_noise_radius - 0.06
 	Music.follow_threats()
+	# Get every triggers in the scene and connect to their signal
+	var trigger_array = get_tree().get_nodes_in_group("trigger")
+	for trigger in trigger_array:
+		trigger.connect("trigger_on_entered", _on_trigger_signal)
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -122,6 +134,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Debug --> works without having picked the lamp up
 		if _has_lamp or _debug:
 			_lamp.visible = not _lamp.visible
+			# Play light event
+			if (_lamp.visible):
+				_light_on_emitter.play(false)
+				_light_off_emitter.stop()
+			else:
+				_light_off_emitter.play(false)
+				_light_on_emitter.stop()
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
 		var point := target as ClimbPoint
@@ -151,19 +170,21 @@ func _drag(body: RigidBody3D) -> void:
 	# Prevent the held item from spinning
 	body.lock_rotation = true
 	# Start the dragged SFX @Pierre67
-
+	_interact_emitter.play(false)
 
 func _throw(body: RigidBody3D) -> void:
 	_let_go()
 	# Same impulse for every item: launch speed is throw_impulse / mass
 	body.apply_central_impulse(-_camera.global_basis.z * throw_impulse)
 	# Start the throw SFX @Pierre67
+	_throw_emitter.play(false)
 
 
 func _release() -> void:
 	if _held:
 		_let_go()
 		# Start the SFX release @Pierre67
+		_throw_emitter.play(false)
 
 
 ## Stops holding the item without any SFX, shared by _release and _throw
@@ -185,7 +206,7 @@ func _pick_lamp(item: Node) -> void:
 	item.queue_free()
 	_has_lamp = true
 	# Start the pickup SFX @Pierre67
-
+	_interact_emitter.play(false)
 	# Create the UI hint for lamp_hint_duration and then hide it
 	get_tree().call_group(&"lamp_hint", &"show")
 	await get_tree().create_timer(lamp_hint_duration).timeout
@@ -209,7 +230,8 @@ func _climb(point: ClimbPoint) -> void:
 	_move_tween.tween_property(self, ^"global_position", top, above.distance_to(top) / climb_speed)
 	_move_tween.tween_callback(set_freeze_enabled.bind(false))
 	# Start the climb SFX @Pierre67
-
+	_climb_emitter.play(false)
+	
 
 ## Caught by an enemy: frozen for good, the camera turns to the enemy's head and the view fades out.
 ## head_height is the head above the captor's center. Called once by the enemy whose death range is entered.
@@ -319,10 +341,34 @@ func _aimed(areas: bool = false) -> Object:
 	query.hit_from_inside = areas
 	return get_world_3d().direct_space_state.intersect_ray(query).get("collider")
 
+enum Ambient {
+	START = 0,
+	CORRIDOR,
+	LARGE,
+	TUNNEL,
+	NOTHING
+}
+func _on_trigger_signal(ambient_level) -> void:
+	print("Ambient level received : " + str(ambient_level))
+	var ambient_name = "Start"
+	if ambient_level == Ambient.CORRIDOR:
+		ambient_name = "Corridor"
+	elif ambient_level == Ambient.LARGE:
+		ambient_name = "Large"
+	elif ambient_level == Ambient.TUNNEL:
+		ambient_name = "Tunnel"
+	elif ambient_level == Ambient.NOTHING:
+		ambient_name = "Nothing"
+	_ambient_emitter.set_parameter("ambParameter", ambient_name)
 
-func _process(_delta: float) -> void:
+
+func _process(delta: float) -> void:
+	# Same distance as the footsteps, counted per frame --> a bob counted per physics tick would judder
+	var walked := Vector2(linear_velocity.x, linear_velocity.z).length()
+	var bob: Vector2 = _camera.walk(walked * delta / step_length, walked / speed, delta)
 	# Prevent stuttering that we would get with get_global_transform()
-	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * eye_height
+	_camera.global_position = get_global_transform_interpolated().origin + Vector3.UP * (eye_height + bob.y) \
+			+ Vector3.RIGHT.rotated(Vector3.UP, _yaw) * bob.x
 	if is_instance_valid(_captor):
 		# The mouse no longer drives the view, it turns to the head of the captor
 		var to := _captor.global_position + Vector3.UP * _captor_head - _camera.global_position
@@ -354,7 +400,7 @@ func _process(_delta: float) -> void:
 		# Starts below the eye, a line seen exactly end-on would only be a dot
 		var start := Vector3(0.0, -0.15, 0.0)
 		var end := Vector3(0.0, 0.0, -length)
-		_beam.transform = Transform3D(Basis.looking_at(end - start), (start + end) / 2.0) 				.scaled_local(Vector3(1.0, 1.0, start.distance_to(end)))
+		_beam.transform = Transform3D(Basis.looking_at(end - start), (start + end) / 2.0).scaled_local(Vector3(1.0, 1.0, start.distance_to(end)))
 
 
 func _physics_process(delta: float) -> void:
@@ -373,6 +419,18 @@ func _physics_process(delta: float) -> void:
 	if _total_walked > step_length:
 		_total_walked = 0.0
 		get_tree().call_group(&"enemies", &"hear", global_position, step_noise_radius)
+		# Play footstep @Pierre67
+		var ground_raycast: RayCast3D = $GroundCheck
+		if ground_raycast.is_colliding():
+			var collider = ground_raycast.get_collider()
+			if collider and collider.is_in_group("wood_ground"):
+				_footsteps_emitter.set_parameter("footstepParameter", "Wood")
+			elif collider and collider.is_in_group("metal_ground"):
+				_footsteps_emitter.set_parameter("footstepParameter", "Metal")
+			else:
+				_footsteps_emitter.set_parameter("footstepParameter", "Dirt")
+
+		_footsteps_emitter.play(false)
 
 	if _held:
 		var hold_point := _camera.global_position - _camera.global_basis.z * hold_distance

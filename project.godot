@@ -44,6 +44,10 @@ banks/import/fmod_studio_path="C:/Program Files/FMOD SoundSystem/FMOD Studio 2.0
 banks/import/fmod_project_path="C:/Users/bicho/oelajam/FMOD/FMOD.fspro"
 banks/initialization/load_banks=2
 
+[global_group]
+
+wood_ground=""
+
 [input]
 
 move_forward={
