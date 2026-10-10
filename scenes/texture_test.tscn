@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dh541y02l43u6" path="res://scenes/_Hero/jam_hero_foe_tpose.tscn" id="9_owcjw"]
 [ext_resource type="PackedScene" uid="uid://bl6o8whxnt18y" path="res://assets/_mesh/_Lookdev/JAM_Ropes_02.fbx" id="10_6gm6i"]
 [ext_resource type="PackedScene" uid="uid://donnygnqa0tfs" path="res://scenes/_Hero/jam_hero_tope.tscn" id="11_gnwrd"]
+[ext_resource type="PackedScene" uid="uid://dewac0kje1mpe" path="res://scenes/_Props/jam_rock_01.tscn" id="13_wd4t5"]
+[ext_resource type="PackedScene" uid="uid://bytq866si2hmg" path="res://scenes/_Props/jam_rock_02.tscn" id="14_c6rhc"]
+[ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="15_c6rhc"]
+[ext_resource type="PackedScene" uid="uid://cpkwlfpivqxtp" path="res://scenes/_Props/jam_pickaxe.tscn" id="16_5josl"]
 
 [node name="TextureSet" type="Node3D" unique_id=1151871138]
 
@@ -50,3 +54,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8450346, 0.073246, -5.74343
 
 [node name="JAM_Ropes" parent="." unique_id=1030473890 instance=ExtResource("4_48vo2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71751297, 1.2397766e-05, -7.5295734)
+
+[node name="JAM_Rock_01" parent="." unique_id=1988803648 instance=ExtResource("13_wd4t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5324578, 0.9301925, 1.7339008)
+
+[node name="JAM_Rock_02" parent="." unique_id=1951766825 instance=ExtResource("14_c6rhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5324578, 0.9301925, 1.7339008)
+
+[node name="JAM_Rock_03" parent="." unique_id=1047716793 instance=ExtResource("15_c6rhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5324578, 0.9301925, 1.7339008)
+
+[node name="JAM_pickaxe" parent="." unique_id=335932595 instance=ExtResource("16_5josl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.786993, 1.2437766e-05, 5.7711697)
