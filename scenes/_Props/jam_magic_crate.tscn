@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cyrp1er7ihbaa"]
+
+[ext_resource type="PackedScene" uid="uid://dueegdueecohr" path="res://assets/_mesh/_Lookdev/JAM_MagicCrate.fbx" id="1_fue5x"]
+[ext_resource type="Material" uid="uid://b4nq3yk1ntubh" path="res://scenes/_Enviro/_MAT/MAT_Crates.tres" id="2_ifg5y"]
+
+[node name="JAM_MagicCrate" unique_id=1098129342 instance=ExtResource("1_fue5x")]
+
+[node name="PROPS_Crate" parent="." index="0" unique_id=1570465729]
+surface_material_override/0 = ExtResource("2_ifg5y")
