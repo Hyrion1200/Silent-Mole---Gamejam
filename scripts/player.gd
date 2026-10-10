@@ -156,22 +156,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"interact"): # E
 		var target := _aimed(true)
 		var point := target as ClimbPoint
+		var body := _aimed_body()
+		if _held:
+			_release()
 		# Prevent retriggering climibing if already climbing or freezed (death animation for ex.)
-		if point and not freeze:
+		elif point and not freeze:
 			_climb(point)
 		elif _is_lamp_pickup(target):
 			_pick_lamp(target.owner)
-	elif event.is_action_pressed(&"grab"):
-		if _held:
-			_release()
-		else:
-			var body := _aimed_body()
-			if body and body.is_in_group(&"draggable"): # Left-Click
-				_drag(body)
-	elif event.is_action_pressed(&"throw"):
-		# A throwable that is not held (or not draggable) is shoved from where it stands
-		var body := _held if _held else _aimed_body()
-		if body and body.is_in_group(&"throwable"): # Right-Click
+		elif body and body.is_in_group(&"draggable"):
+			_drag(body)
+		# Only what cannot be dragged is thrown: shoved from where it stands
+		elif body and body.is_in_group(&"throwable"):
 			_throw(body)
 
 
@@ -401,7 +397,7 @@ func _process(delta: float) -> void:
 			_facing_captor = true
 			_die()
 	_camera.global_rotation = Vector3(_pitch, _yaw, 0.0)
-	# Same rays as the keys, so the prompt shows exactly when E, grab or throw would work
+	# Same rays as the keys, so the prompt shows exactly when E would work
 	var body := _aimed_body()
 	var target := _aimed(true)
 	# This line is starting to become horrible.
