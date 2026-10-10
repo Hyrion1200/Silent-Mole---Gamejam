@@ -107,3 +107,8 @@ explosiveness = 0.22
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_5qsww")
 draw_pass_1 = SubResource("QuadMesh_kn4hp")
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1269939613]
+event_name = "event:/Enviro/lamp"
+event_guid = "{3ae28b5c-6c25-43c5-bba5-73fcf8a85f23}"
+autoplay = true
