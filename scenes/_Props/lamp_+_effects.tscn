@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bwmsfbh8lp6ua"]
+
+[ext_resource type="PackedScene" uid="uid://cl6nlp12ojeys" path="res://scenes/_Props/jam_lamp.tscn" id="1_6cyuo"]
+[ext_resource type="Texture2D" uid="uid://dc34kyunkgrvt" path="res://textures/Smoke_spr.png" id="2_kge0c"]
+
+[sub_resource type="Animation" id="Animation_sybad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kge0c"]
+resource_name = "swing A"
+length = 13.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 8, 12.184803),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.073303826, 0.15009831, 0.034906585), Vector3(0.02094395, -0.05235988, 0.0052359877), Vector3(0.08028515, -0.09773844, 0.03141593), Vector3(-0.06283186, 0.15009831, 0.034906585)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sybad"]
+_data = {
+&"RESET": SubResource("Animation_sybad"),
+&"swing A": SubResource("Animation_kge0c")
+}
+
+[sub_resource type="Curve" id="Curve_sybad"]
+_limits = [0.0, 1.9230804, 0.0, 132.69]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.9973958, 1.9230804), -258.46136, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cilah"]
+curve = SubResource("Curve_sybad")
+
+[sub_resource type="Gradient" id="Gradient_gb2ss"]
+offsets = PackedFloat32Array(0, 0.15849057, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.87784094, 0.87784094, 0.87784094, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jddww"]
+gradient = SubResource("Gradient_gb2ss")
+
+[sub_resource type="Curve" id="Curve_of75h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9538472, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_763k3"]
+curve = SubResource("Curve_of75h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5qsww"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+gravity = Vector3(0, 2, 0)
+scale_curve = SubResource("CurveTexture_763k3")
+color = Color(0.50140685, 0.50140643, 0.5014065, 1)
+color_ramp = SubResource("GradientTexture1D_jddww")
+alpha_curve = SubResource("CurveTexture_cilah")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oqcw"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_kge0c")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_kn4hp"]
+material = SubResource("StandardMaterial3D_3oqcw")
+
+[node name="lamp + effects" type="Node3D" unique_id=772677467]
+
+[node name="lamp_anchor" type="Node3D" parent="." unique_id=717838810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8182565, 0)
+
+[node name="JAM_Lamp" parent="lamp_anchor" unique_id=1425553412 instance=ExtResource("1_6cyuo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8182565, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="lamp_anchor" unique_id=771330249]
+libraries/ = SubResource("AnimationLibrary_sybad")
+autoplay = &"swing A"
+speed_scale = 5.0
+
+[node name="dust puff lamp" type="GPUParticles3D" parent="." unique_id=1255029086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.211, 0)
+amount = 15
+lifetime = 0.9
+explosiveness = 0.22
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5qsww")
+draw_pass_1 = SubResource("QuadMesh_kn4hp")
