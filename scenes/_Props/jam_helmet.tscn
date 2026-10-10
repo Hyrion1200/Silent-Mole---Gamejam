@@ -15,9 +15,6 @@ emission_energy_multiplier = 4.0
 surface_material_override/0 = ExtResource("2_linat")
 surface_material_override/1 = ExtResource("3_saqfv")
 
-[node name="CollisionShape3D" parent="PROPS_helmet/PROP_helmet/PROP_helmet_col" parent_id_path=PackedInt32Array(2001826468) index="0" unique_id=999270458]
-visible = false
-
 [node name="SpotLight3D" type="SpotLight3D" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="0" unique_id=1105721273]
 transform = Transform3D(1, 0, 0, 0, -0.9659258, -0.25881913, 0, 0.25881913, -0.9659258, 0, 0.15641302, 0.3196242)
 light_color = Color(0.92097455, 0.9130113, 0.71889204, 1)

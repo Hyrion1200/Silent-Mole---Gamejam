@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cpkwlfpivqxtp"]
+
+[ext_resource type="PackedScene" uid="uid://bp0usyp4wuk4b" path="res://assets/_mesh/_Lookdev/JAM_pickaxe.fbx" id="1_jglyo"]
+[ext_resource type="Material" uid="uid://bnhldeo25f1m3" path="res://scenes/_Enviro/_MAT/MAT_wood.tres" id="2_d21wn"]
+[ext_resource type="Material" uid="uid://be4potdj5080k" path="res://scenes/_Enviro/_MAT/MAT_Rail_Metal.tres" id="3_4vpqi"]
+
+[node name="JAM_pickaxe" unique_id=335932595 instance=ExtResource("1_jglyo")]
+
+[node name="PROPS_pickaxe" parent="." index="0" unique_id=1662172086]
+surface_material_override/0 = ExtResource("2_d21wn")
+surface_material_override/1 = ExtResource("3_4vpqi")

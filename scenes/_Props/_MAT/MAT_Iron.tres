@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cmuh07cv4wde1"]
+
+[ext_resource type="Texture2D" uid="uid://d0b8bs8fw5j3l" path="res://assets/_texture/_iron/Iron_Albedo.jpg" id="1_1wt07"]
+[ext_resource type="Texture2D" uid="uid://su3fi4kqo5bj" path="res://assets/_texture/_iron/Iron_Normal.jpg" id="2_dgc28"]
+
+[resource]
+albedo_color = Color(1.1638972, 1.1638972, 1.1638972, 1)
+albedo_texture = ExtResource("1_1wt07")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 0.58
+normal_texture = ExtResource("2_dgc28")
+texture_filter = 0
