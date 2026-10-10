@@ -130,6 +130,9 @@
 		<property name="volume">
 			<value>5</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{31854ddd-7773-4ac8-b8ae-494f79a3ca4c}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{39d5b112-b385-409f-b98c-1ceea7f95291}</destination>
 			<destination>{52205d30-16c6-4a94-8795-3dfe5c62ecc7}</destination>
@@ -192,6 +195,14 @@
 		</property>
 		<property name="overrideRange">
 			<value>true</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{31854ddd-7773-4ac8-b8ae-494f79a3ca4c}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>2.5</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{39d5b112-b385-409f-b98c-1ceea7f95291}">
