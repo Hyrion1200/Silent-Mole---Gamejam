@@ -314,6 +314,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0241094, 0, 0, 0, 4.858903, -54.780514, 0,
 fire_once = true
 camera_shake = SubResource("Resource_du5ex")
 spawn_point_set = true
+ambient_level = 0
 
 [node name="CinematicCamera" parent="." unique_id=473261405 instance=ExtResource("10_4asn1")]
 transform = Transform3D(1, 0, 0, 0, 1.0241094, 0, 0, 0, 4.858903, -8.520296, 2.3662708, 11.237549)

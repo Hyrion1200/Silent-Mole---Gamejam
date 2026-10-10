@@ -3,6 +3,7 @@ class_name Trigger
 extends Area3D
 ## Invisible box that starts the ticked events when the player walks in
 signal trigger_on_entered(ambient_level)
+signal stinger_on_entered(which_stinger)
 
 ## Size of the box the player has to walk in.
 @export var size: Vector3 = Vector3.ONE * 2.0:
@@ -25,10 +26,19 @@ enum Ambient {
 	CORRIDOR,
 	LARGE,
 	TUNNEL,
-	NOTHING
+	NOTHING,
+	NONE
 }
 ## Which ambient parameter should be playing from AmbientEmitter3D
-@export var ambient_level: Ambient = Ambient.START
+@export var ambient_level: Ambient = Ambient.NONE
+
+enum Stinger {
+	Nothing = 0,
+	Stinger1,
+	Stinger2,
+	Stinger3
+}
+@export var stinger: Stinger = Stinger.Nothing
 
 
 func _ready() -> void:
@@ -49,9 +59,12 @@ func _update_size() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("player"):
 		return
-	trigger_on_entered.emit(ambient_level)
 	if not body.is_in_group(&"player"):
 		return
+	if ambient_level != Ambient.NONE:
+		trigger_on_entered.emit(ambient_level)
+	if stinger != Stinger.Nothing:
+		stinger_on_entered.emit(stinger)
 	if camera_shake:
 		get_viewport().get_camera_3d().shake(camera_shake)
 	if spawn_point_set:

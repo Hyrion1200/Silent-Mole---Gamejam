@@ -188,7 +188,11 @@ func reset() -> void:
 
 ## Called by the player it caught, once they are placed and look at this enemy.
 func faced() -> void:
+	print("Play mine after pls")
+	_anim.animation_set_next("see player", "mine")
+	print(_anim.animation_get_next("see player"))
 	_anim.play("see player")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -327,8 +331,8 @@ func _set_state(new_state: State) -> void:
 			_anim.play("loose aggro")
 			return
 		State.INVESTIGATING:
-			_anim.play("see player")
 			_anim.animation_set_next("see player", "walk drunk")
+			_anim.play("see player")
 			return
 		State.SEARCHING:
 			_anim.play("walk drunk")

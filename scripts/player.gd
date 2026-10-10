@@ -100,6 +100,9 @@ var _facing_captor: bool = false
 @onready var _throw_emitter: FmodEventEmitter3D = $ThrowEmitter3D
 @onready var _ambient_emitter: FmodEventEmitter3D = $AmbientEmitter3D
 @onready var _climb_emitter: FmodEventEmitter3D = $ClimbEmitter3D
+@onready var _stinger1_emitter: FmodEventEmitter3D = $Stinger1Emitter3D
+@onready var _stinger2_emitter: FmodEventEmitter3D = $Stinger2Emitter3D
+@onready var _stinger3_emitter: FmodEventEmitter3D = $Stinger3Emitter3D
 
 
 func _ready() -> void:
@@ -118,7 +121,24 @@ func _ready() -> void:
 	var trigger_array = get_tree().get_nodes_in_group("trigger")
 	for trigger in trigger_array:
 		trigger.connect("trigger_on_entered", _on_trigger_signal)
+		trigger.connect("stinger_on_entered", _on_stinger_signal)
 	
+	
+enum Stinger {
+	Nothing = 0,
+	Stinger1,
+	Stinger2,
+	Stinger3
+}
+func _on_stinger_signal(stinger) -> void:
+	if stinger == Stinger.Stinger1:
+		_stinger1_emitter.play(false)
+	elif stinger == Stinger.Stinger2:
+		_stinger2_emitter.play(false)
+	elif stinger == Stinger.Stinger3:
+		_stinger3_emitter.play(false)
+		
+	return
 
 
 func _unhandled_input(event: InputEvent) -> void:

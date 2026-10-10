@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://btine1amanpws"]
 
 [ext_resource type="Material" uid="uid://dnj3efh1wm6ng" path="res://scenes/_Hero/_MAT/MAT_Tope.tres" id="1_h5uw8"]
+[ext_resource type="Script" uid="uid://578jaa4dalw7" path="res://scripts/hanged_mole.gd" id="1_y4hhg"]
 [ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="2_y4hhg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1tgn"]
@@ -100,6 +101,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.26666668),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_hanged_mole"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_33quc"]
 resource_name = "swing A"
@@ -136,6 +151,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-0.02094395, 0, 0.0034906585), Vector3(0, 0, 0), Vector3(-0.04363323, 0, -0.0052359877), Vector3(-0.010471975, 0, 0), Vector3(-0.02094395, 0, 0.0034906585)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_hanged_mole"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qqma4"]
 _data = {
@@ -146,6 +175,7 @@ _data = {
 
 [node name="hanging_mole_pivot B" type="Node3D" unique_id=1438203654]
 transform = Transform3D(0.9999939, 0, 0.0034906515, 0, 1, 0, -0.0034906515, 0, 0.9999939, 0, 0, 0)
+script = ExtResource("1_y4hhg")
 
 [node name="anchor" type="Node3D" parent="." unique_id=29561761]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9309883, 0)
@@ -166,3 +196,7 @@ libraries/ = SubResource("AnimationLibrary_abuo1")
 libraries/ = SubResource("AnimationLibrary_qqma4")
 autoplay = &"swing B"
 speed_scale = 3.0
+
+[node name="HangedEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=820245075]
+event_name = "event:/Enviro/rope_moleB"
+event_guid = "{670123b9-d841-4a25-9655-7965d80bd53a}"
