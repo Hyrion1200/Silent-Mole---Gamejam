@@ -1,10 +1,14 @@
 extends Node
 
-## Speed of the wagon along its rails above which it is heard rolling, in m/s
+## Speed of the wagon along its rails above which it is heard rolling
 @export var moving_speed: float = 0.5
+## Seconds under moving_speed before it counts as stopped
+@export var stop_delay: float = 0.3
 
 var _last: Vector3
 var _moving: bool = false
+## Time spent under moving_speed
+var _slow_time: float = 0.0
 
 @onready var _wagon: Node3D = $Enemy3/JAM_Cart2
 @onready var _wagon_movement_emitter: FmodEventEmitter3D = $Enemy3/JAM_Cart2/WagonMovementEmitter3D
@@ -24,7 +28,8 @@ func _physics_process(delta: float) -> void:
 		# Teleported back to the start of the round, not a movement
 		return
 	var moving := absf(step.dot(_wagon.global_basis.z)) / delta > moving_speed
-	if moving == _moving:
+	_slow_time = 0.0 if moving else _slow_time + delta
+	if moving == _moving or (not moving and _slow_time < stop_delay):
 		return
 	_moving = moving
 	if moving:
