@@ -177,6 +177,14 @@ fmod_parameters/footstepParameter = "Dirt"
 fmod_parameters/footstepParameter/labels = PackedStringArray("Dirt", "Metal", "Wood")
 fmod_parameters/footstepParameter/variant_type = 4
 
+[node name="SlowFootstepsEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=427442247]
+event_name = "event:/Player/player_footsteps_light"
+event_guid = "{6bf62279-7818-47e5-861b-fdad4774ae1e}"
+fmod_parameters/footstepParameter/id = -2439879591509651875
+fmod_parameters/footstepParameter = "Dirt"
+fmod_parameters/footstepParameter/labels = PackedStringArray("Dirt", "Metal", "Wood")
+fmod_parameters/footstepParameter/variant_type = 4
+
 [node name="GroundCheck" type="RayCast3D" parent="." unique_id=1353919531]
 collide_with_areas = true
 

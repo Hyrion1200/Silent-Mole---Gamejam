@@ -55,6 +55,8 @@ area_size = Vector2(0.5, 0.5)
 transform = Transform3D(0.2166887, 0, 0.97624075, 0, 1, 0, -0.97624075, 0, 0.2166887, -10.759974, 1.8663797, -54.588295)
 wall_min_slide_angle = 0.7853982
 patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+patrol_wait = 6.0
+home_animation = &"mine"
 
 [node name="PatrolPoint" type="Marker3D" parent="Enemy" unique_id=1272940355]
 transform = Transform3D(-0.8905499, 0, 0.4548853, 0, 1, 0, -0.4548853, 0, -0.8905499, -8.176262, 0, 6.87315)
@@ -65,7 +67,8 @@ metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 [node name="PatrolPoint2" type="Marker3D" parent="Enemy" unique_id=55932346]
 transform = Transform3D(-0.99998343, 0, -0.0057554245, 0, 1, 0, 0.0057554245, 0, -0.99998343, -7.908333, 0, 14.264649)
 script = ExtResource("4_pa8r4")
-wait = 7.0
+wait = 4.0
+animation = &"loose aggro"
 metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=913230002]

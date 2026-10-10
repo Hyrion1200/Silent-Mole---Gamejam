@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://be4potdj5080k"]
+
+[ext_resource type="Texture2D" uid="uid://drviinev62i7o" path="res://assets/_texture/_rails/Metal_Rail_Albedo.jpg" id="1_xechi"]
+[ext_resource type="Texture2D" uid="uid://cgc7la82ocvjg" path="res://assets/_texture/_rails/Metal_Rail_Normal.jpg" id="2_nc8qe"]
+
+[resource]
+albedo_color = Color(1.353256, 1.353256, 1.353256, 1)
+albedo_texture = ExtResource("1_xechi")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 3.5
+normal_texture = ExtResource("2_nc8qe")
+texture_filter = 0
