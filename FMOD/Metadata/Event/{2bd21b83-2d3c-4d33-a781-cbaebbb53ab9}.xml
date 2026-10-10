@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{2bd21b83-2d3c-4d33-a781-cbaebbb53ab9}">
 		<property name="name">
-			<value>rope_mole1</value>
+			<value>rope_moleA</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
