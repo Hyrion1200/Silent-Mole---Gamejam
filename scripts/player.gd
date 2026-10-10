@@ -78,6 +78,7 @@ var _facing_captor: bool = false
 @onready var _prompt: Control = $Camera3D/Fade/Prompt
 ## From the center of the capsule down to the feet
 @onready var _half_height: float = $CollisionShape3D.shape.height * $CollisionShape3D.scale.y / 2.0
+@onready var _footsteps_emitter: FmodEventEmitter3D = $FootstepsEmitter3D
 
 
 func _ready() -> void:
@@ -358,7 +359,7 @@ func _process(delta: float) -> void:
 		# Starts below the eye, a line seen exactly end-on would only be a dot
 		var start := Vector3(0.0, -0.15, 0.0)
 		var end := Vector3(0.0, 0.0, -length)
-		_beam.transform = Transform3D(Basis.looking_at(end - start), (start + end) / 2.0) 				.scaled_local(Vector3(1.0, 1.0, start.distance_to(end)))
+		_beam.transform = Transform3D(Basis.looking_at(end - start), (start + end) / 2.0).scaled_local(Vector3(1.0, 1.0, start.distance_to(end)))
 
 
 func _physics_process(delta: float) -> void:
@@ -377,6 +378,7 @@ func _physics_process(delta: float) -> void:
 	if _total_walked > step_length:
 		_total_walked = 0.0
 		get_tree().call_group(&"enemies", &"hear", global_position, step_noise_radius)
+		# Play footstep @Pierre67
 
 	if _held:
 		var hold_point := _camera.global_position - _camera.global_basis.z * hold_distance

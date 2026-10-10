@@ -8,7 +8,7 @@ script = ExtResource("1_music")
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=623944925]
 bank_paths = ["res://FMOD/Build/Desktop/Desktop/Master.bank"]
 
-[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1432959862]
+[node name="MusicEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1432959862]
 event_name = "event:/Music"
 event_guid = "{3d86c8b8-cdc6-4b9d-8359-edc68d19ea19}"
 autoplay = true
@@ -16,3 +16,6 @@ fmod_parameters/musParameter/id = -4965400694012104773
 fmod_parameters/musParameter = "Menu"
 fmod_parameters/musParameter/labels = PackedStringArray("Nothing", "Menu", "Idle", "Suspicious", "Alerted", "Found", "Death", "Ending")
 fmod_parameters/musParameter/variant_type = 4
+
+[node name="FootstepsEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=636228690]
+event_guid = "{0000005f-006e-0000-6f00-000064000000}"
