@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpi0mc82yj0fk" path="res://scripts/enemy.gd" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://bgqpxvre724xg" path="res://resources/enemy_default.tres" id="2_profile"]
+[ext_resource type="Resource" uid="uid://bgqpxvre724xg" path="res://resources/enemy_default.tres" id="2_profile"]
 [ext_resource type="PackedScene" uid="uid://rhjvd4lw1n53" path="res://animation/Enemy/miner_no_tex.tscn" id="3_4ra3w"]
 [ext_resource type="Material" uid="uid://cokkcuppfacf0" path="res://scenes/_Hero/_MAT/MAT_Foe.tres" id="4_xwavj"]
 [ext_resource type="Material" uid="uid://nbsp3pcacrjc" path="res://scenes/_Hero/_MAT/MAT_Helmet_Light.tres" id="5_nenq2"]
@@ -19,9 +20,6 @@ material = SubResource("StandardMaterial3D_enemy")
 radius = 0.4
 height = 1.8
 
-[sub_resource type="BoxMesh" id="BoxMesh_nose"]
-size = Vector3(0.2, 0.2, 0.4)
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_death"]
 resource_local_to_scene = true
 radius = 0.6
@@ -37,7 +35,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
 top_radius = 0.0
 bottom_radius = 9.35
-height = 3.4031217
+height = 0.36327657
 radial_segments = 32
 rings = 1
 cap_bottom = false
@@ -63,7 +61,7 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_cone")
 top_radius = 9.35
 bottom_radius = 9.35
-height = 11.596878
+height = 14.6367235
 radial_segments = 32
 rings = 1
 cap_top = false
@@ -681,6 +679,23 @@ tracks/86/path = NodePath("Armature_007/Skeleton3D:mixamorig_RightToe_End")
 tracks/86/interp = 0
 tracks/86/loop_wrap = true
 tracks/86/keys = PackedFloat32Array(0, 1, 1.0859226e-06, 13.758543, 1.5497147e-06)
+tracks/87/type = "method"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("..")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0.23333333, 0.56666666),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_play_footstep"
+}, {
+"args": [],
+"method": &"_play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_sw4tn"]
 resource_name = "loose aggro"
@@ -1908,6 +1923,20 @@ tracks/86/path = NodePath("Armature_007/Skeleton3D:mixamorig_RightToe_End")
 tracks/86/interp = 0
 tracks/86/loop_wrap = true
 tracks/86/keys = PackedFloat32Array(0, 1, 1.331605e-05, 13.758545, 1.7285471e-06)
+tracks/87/type = "method"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("..")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0.6666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_pickaxe"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_fmbxl"]
 resource_name = "pulling kart"
@@ -3135,6 +3164,20 @@ tracks/86/path = NodePath("Armature_007/Skeleton3D:mixamorig_RightToe_End")
 tracks/86/interp = 0
 tracks/86/loop_wrap = true
 tracks/86/keys = PackedFloat32Array(0, 1, 1.737846e-06, 13.758539, 3.069634e-06)
+tracks/87/type = "method"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("..")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_see_player"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ghloj"]
 resource_name = "sitting"
@@ -4976,6 +5019,29 @@ tracks/86/path = NodePath("Armature_007/Skeleton3D:mixamorig_RightToe_End")
 tracks/86/interp = 0
 tracks/86/loop_wrap = true
 tracks/86/keys = PackedFloat32Array(0, 1, -7.655472e-07, 13.758533, 1.7583277e-06)
+tracks/87/type = "method"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("..")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0.6666667, 2.2333333, 2.8666666, 3.6333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_play_footstep"
+}, {
+"args": [],
+"method": &"_play_footstep"
+}, {
+"args": [],
+"method": &"_play_footstep"
+}, {
+"args": [],
+"method": &"_play_footstep"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5uy6h"]
 _data = {
@@ -4999,14 +5065,11 @@ profile = ExtResource("2_profile")
 shape = SubResource("CapsuleShape3D_enemy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1956763556]
+visible = false
 mesh = SubResource("CapsuleMesh_enemy")
 
-[node name="Front" type="MeshInstance3D" parent="." unique_id=700360876]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32925105, -0.39621973)
-mesh = SubResource("BoxMesh_nose")
-
 [node name="Label3D" type="Label3D" parent="." unique_id=843621756]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.144078, 0)
 billboard = 1
 no_depth_test = true
 font_size = 128
@@ -5021,7 +5084,7 @@ shape = SubResource("SphereShape3D_death")
 [node name="Debug" type="Node3D" parent="." unique_id=84200304 groups=["debug"]]
 
 [node name="Cone" type="MeshInstance3D" parent="Debug" unique_id=719398577]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -1.7015609)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -0.18163829)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_cone")
 
@@ -5036,7 +5099,7 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_death")
 
 [node name="Tube" type="MeshInstance3D" parent="Debug" unique_id=368716703]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -9.201561)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.10695187, 0, 1, -4.6750146e-09, 0, 0.4, -7.6816382)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tube")
 
@@ -5154,5 +5217,27 @@ visible = false
 spot_range = 100.0
 spot_attenuation = 0.4
 spot_angle_attenuation = 0.14358725
+
+[node name="NoiseEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=197039895]
+event_name = "event:/Enemy/enemy_noise"
+event_guid = "{9b75e47f-8086-4724-baf6-2c3420501eac}"
+
+[node name="PickaxeEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=2047988477]
+event_name = "event:/Enemy/enemy_pickaxe_hit"
+event_guid = "{85e9fd95-64ea-45db-bf8f-b620ee49fedb}"
+
+[node name="FootstepEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1538439672]
+event_name = "event:/Enemy/enemy_footsteps"
+event_guid = "{32f909cd-2da1-4267-a8c5-d0294706f81a}"
+fmod_parameters/footstepParameter/id = -2439879591509651875
+fmod_parameters/footstepParameter = "Dirt"
+fmod_parameters/footstepParameter/labels = PackedStringArray("Dirt", "Metal", "Wood")
+fmod_parameters/footstepParameter/variant_type = 4
+
+[node name="SeePlayerEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1422046531]
+event_name = "event:/Enemy/enemy_found_alert"
+event_guid = "{dfbc6d80-d8ab-4c5a-a8b5-1c2c265d7f61}"
+volume = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8977623, 0)
 
 [editable path="miner no tex"]

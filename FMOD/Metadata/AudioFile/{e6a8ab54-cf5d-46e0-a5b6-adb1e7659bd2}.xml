@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e6a8ab54-cf5d-46e0-a5b6-adb1e7659bd2}">
+		<property name="assetPath">
+			<value>Player/player_throw2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.30081249999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{453f2612-f818-4225-8e43-0ef9440852e8}</destination>
+		</relationship>
+	</object>
+</objects>

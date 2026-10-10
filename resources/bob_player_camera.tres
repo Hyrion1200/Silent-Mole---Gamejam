@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BobSettings" format=3 uid="uid://d0iwunc2swpe4"]
+
+[ext_resource type="Script" uid="uid://dc4ju7bnansgs" path="res://scripts/bob_settings.gd" id="1_dmek4"]
+
+[resource]
+script = ExtResource("1_dmek4")
+vertical = 0.04
+horizontal = 0.05

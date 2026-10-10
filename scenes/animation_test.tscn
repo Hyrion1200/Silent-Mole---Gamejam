@@ -90,6 +90,7 @@ transform = Transform3D(0.5615474, 0, -0.82744455, 0, 1, 0, 0.82744455, 0, 0.561
 gizmo_extents = 1.07
 script = ExtResource("3_wh0ns")
 wait = 5.0
+animation = &"mine"
 metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 
 [node name="PatrolPoint" type="Marker3D" parent="Enemy3" unique_id=1294719481]

@@ -6,6 +6,7 @@
 [ext_resource type="Environment" uid="uid://b4h8pno807qun" path="res://resources/Environment_Compositing.tres" id="1_w1x4e"]
 [ext_resource type="FontFile" uid="uid://b62u0wwjl1w1k" path="res://textures/font/RandomLetters.ttf" id="2_763k3"]
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="2_tv1s7"]
+[ext_resource type="Texture2D" uid="uid://b37c6otouutja" path="res://assets/_icons/UI_pointer.png" id="4_8h3f4"]
 [ext_resource type="Shader" uid="uid://b5ptog53u0l54" path="res://shaders/colorgrading/ScreenEffects_Ultimate.tres" id="6_yj3ml"]
 [ext_resource type="Texture2D" uid="uid://cky1t17vx4roh" path="res://textures/noise_pixel.png" id="8_yj3ml"]
 [ext_resource type="Texture2D" uid="uid://b3fgnmh4ev1vj" path="res://textures/pixel_dust_16x16.png" id="10_wjyh8"]
@@ -252,6 +253,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Pointer" type="TextureRect" parent="SubViewportConterner text HD/SubViewport" unique_id=1753902374]
+modulate = Color(1, 1, 1, 0.18039216)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(6, 6)
+mouse_filter = 2
+texture = ExtResource("4_8h3f4")
 
 [node name="psx_pixelate_Master" type="Control" parent="." unique_id=820211952]
 z_index = 1
