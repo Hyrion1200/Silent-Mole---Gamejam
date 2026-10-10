@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bu4sxdgniekf" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://rge7yv18el8h" path="res://scenes/texture_test.tscn" id="1_qcd3b"]
+[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="2_kpk0m"]
 [ext_resource type="PackedScene" uid="uid://0vvx42g72lnn" path="res://assets/_mesh/_Blockout/JAM_BLOCKOUT_LVL1.fbx" id="2_paw1w"]
 [ext_resource type="PackedScene" uid="uid://blqqtvbyut2vk" path="res://assets/_mesh/_Blockout/JAM_HERO_PRX.fbx" id="3_j6w7d"]
 [ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="4_enemy"]
@@ -171,6 +172,46 @@ shape = SubResource("BoxShape3D_medium")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CrateMedium4kg" unique_id=404326132]
 mesh = SubResource("BoxMesh_medium")
 
+[node name="Enemy3" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.304255, 0.25136757, 25.631166)
+patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
+home_animation = &"pulling kart"
+default_walking_animation = "pulling kart"
+
+[node name="JAM_Cart" parent="Enemy3" unique_id=698080680 instance=ExtResource("2_kpk0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56103325, -1.076364, 3.147585)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="JAM_Cart2" parent="Enemy3" unique_id=1585179080 instance=ExtResource("2_kpk0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7763119, -1.113586, 6.29517)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="JAM_Cart3" parent="Enemy3" unique_id=947131958 instance=ExtResource("2_kpk0m")]
+transform = Transform3D(0.9994191, 0.034080323, 0, -0.034080323, 0.9994191, 0, 0, 0, 1, -0.64224625, -1.1620083, 9.266493)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="PatrolPoint" type="Marker3D" parent="Enemy3" unique_id=2125289001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.860369)
+script = ExtResource("6_7gix3")
+wait = 0.0
+animation = &"pulling kart"
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
+[node name="PatrolPoint2" type="Marker3D" parent="Enemy3" unique_id=1688663466]
+transform = Transform3D(0.8983275, 0, 0.4393264, 0, 1, 0, -0.4393264, 0, 0.8983275, 0, 0, -20.25732)
+script = ExtResource("6_7gix3")
+wait = 0.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
 [node name="CrateHeavy20kg" type="RigidBody3D" parent="." unique_id=609283891 groups=["draggable", "throwable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -4)
 mass = 20.0
@@ -258,7 +299,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.027038, -0.03827572, 0)
 [node name="JAM_HERO_PRX" parent="." unique_id=888050093 instance=ExtResource("3_j6w7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3129, 0, -3.287963)
 
-[node name="Enemy2" parent="." unique_id=142524920 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
+[node name="Enemy2" parent="." unique_id=208639951 node_paths=PackedStringArray("patrol") instance=ExtResource("4_enemy")]
 transform = Transform3D(-0.9919228, 0, 0.12684408, 0, 1, 0, -0.12684408, 0, -0.9919228, 34.89942, 0.9, -4.436102)
 patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2")]
 ping_pong = false
@@ -314,6 +355,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0241094, 0, 0, 0, 4.858903, -54.780514, 0,
 fire_once = true
 camera_shake = SubResource("Resource_du5ex")
 spawn_point_set = true
+ambient_level = 0
 
 [node name="CinematicCamera" parent="." unique_id=473261405 instance=ExtResource("10_4asn1")]
 transform = Transform3D(1, 0, 0, 0, 1.0241094, 0, 0, 0, 4.858903, -8.520296, 2.3662708, 11.237549)

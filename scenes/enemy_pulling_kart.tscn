@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bq7suwvrj5t7l"]
+
+[ext_resource type="PackedScene" uid="uid://crm1lak61ifmc" path="res://scenes/enemy.tscn" id="1_2s3jh"]
+[ext_resource type="Script" uid="uid://bnw27ddycumaj" path="res://scripts/enemy_profile.gd" id="2_2s3jh"]
+[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="2_imqlu"]
+[ext_resource type="Script" uid="uid://uff8yv5fs2wj" path="res://scripts/wagon.gd" id="3_wagon"]
+
+[sub_resource type="Resource" id="Resource_imqlu"]
+script = ExtResource("2_2s3jh")
+view_range = 15.0
+view_half_angle = 87.775
+view_width = 2.95
+view_height = 1.0
+animation_eye_height = 2.5
+eye_height = 0.4
+death_placement_distance = 4.0
+death_lean = 30.0
+detect_time = 1.0
+lamp_detect_time = 3.0
+forget_time = 20.0
+walk_speed = 2.0
+investigate_at = 0.5
+search_time = 15.0
+search_radius = 18.0
+search_cheat = 0.6
+
+[node name="Pulling Kart" type="Node3D" unique_id=9425232]
+script = ExtResource("3_wagon")
+
+[node name="Enemy3" parent="." unique_id=142524920 instance=ExtResource("1_2s3jh")]
+profile = SubResource("Resource_imqlu")
+home_animation = &"pulling kart"
+teleport_to_start = true
+default_walking_animation = "pulling kart"
+
+[node name="JAM_Cart" parent="Enemy3" unique_id=698080680 instance=ExtResource("2_imqlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56103325, -1.076364, 3.147585)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="JAM_Cart2" parent="Enemy3" unique_id=166101762 instance=ExtResource("2_imqlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7763119, -1.113586, 6.29517)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="WagonMovementEmitter3D" type="FmodEventEmitter3D" parent="Enemy3/JAM_Cart2" unique_id=1489891242]
+event_name = "event:/Enviro/wagon_movement"
+event_guid = "{1720ee9b-c17b-4522-9727-d754008ccb18}"
+
+[node name="WagonStopEmitter3D" type="FmodEventEmitter3D" parent="Enemy3/JAM_Cart2" unique_id=1489891243]
+event_name = "event:/Enviro/wagon_stop"
+event_guid = "{b4653a82-1d35-4ef4-95d5-1bdcb7a4f535}"
+
+[node name="JAM_Cart3" parent="Enemy3" unique_id=1786213476 instance=ExtResource("2_imqlu")]
+transform = Transform3D(0.9994191, 0.034080323, 0, -0.034080323, 0.9994191, 0, 0, 0, 1, -0.64224625, -1.1620083, 9.266493)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true

@@ -215,3 +215,15 @@ fmod_parameters/ambParameter/variant_type = 4
 [node name="ClimbEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1869728550]
 event_name = "event:/Player/player_climb"
 event_guid = "{12098461-aa89-4ff4-85d7-55209c25bb0e}"
+
+[node name="Stinger1Emitter3D" type="FmodEventEmitter3D" parent="." unique_id=1677876220]
+event_name = "event:/Stinger1"
+event_guid = "{b85fb308-b271-4164-8f20-735a1e255024}"
+
+[node name="Stinger2Emitter3D" type="FmodEventEmitter3D" parent="." unique_id=682954706]
+event_name = "event:/Stinger2"
+event_guid = "{a5834a65-7f34-495b-95b5-e76940cc2147}"
+
+[node name="Stinger3Emitter3D" type="FmodEventEmitter3D" parent="." unique_id=484500983]
+event_name = "event:/Stinger3"
+event_guid = "{b33f638e-d027-4ed4-af03-c50e4c7429d5}"

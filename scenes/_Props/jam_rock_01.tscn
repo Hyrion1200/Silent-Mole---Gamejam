@@ -6,6 +6,7 @@
 
 [node name="JAM_Rock_01" unique_id=1988803648 groups=["draggable"] instance=ExtResource("1_skolw")]
 mass = 7.0
+gravity_scale = 2.0
 script = ExtResource("3_rock")
 
 [node name="PROPS_Rock_01" parent="PROPS_rock" parent_id_path=PackedInt32Array(318494381) index="0" unique_id=1834931817]
