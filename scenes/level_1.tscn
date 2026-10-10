@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="11_2os1m"]
 [ext_resource type="Script" uid="uid://753x8fejqhve" path="res://scripts/cart.gd" id="12_cart"]
 [ext_resource type="PackedScene" uid="uid://whkhfrafvcd5" path="res://scenes/_Props/hanging_mole_animated A.tscn" id="13_7gny6"]
+[ext_resource type="PackedScene" uid="uid://bq7suwvrj5t7l" path="res://scenes/enemy_pulling_kart.tscn" id="14_2aecg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lamp"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -35,7 +36,7 @@ offset_right = 1922.0
 offset_bottom = 1081.0
 
 [node name="Player" parent="Node3D/SubViewportContainer (dithered)/SubViewport" parent_id_path=PackedInt32Array(1865376727, 1423005682) index="0" unique_id=704551036]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -32.010666, 0.3583678, 1.7353411)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 47.951824, -5.217868, -56.8962)
 
 [node name="LampPickup" type="Area3D" parent="." unique_id=1530927714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -0.90078, 5)
@@ -190,7 +191,7 @@ transform = Transform3D(0.95837444, 0, -0.2855143, 0, 1, 0, 0.2855143, 0, 0.9583
 home_animation = &"mine"
 
 [node name="Enemy3" parent="." unique_id=1473739920 instance=ExtResource("3_fcfvj")]
-transform = Transform3D(0.15099125, 0, 0.988534, 0, 1, 0, -0.988534, 0, 0.15099125, 30.258835, -19.266758, -31.877577)
+transform = Transform3D(0.15099117, 0, 0.98853344, 0, 1, 0, -0.98853344, 0, 0.15099117, 30.258835, -19.266758, -31.877577)
 home_animation = &"mine"
 
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
@@ -244,5 +245,31 @@ transform = Transform3D(2.2282994, 0, 0, 0, 0.7661008, 0, 0, 0, 0.15062831, 2.36
 fire_once = true
 stinger = 1
 
+[node name="Pulling Kart" parent="." unique_id=9425232 instance=ExtResource("14_2aecg")]
+transform = Transform3D(0.75259775, 0, 0.6584806, 0, 1, 0, -0.6584806, 0, 0.75259775, 32.963455, -5.8901777, -66.87219)
+
+[node name="Enemy3" parent="Pulling Kart" index="0" unique_id=142524920 node_paths=PackedStringArray("patrol")]
+transform = Transform3D(0.9969357, 0, 0.07822585, 0, 1, 0, -0.07822585, 0, 0.9969357, 23.902626, 0.25136757, 35.086292)
+patrol = [NodePath("../PatrolPoint")]
+patrol_speed = 2.0
+patrol_wait = 2.0
+ping_pong = false
+
+[node name="JAM_Cart" parent="Pulling Kart/Enemy3" index="12" unique_id=698080680]
+axis_lock_linear_x = true
+
+[node name="JAM_Cart2" parent="Pulling Kart/Enemy3" index="13" unique_id=166101762]
+axis_lock_linear_x = true
+
+[node name="JAM_Cart3" parent="Pulling Kart/Enemy3" index="14" unique_id=1786213476]
+axis_lock_linear_x = true
+
+[node name="PatrolPoint" type="Marker3D" parent="Pulling Kart" unique_id=517222827]
+transform = Transform3D(0.99902314, 0, 0.044189896, 0, 1, 0, -0.044189896, 0, 0.99902314, 18.779003, 0.103304744, -40.707123)
+script = ExtResource("4_pa8r4")
+wait = 0.0
+metadata/_custom_type_script = "uid://dw7oldyemxdx6"
+
 [editable path="Node3D"]
 [editable path="ClimbPoint"]
+[editable path="Pulling Kart"]
