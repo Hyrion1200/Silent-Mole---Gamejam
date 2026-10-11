@@ -30,4 +30,5 @@ func _on_play_pressed() -> void:
 	await get_tree().create_timer(_camera.fade_out_duration).timeout
 	# The level camera takes over the fade from black
 	CameraEffects.fade_in_on_ready = true
+	Music.start_rumble()
 	get_tree().change_scene_to_file(LEVEL)
