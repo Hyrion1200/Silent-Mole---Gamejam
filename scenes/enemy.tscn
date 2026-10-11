@@ -5073,6 +5073,7 @@ mesh = SubResource("CapsuleMesh_enemy")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=843621756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.144078, 0)
+visible = false
 billboard = 1
 no_depth_test = true
 font_size = 128
