@@ -286,7 +286,8 @@ offset_bottom = 398.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(324, 104.5)
-text = "Press [F] for light"
+text = "Press [F] for light
+Press [Ctrl] for crouch..."
 label_settings = SubResource("LabelSettings_28nd1")
 horizontal_alignment = 1
 vertical_alignment = 1
