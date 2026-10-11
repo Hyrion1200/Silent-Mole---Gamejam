@@ -219,6 +219,7 @@ transform = Transform3D(0.2166887, 0, 0.97624075, 0, 1, 0, -0.97624075, 0, 0.216
 [node name="Enemy" parent="Enemy_pickaxe First room" index="0" unique_id=142524920 node_paths=PackedStringArray("patrol")]
 patrol = [NodePath("../PatrolPoint"), NodePath("../PatrolPoint2")]
 patrol_wait = 6.0
+max_step = null
 
 [node name="CollisionShape3D" parent="Enemy_pickaxe First room/Enemy/DeathRange" parent_id_path=PackedInt32Array(195369376, 142524920, 1311436096) index="0" unique_id=2049062684]
 shape = SubResource("SphereShape3D_isj1j")
@@ -487,6 +488,7 @@ transform = Transform3D(-0.71196854, 0, 0.7022114, 0, 1, 0, -0.7022114, 0, -0.71
 [node name="Enemy4" parent="." unique_id=281636170 instance=ExtResource("3_fcfvj")]
 transform = Transform3D(0.26932335, 0, 0.96304893, 0, 1, 0, -0.96304893, 0, 0.26932335, 50.68466, -22.188578, -36.534)
 home_animation = &"loose aggro"
+max_step = null
 
 [node name="Enemy_pickaxe2" parent="." unique_id=348937809 instance=ExtResource("12_7nomh")]
 transform = Transform3D(0.15099141, 0, 0.98853505, 0, 1, 0, -0.98853505, 0, 0.15099141, 30.258835, -19.266758, -31.877577)
@@ -498,6 +500,7 @@ transform = Transform3D(0.83609575, 0, -0.5485835, 0, 1, 0, 0.5485835, 0, 0.8360
 transform = Transform3D(0.83609587, 0, -0.54858357, 0, 1, 0, 0.54858357, 0, 0.83609587, 54.34704, -20.984652, -22.813457)
 patrol = [NodePath("PatrolPoint"), NodePath("PatrolPoint2"), NodePath("PatrolPoint3")]
 patrol_wait = 0.0
+max_step = null
 
 [node name="PatrolPoint" type="Marker3D" parent="Enemy6" unique_id=1505210135]
 transform = Transform3D(0.7656474, 0, 0.6432605, 0, 1, 0, -0.6432605, 0, 0.7656474, -2.3841858e-07, 0, -11.628789)
@@ -544,6 +547,7 @@ patrol = [NodePath("../../PatrolPoint")]
 patrol_speed = 2.0
 patrol_wait = 2.0
 ping_pong = false
+max_step = null
 
 [node name="CollisionShape3D" parent="Pulling Kart/Enemy3/DeathRange" parent_id_path=PackedInt32Array(9425232, 142524920, 1311436096) index="0" unique_id=2049062684]
 shape = SubResource("SphereShape3D_d5akn")
@@ -670,10 +674,12 @@ metadata/_custom_type_script = "uid://dw7oldyemxdx6"
 [node name="Enemy" parent="." unique_id=1514064359 instance=ExtResource("3_fcfvj")]
 transform = Transform3D(0.69549483, 0, 0.71853095, 0, 1, 0, -0.71853095, 0, 0.69549483, 34.721798, -6.4494867, -124.3038)
 default_walking_animation = "sitting"
+max_step = null
 
 [node name="Enemy2" parent="." unique_id=1061075308 instance=ExtResource("3_fcfvj")]
 transform = Transform3D(-0.7906513, 0, -0.61226666, 0, 1, 0, 0.61226666, 0, -0.7906513, 31.951757, -6.3128896, -126.23758)
 default_walking_animation = "sitting"
+max_step = null
 
 [node name="Trigger2" parent="." unique_id=1851891000 instance=ExtResource("6_fcfvj")]
 transform = Transform3D(2.5336108, 0, 0.10263435, 0, 1.991082, 0, -2.358597, 0, 0.11025008, 32.5979, -5.218508, -118.66288)
@@ -704,6 +710,7 @@ transform = Transform3D(-0.17218956, 0, 0.9850638, 0, 1, 0, -0.9850638, 0, -0.17
 
 [node name="Enemy" parent="Enemy_pickaxe4" index="0" unique_id=142524920]
 default_walking_animation = "loose aggro"
+max_step = null
 
 [node name="CollisionShape3D" parent="Enemy_pickaxe4/Enemy/DeathRange" parent_id_path=PackedInt32Array(732690863, 142524920, 1311436096) index="0" unique_id=2049062684]
 shape = SubResource("SphereShape3D_s7g0b")
