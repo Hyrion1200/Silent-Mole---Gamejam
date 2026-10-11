@@ -13,6 +13,7 @@ var _threats_enabled := false
 
 @onready var _emitter: FmodEventEmitter3D = $MusicEmitter3D
 @onready var _start_emitter: FmodEventEmitter3D = $SilentMoleEmitter3D
+@onready var _rumble_start_emitter: FmodEventEmitter3D = $RumbleStartEmitter3D
 
 func on_start() -> void:
 	# Sound
@@ -24,6 +25,12 @@ func on_start() -> void:
 func set_state(label: String) -> void:
 	_threats_enabled = false
 	_apply(label)
+
+
+func start_rumble() -> void:
+	_rumble_start_emitter.play(false)
+	print("Start rumble start")
+	return
 
 
 ## Back to the music of the enemies: the highest threat level, Idle without any
