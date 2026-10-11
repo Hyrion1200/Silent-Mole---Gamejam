@@ -8,7 +8,7 @@ script = ExtResource("1_music")
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=623944925]
 bank_paths = ["res://FMOD/Build/Desktop/Desktop/Master.bank"]
 
-[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1432959862]
+[node name="MusicEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1432959862]
 event_name = "event:/Music"
 event_guid = "{3d86c8b8-cdc6-4b9d-8359-edc68d19ea19}"
 autoplay = true
@@ -16,3 +16,11 @@ fmod_parameters/musParameter/id = -4965400694012104773
 fmod_parameters/musParameter = "Menu"
 fmod_parameters/musParameter/labels = PackedStringArray("Nothing", "Menu", "Idle", "Suspicious", "Alerted", "Found", "Death", "Ending")
 fmod_parameters/musParameter/variant_type = 4
+
+[node name="SilentMoleEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=1560609508]
+event_name = "event:/UI/UI_start"
+event_guid = "{a7c28ba8-f215-4760-a5bd-5afc9dd6cdfd}"
+
+[node name="RumbleStartEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=945550884]
+event_name = "event:/Enviro/mine_rumble_intro"
+event_guid = "{23c99daa-06bf-4558-a55f-65c370ab3e2c}"

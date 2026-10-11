@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://donnygnqa0tfs"]
+
+[ext_resource type="PackedScene" uid="uid://basgr35kepoav" path="res://assets/_mesh/JAM_Hero_Tope.fbx" id="1_4jbab"]
+[ext_resource type="Material" uid="uid://dnj3efh1wm6ng" path="res://scenes/_Hero/_MAT/MAT_Tope.tres" id="2_csskq"]
+
+[node name="JAM_Hero_Tope" unique_id=616142214 instance=ExtResource("1_4jbab")]
+
+[node name="Tope_Full" parent="." index="0" unique_id=2130725035]
+surface_material_override/0 = ExtResource("2_csskq")

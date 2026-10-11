@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cl6nlp12ojeys"]
+
+[ext_resource type="PackedScene" uid="uid://cp0fr0al27rli" path="res://assets/_mesh/_Lookdev/JAM_Lamp.fbx" id="1_dce6f"]
+[ext_resource type="Material" uid="uid://be4potdj5080k" path="res://scenes/_Enviro/_MAT/MAT_Rail_Metal.tres" id="2_hq6v1"]
+[ext_resource type="Material" uid="uid://bryga1y6a2nlu" path="res://scenes/_Props/_MAT/MAT_LampLight.tres" id="3_dce6f"]
+
+[node name="JAM_Lamp" unique_id=1425553412 instance=ExtResource("1_dce6f")]
+
+[node name="PROPS_Lamp" parent="." index="0" unique_id=2115628847]
+surface_material_override/0 = ExtResource("2_hq6v1")
+surface_material_override/1 = ExtResource("3_dce6f")

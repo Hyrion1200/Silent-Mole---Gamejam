@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bp4ofwxpusr8i"]
 
 [ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="1_syioc"]
+[ext_resource type="Material" uid="uid://cokkcuppfacf0" path="res://scenes/_Hero/_MAT/MAT_Foe.tres" id="3_saqfv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mqug"]
 emission_enabled = true
@@ -19,6 +20,7 @@ spot_angle_attenuation = 0.1830108
 
 [node name="PROP_helmet" parent="PROPS_helmet" parent_id_path=PackedInt32Array(2111995606) index="1" unique_id=708096661]
 surface_material_override/0 = SubResource("StandardMaterial3D_8mqug")
+surface_material_override/1 = ExtResource("3_saqfv")
 
 [node name="CollisionShape3D" parent="PROPS_helmet/PROP_helmet/PROP_helmet_col" parent_id_path=PackedInt32Array(903899578) index="0" unique_id=1053847924 groups=["lamp_pickup"]]
 
@@ -37,5 +39,5 @@ transform = Transform3D(-1, 0, -8.742277e-08, 3.618718e-08, 0.9103073, -0.413933
 visible = false
 light_energy = 0.387
 light_volumetric_fog_energy = 2.634
-omni_range = 2.838
-omni_attenuation = 0.489
+omni_range = 6.437
+omni_attenuation = 0.243

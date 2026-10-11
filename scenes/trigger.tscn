@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bintkcf5gav7"]
+[gd_scene format=3 uid="uid://cjlrs3c2535tc"]
 
 [ext_resource type="Script" uid="uid://3608fk1q3ipl" path="res://scripts/trigger.gd" id="1_trigger"]
 
@@ -15,7 +15,8 @@ albedo_color = Color(1, 0.6, 0.2, 0.15)
 [sub_resource type="BoxMesh" id="BoxMesh_zone"]
 material = SubResource("StandardMaterial3D_zone")
 
-[node name="Trigger" type="Area3D" unique_id=1808192201]
+[node name="Trigger" type="Area3D" unique_id=1808192201 groups=["trigger"]]
+transform = Transform3D(1.5345322, 0, 0, 0, 0.7661008, 0, 0, 0, 0.15062831, 0, 0, 0)
 monitorable = false
 script = ExtResource("1_trigger")
 

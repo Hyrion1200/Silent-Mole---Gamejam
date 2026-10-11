@@ -55,11 +55,19 @@ const THREATS: Dictionary[State, int] = {
 @export var patrol_speed: float = 1.5
 ## Seconds spent at the starting position, the other stops have their own wait
 @export_range(0.0, 10.0, 0.1, "or_greater") var patrol_wait: float = 1.0
+## Animation played while it stands at the starting position for ex. "mine"; Empty --> keeps its idle one
+@export var home_animation: StringName
 ## Walks the round backward once at the last stop. Off --> goes straight back to the start
 @export var ping_pong: bool = true
+## Once done waiting at the last stop, appears back at the start instead of walking there
+## --> looks like an endless line of enemies going the same way
+@export var teleport_to_start: bool = false
+@export var default_walking_animation: String = "walk drunk"
 
 ## How close the enemy gets to a stop of its round
 const PATROL_REACH := 0.2
+## Path points closer than this are skipped, about the radius the navmesh is baked with
+const PATH_LOOKAHEAD := 0.5
 
 ## 0 = unaware, 1 = player detected.
 var awareness: float = 0.0
@@ -76,11 +84,18 @@ var _search_timer: float = 0.0
 var _caught: bool = false
 ## Stops left behind since the start of the round
 var _patrol_count: int = 0
+## Karts pulled by this enemy and where they sit behind it. None --> a normal enemy
+var _karts: Array[RigidBody3D]
+var _kart_rests: Array[Transform3D]
+## Left its karts behind, and where it stood and faced when it did
+var _detached: bool = false
+var _drop: Vector3
+var _drop_yaw: float = 0.0
 
 ## On start of the scene save "home" position and rotation to comeback in case of chase ending
 ## We will need to save base animation aswell later on
 @onready var _home: Vector3 = global_position
-@onready var _home_yaw: float = rotation.y
+@onready var _home_yaw: float = global_rotation.y
 ## Time left standing at the current stop of the round
 @onready var _patrol_timer: float = patrol_wait
 @onready var _label: Label3D = $Label3D
@@ -90,14 +105,27 @@ var _patrol_count: int = 0
 @onready var _model: Node3D = $"miner no tex"
 ## The model as placed in the scene, and how far it bends over the player it caught
 @onready var _model_rest: Basis = _model.basis
-var _lean: float = 0.0
+@onready var _footstep_emitter: FmodEventEmitter3D = $FootstepEmitter3D
+@onready var _see_player_emitter: FmodEventEmitter3D = $SeePlayerEmitter3D
+@onready var _noise_emitter: FmodEventEmitter3D = $NoiseEmitter3D
+@onready var _pickaxe_emiter: FmodEventEmitter3D = $PickaxeEmitter3D
+@onready var _kill_emitter: FmodEventEmitter3D = $KillEventEmitter3D
 
+var _lean: float = 0.0
 
 
 func _ready() -> void:
 	# Always shown in the editor, in game only once debug is toggled on
 	$Debug.visible = Engine.is_editor_hint()
 	_update_view_shape()
+	if (not Engine.is_editor_hint()):
+		_noise_emitter.play(false)
+		for kart: RigidBody3D in find_children("*", "RigidBody3D", false, false):
+			_karts.append(kart)
+			_kart_rests.append(kart.transform)
+			# Otherwise it gets stuck against its own karts when it comes back for them
+			for body: StaticBody3D in kart.find_children("*", "StaticBody3D", true, false):
+				add_collision_exception_with(body)
 	reset()
 
 
@@ -128,6 +156,22 @@ func _update_view_shape() -> void:
 		$Debug/Tube.position = Vector3(0.0, profile.eye_height, -(tip + profile.view_range) / 2.0)
 
 
+func _play_footstep() -> void:
+	_footstep_emitter.play(false)
+	return
+
+func _play_see_player() -> void:
+	_see_player_emitter.play(false)
+	return
+	
+func _play_pickaxe() -> void:
+	_pickaxe_emiter.play(false)
+	return
+
+func _play_kill() -> void:
+	_kill_emitter.play(false)
+	return
+
 ## Called through the "enemies" group by anything that makes noise.
 ## radius is how far the noise carries.
 func hear(at: Vector3, radius: float) -> void:
@@ -155,17 +199,22 @@ func reset() -> void:
 	awareness = 0.0
 	velocity = Vector3.ZERO
 	global_position = _home
-	rotation.y = _home_yaw
+	global_rotation.y = _home_yaw
 	_patrol_count = 0
 	_patrol_timer = patrol_wait
 	_set_state(State.IDLE)
+	_attach()
 	# Caught while already IDLE --> no state change to put the animation back
-	_anim.play("walk drunk")
+	_anim.play(default_walking_animation)
 
 
 ## Called by the player it caught, once they are placed and look at this enemy.
 func faced() -> void:
+	print("Play mine after pls")
+	_anim.animation_set_next("see player", "hit_player")
+	print(_anim.animation_get_next("see player"))
 	_anim.play("see player")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -183,7 +232,7 @@ func _physics_process(delta: float) -> void:
 	if _caught:
 		# AI off: stands there and only turns to face the player
 		var dir := player.global_position - global_position
-		rotation.y = rotate_toward(rotation.y, atan2(-dir.x, -dir.z), profile.turn_speed * delta)
+		global_rotation.y = rotate_toward(global_rotation.y, atan2(-dir.x, -dir.z), profile.turn_speed * delta)
 		if _anim.assigned_animation == "see player":
 			# Cheat: way taller than the player, so it bends over them from the feet.
 			# Only the model, the collision stays upright
@@ -209,11 +258,25 @@ func _physics_process(delta: float) -> void:
 	var post := stop.global_position if stop else _home
 	match state:
 		State.IDLE:
+			_noise_emitter.play(false)
 			move = _step_toward(post, PATROL_REACH) * patrol_speed
+			# Standing at a stop that has an animation --> plays it, back to the walk once it leaves.
+			# Checked every tick, so it also comes back after a state change played something else
+			var anim: StringName = stop.animation if stop else home_animation
+			if move != Vector3.ZERO or not _anim.has_animation(anim):
+				anim = _walk_anim()
+			if _anim.assigned_animation != anim:
+				_anim.play(anim)
 			if move == Vector3.ZERO:
 				_patrol_timer -= delta
 				if _patrol_timer <= 0.0:
 					_patrol_count += 1
+					if teleport_to_start and stop and stop == patrol.back():
+						_patrol_count = 0
+						global_position = _home
+						global_rotation.y = _home_yaw
+						# Otherwise it is drawn sliding across the level for a frame
+						reset_physics_interpolation()
 					var next := _patrol_point()
 					_patrol_timer = next.wait if next else patrol_wait
 		State.SUSPICIOUS:
@@ -222,6 +285,7 @@ func _physics_process(delta: float) -> void:
 			move = _step_toward(_focus, profile.stop_distance) * profile.walk_speed
 			_forget(gain, delta)
 		State.CHASING:
+			_noise_emitter.stop()
 			move = _step_toward(_focus, profile.stop_distance) * profile.run_speed
 			if gain <= 0.0 and move == Vector3.ZERO:
 				# Got to the last place it saw or heard the player: search around it
@@ -238,9 +302,11 @@ func _physics_process(delta: float) -> void:
 			# The bar empties over the search, then the enemy gives up
 			awareness = maxf(awareness - delta / profile.search_time, 0.0)
 		State.RETURNING:
-			# Back to the stop it left, the round carries on from there
-			move = _step_toward(post, PATROL_REACH) * profile.walk_speed
-			if move == Vector3.ZERO:
+			# Back to the karts it left if any, else to the stop it left. The round carries on from there
+			move = _step_toward(_drop if _detached else post, PATROL_REACH) * profile.walk_speed
+			# Faces the way it pulled them first, or the karts would swing round behind it
+			if move == Vector3.ZERO and (not _detached or absf(angle_difference(global_rotation.y, _drop_yaw)) < 0.05):
+				_attach()
 				_set_state(State.IDLE)
 
 	velocity = Vector3(move.x, velocity.y, move.z)
@@ -253,12 +319,14 @@ func _physics_process(delta: float) -> void:
 
 	# Look where it walks, else at the stimulus, else the way its stop faces
 	var yaw := stop.global_rotation.y if stop else _home_yaw
+	if _detached and state == State.RETURNING:
+		yaw = _drop_yaw
 	if move != Vector3.ZERO:
 		yaw = atan2(-move.x, -move.z)
 	elif awareness > 0.0:
 		var dir := _focus - global_position
 		yaw = atan2(-dir.x, -dir.z)
-	rotation.y = rotate_toward(rotation.y, yaw, profile.turn_speed * delta)
+	global_rotation.y = rotate_toward(global_rotation.y, yaw, profile.turn_speed * delta)
 	_bar.scale.x = maxf(awareness, 0.001)
 	_label.text = ICONS[state]
 
@@ -285,29 +353,53 @@ func _set_state(new_state: State) -> void:
 		return
 	if new_state == State.CHASING and state not in [State.CHASING, State.SEARCHING]:
 		detected.emit()
+	if state == State.IDLE:
+		# First suspicion --> the karts stay where they are
+		_detach()
 	state = new_state
 	Music.report(self, THREATS[state])
 	match state:
-		State.IDLE:
-			_anim.play("walk drunk")
-			# Start the idle music @Pierre67
+		State.IDLE, State.RETURNING:
+			_anim.play(_walk_anim())
 			return
 		State.SUSPICIOUS:
 			_anim.play("loose aggro")
-			# Start the Suspicious music @Pierre67
 			return
 		State.INVESTIGATING:
-			# Start the Alerted music @Pierre67
+			_anim.animation_set_next("see player", _walk_anim())
 			_anim.play("see player")
 			return
 		State.SEARCHING:
-			_anim.play("walk drunk")
-			# Fallback to the Alerted music @Pierre67
+			_anim.play(_walk_anim())
 			return
 		State.CHASING:
 			_anim.play("chase")
-			# Start the Found music @Pierre67
 			return
+
+
+## Leaves its karts where they stand, RETURNING comes back here for them
+func _detach() -> void:
+	if _detached or _karts.is_empty():
+		return
+	_detached = true
+	_drop = global_position
+	_drop_yaw = global_rotation.y
+	for kart in _karts:
+		# Same as the PatrolPoints: stays in place even as a child of the enemy
+		kart.top_level = true
+
+
+## Karts back behind the enemy, following it again
+func _attach() -> void:
+	_detached = false
+	for i in _karts.size():
+		_karts[i].top_level = false
+		_karts[i].transform = _kart_rests[i]
+
+
+## Only mimes pulling while the karts are behind it
+func _walk_anim() -> StringName:
+	return &"walk drunk" if _detached else StringName(default_walking_animation)
 
 
 ## Awareness decays when nothing feeds it, except while the enemy is still on its
@@ -347,12 +439,16 @@ func _step_toward(target: Vector3, reach: float) -> Vector3:
 	# With lots of ennemy it might lags but we will probably get nowhere this problem so fck it
 	# The first point is the enemy itself put on the navmesh. On a slope it lands behind
 	# the enemy, which walked back to it forever --> skipped
-	for point in NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1):
+	var path := NavigationServer3D.map_get_path(get_world_3d().navigation_map, global_position, target, true).slice(1)
+	# Walks to the first point further than PATH_LOOKAHEAD. Closer ones are corners it already
+	# stands on: aiming at them made it step back and forth between two of them, on the spot
+	for point in path:
 		to = point - global_position
 		to.y = 0.0
-		if to.length() > 0.1:
+		if to.length() > PATH_LOOKAHEAD:
 			return to.normalized()
-	return Vector3.ZERO
+	# Only close points left --> to is the end of the path
+	return to.normalized() if path and to.length() > 0.1 else Vector3.ZERO
 
 
 func _sees_body(body: CollisionObject3D) -> bool:
@@ -368,16 +464,25 @@ func _sees_lamp(lamp: SpotLight3D, holder: CollisionObject3D) -> bool:
 	# one ray along the beam axis, the edges of the light cone are ignored
 	# otherwise it is way too hard for the player
 	var from := lamp.global_position
-	var query := PhysicsRayQueryParameters3D.create(from, from - lamp.global_basis.z * lamp.spot_range)
+	var to := from - lamp.global_basis.z * lamp.spot_range
+	var query := PhysicsRayQueryParameters3D.create(from, to)
 	if holder:
 		query.exclude = [holder.get_rid()]
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	# Where the beam stops: on what it lit, or at the end of its range
+	var end: Vector3 = hit.position if hit else to
+	# The model is way bigger than the collision --> a beam passing near the line from
+	# its center to its head lands on the enemy
+	var head := global_position + Vector3.UP * profile.animation_eye_height
+	var near := Geometry3D.get_closest_points_between_segments(from, end, global_position, head)
+	var on_body := near[0].distance_to(near[1]) <= profile.lamp_body_radius
+	if not on_body and hit.is_empty():
 		return false
 	# Pull the spot off the surface so the sight ray does not hit the lit wall itself
-	var spot: Vector3 = hit.position + hit.normal * 0.05
-	# A beam landing on the enemy is noticed even from behind
-	if hit.collider == self or _sees(spot):
+	var spot: Vector3 = near[0] if on_body else hit.position + hit.normal * 0.05
+	# A beam landing on the enemy is noticed even from behind.
+	# A lit spot is seen at any height, so the floor in front of the enemy counts
+	if on_body or _sees(spot, null, false):
 		if awareness < profile.investigate_at:
 			# Not suspicious enough yet --> only looks at the light
 			_focus = spot
@@ -390,13 +495,14 @@ func _sees_lamp(lamp: SpotLight3D, holder: CollisionObject3D) -> bool:
 
 
 ## True if point is inside the vision cone with nothing but target in the way.
-func _sees(point: Vector3, target: CollisionObject3D = null) -> bool:
+## flat = false ignores view_height: the vision is as tall as it is wide
+func _sees(point: Vector3, target: CollisionObject3D = null, flat: bool = true) -> bool:
 	var eye := global_position + Vector3.UP * profile.eye_height
 	var to := point - eye
 	# Distance along the view axis, and away from it
 	var ahead := to.dot(-global_basis.z)
 	# Height counts for more than width, which squashes the vision down to view_height
-	var aside := Vector2(to.dot(global_basis.x), to.dot(global_basis.y) * profile.view_width / profile.view_height).length()
+	var aside := Vector2(to.dot(global_basis.x), to.dot(global_basis.y) * (profile.view_width / profile.view_height if flat else 1.0)).length()
 	if ahead <= 0.0 or ahead > profile.view_range or aside > minf(ahead * tan(deg_to_rad(profile.view_half_angle)), profile.view_width):
 		return false
 	var query := PhysicsRayQueryParameters3D.create(eye, point)

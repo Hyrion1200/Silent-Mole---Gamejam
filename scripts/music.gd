@@ -11,8 +11,13 @@ var _label := "Menu"
 # False while a music set by set_state() plays --> the enemies' reports are only stored
 var _threats_enabled := false
 
-@onready var _emitter: FmodEventEmitter3D = $FmodEventEmitter3D
+@onready var _emitter: FmodEventEmitter3D = $MusicEmitter3D
+@onready var _start_emitter: FmodEventEmitter3D = $SilentMoleEmitter3D
+@onready var _rumble_start_emitter: FmodEventEmitter3D = $RumbleStartEmitter3D
 
+func on_start() -> void:
+	# Sound
+	_start_emitter.play(false)
 
 ## For the music that does not depend on the enemies: Menu, Nothing, Death, Ending
 ## The enemies cannot change the music anymore, until follow_threats()
@@ -20,6 +25,12 @@ var _threats_enabled := false
 func set_state(label: String) -> void:
 	_threats_enabled = false
 	_apply(label)
+
+
+func start_rumble() -> void:
+	_rumble_start_emitter.play(false)
+	print("Start rumble start")
+	return
 
 
 ## Back to the music of the enemies: the highest threat level, Idle without any

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/JAM_Cart.fbx-bf43d2faffca3762f30a9783d8b5a46f
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="RigidBody3D"
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false

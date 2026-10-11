@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cokkcuppfacf0"]
+
+[ext_resource type="Texture2D" uid="uid://qo5lq306i7ww" path="res://assets/_texture/_foe/Hero_Foe_TPOSE_standardSurface1_BaseColor.jpg" id="1_03iqb"]
+[ext_resource type="Texture2D" uid="uid://rv53jy1080gr" path="res://assets/_texture/_foe/Hero_Foe_TPOSE_standardSurface1_Normal.jpg" id="2_h2mmr"]
+
+[resource]
+albedo_color = Color(3.061103, 3.061103, 3.061103, 1)
+albedo_texture = ExtResource("1_03iqb")
+metallic = 0.34
+roughness = 0.0
+normal_enabled = true
+normal_scale = 5.0
+normal_texture = ExtResource("2_h2mmr")
+backlight = Color(0.9604115, 0.93024623, 0.9346358, 1)
+texture_filter = 0

@@ -5,9 +5,56 @@
 [ext_resource type="PackedScene" uid="uid://wfs11yltsee7" path="res://scenes/_Enviro/jam_rail.tscn" id="3_owcjw"]
 [ext_resource type="PackedScene" uid="uid://vpjr5cmwbdrp" path="res://scenes/_Enviro/jam_ropes.tscn" id="4_48vo2"]
 [ext_resource type="PackedScene" uid="uid://4rmx74ri2t8c" path="res://scenes/_Enviro/jam_st_cart.tscn" id="5_gnwrd"]
-[ext_resource type="PackedScene" uid="uid://g3xls81h05k" path="res://assets/_mesh/_Lookdev/JAM_Cart.fbx" id="7_b028a"]
 [ext_resource type="PackedScene" uid="uid://dm573cbubm8dn" path="res://scenes/_Enviro/jam_wood.tscn" id="7_dsqro"]
-[ext_resource type="PackedScene" uid="uid://7qq3j4hak8pe" path="res://assets/_mesh/_Lookdev/JAM_Helmet.fbx" id="8_wkddb"]
+[ext_resource type="PackedScene" uid="uid://btaiomtiitxwn" path="res://scenes/_Props/jam_cart.tscn" id="7_wkddb"]
+[ext_resource type="PackedScene" uid="uid://bp4ofwxpusr8i" path="res://scenes/_Props/jam_helmet.tscn" id="8_owcjw"]
+[ext_resource type="PackedScene" uid="uid://cystvfvtx530i" path="res://assets/_mesh/_Lookdev/JAM_Ropes_01.fbx" id="9_gnwrd"]
+[ext_resource type="PackedScene" uid="uid://dh541y02l43u6" path="res://scenes/_Hero/jam_hero_foe_tpose.tscn" id="9_owcjw"]
+[ext_resource type="PackedScene" uid="uid://bl6o8whxnt18y" path="res://assets/_mesh/_Lookdev/JAM_Ropes_02.fbx" id="10_6gm6i"]
+[ext_resource type="PackedScene" uid="uid://donnygnqa0tfs" path="res://scenes/_Hero/jam_hero_tope.tscn" id="11_gnwrd"]
+[ext_resource type="PackedScene" uid="uid://dewac0kje1mpe" path="res://scenes/_Props/jam_rock_01.tscn" id="13_wd4t5"]
+[ext_resource type="PackedScene" uid="uid://bytq866si2hmg" path="res://scenes/_Props/jam_rock_02.tscn" id="14_c6rhc"]
+[ext_resource type="PackedScene" uid="uid://dohvde18xra1" path="res://scenes/_Props/jam_rock_03.tscn" id="15_c6rhc"]
+[ext_resource type="PackedScene" uid="uid://bsikvp4cr8j2o" path="res://scenes/_Props/jam_hanged_tope.tscn" id="17_mh4f8"]
+[ext_resource type="PackedScene" uid="uid://cl6nlp12ojeys" path="res://scenes/_Props/jam_lamp.tscn" id="18_6diqf"]
+
+[sub_resource type="Animation" id="Animation_wkddb"]
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JAM_Ropes:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6, 12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.02094395, 0), Vector3(0, 0.03141593, 0), Vector3(0, -0.02094395, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_owcjw"]
+resource_name = "rope_swing"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JAM_Ropes:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48vo2"]
+_data = {
+&"RESET": SubResource("Animation_wkddb"),
+&"rope_swing": SubResource("Animation_owcjw")
+}
 
 [node name="TextureSet" type="Node3D" unique_id=1151871138]
 
@@ -18,10 +65,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 
 [node name="JAM_rail" parent="." unique_id=1035252563 instance=ExtResource("3_owcjw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
+transform = Transform3D(0.9997806, 0, -0.020942418, 0, 1, 0, 0.020942418, 0, 0.9997806, 0.2845745, 0, 0.19820404)
 
-[node name="JAM_Ropes" parent="." unique_id=1030473890 instance=ExtResource("4_48vo2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
+[node name="JAM_Ropes#AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=1507786906]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_48vo2")
+autoplay = &"RESET"
+speed_scale = 4.0
 
 [node name="JAM_ST_Cart" parent="." unique_id=118518236 instance=ExtResource("5_gnwrd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
@@ -29,8 +79,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 [node name="JAM_Wood" parent="." unique_id=267189473 instance=ExtResource("7_dsqro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2845745, 0, 0.19820404)
 
-[node name="JAM_Cart" parent="." unique_id=1978242869 instance=ExtResource("7_b028a")]
+[node name="JAM_Cart" parent="." unique_id=698080680 instance=ExtResource("7_wkddb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0133705, 1.2397766e-05, 13.289236)
 
-[node name="JAM_Helmet" parent="." unique_id=1775718097 instance=ExtResource("8_wkddb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770725, 0.00013450623, 13.571976)
+[node name="JAM_Hero_Foe_TPOSE" parent="." unique_id=1401988619 instance=ExtResource("9_owcjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45957336, 0.7171938, 19.184965)
+
+[node name="JAM_Helmet" parent="." unique_id=1108416575 instance=ExtResource("8_owcjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017086819, 0.00013355256, 14.100674)
+
+[node name="JAM_Hero_Tope" parent="." unique_id=616142214 instance=ExtResource("11_gnwrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.053872, 0.44892183, 17.817394)
+
+[node name="JAM_Ropes_01" parent="." unique_id=391341332 instance=ExtResource("9_gnwrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8032435, 0.08660507, -5.7607927)
+
+[node name="JAM_Ropes_02" parent="." unique_id=360987417 instance=ExtResource("10_6gm6i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8450346, 0.073246, -5.7434316)
+
+[node name="JAM_Ropes" parent="." unique_id=1030473890 instance=ExtResource("4_48vo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71751297, 1.2397766e-05, -7.5295734)
+
+[node name="JAM_Rock_01" parent="." unique_id=1988803648 instance=ExtResource("13_wd4t5")]
+transform = Transform3D(1, 0, 0, 0, 0.8073869, 0.5900224, 0, -0.5900224, 0.8073869, -0.24588704, 0.4115188, -17.345583)
+
+[node name="JAM_Rock_02" parent="." unique_id=1951766825 instance=ExtResource("14_c6rhc")]
+transform = Transform3D(0.29091564, -0.9567487, 0, 0.9567487, 0.29091564, 0, 0, 0, 1, -0.66109794, 0.44845676, -18.678556)
+
+[node name="JAM_Rock_03" parent="." unique_id=1047716793 instance=ExtResource("15_c6rhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5242889, -0.15298343, -17.134525)
+
+[node name="JAM_Hanged_Tope" parent="." unique_id=951787647 instance=ExtResource("17_mh4f8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53933144, 0.39451712, 14.980804)
+
+[node name="JAM_Lamp" parent="." unique_id=1425553412 instance=ExtResource("18_6diqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.224511, 1.9411783, 8.48096)

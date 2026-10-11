@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bijwpx5kmak24"]
+
+[ext_resource type="PackedScene" uid="uid://c17wmxxe5h6xe" path="res://assets/_mesh/_Lookdev/JAM_ST_Tope.fbx" id="1_wgwiq"]
+[ext_resource type="Material" uid="uid://dnj3efh1wm6ng" path="res://scenes/_Hero/_MAT/MAT_Tope.tres" id="2_gjbdn"]
+
+[node name="JAM_ST_Tope" unique_id=2061323010 instance=ExtResource("1_wgwiq")]
+
+[node name="ENV_tope" parent="." index="0" unique_id=1569621967]
+surface_material_override/0 = ExtResource("2_gjbdn")

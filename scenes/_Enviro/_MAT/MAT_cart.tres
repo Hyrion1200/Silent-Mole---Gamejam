@@ -1,9 +1,13 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://wtutikc8wnnl"]
 
 [ext_resource type="Texture2D" uid="uid://dxbjl7gt1vtvt" path="res://assets/_texture/_cart/JAM_ST_Cart_0.png" id="1_m7kg5"]
+[ext_resource type="Texture2D" uid="uid://jkwm5mu5f8jo" path="res://assets/_texture/_cart/Metal_Normal.jpg" id="2_lhlc0"]
 
 [resource]
 albedo_texture = ExtResource("1_m7kg5")
 metallic_specular = 0.0
 roughness = 0.0
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = ExtResource("2_lhlc0")
 texture_filter = 0

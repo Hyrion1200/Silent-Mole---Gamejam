@@ -52,6 +52,9 @@ extends Resource
 @export var detect_time: float = 0.5
 ## Seconds of seeing the spot lit by the player's lamp to fully detect them
 @export var lamp_detect_time: float = 1.5
+## How close to the enemy the center of the beam has to pass to land on it.
+## Measured from the line going from its center to its head
+@export var lamp_body_radius: float = 1.0
 ## Awareness gained from a noise made right next to the enemy
 @export var hear_gain: float = 0.4
 ## Seconds for awareness to decay from 1 to 0 with no stimulus

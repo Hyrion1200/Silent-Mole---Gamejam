@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://nbsp3pcacrjc"]
+
+[resource]
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.78039217, 0.78039217, 0.6156863, 1)
+emission_energy_multiplier = 1.35
+rim_enabled = true
