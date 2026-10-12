@@ -319,8 +319,8 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="psx_pixelate_Master" unique_id=1149813306]
 material = SubResource("ShaderMaterial_66iiw")
 layout_mode = 0
-offset_right = 1885.0
-offset_bottom = 1104.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = SubResource("CanvasTexture_al58b")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2112950533]

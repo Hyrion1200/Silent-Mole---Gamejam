@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://g3xls81h05k" path="res://assets/_mesh/_Lookdev/JAM_Cart.fbx" id="1_iw57b"]
 [ext_resource type="Material" uid="uid://c6ohrbes4b521" path="res://scenes/_Enviro/_MAT/MAT_rope.tres" id="2_251lf"]
 [ext_resource type="Material" uid="uid://wtutikc8wnnl" path="res://scenes/_Enviro/_MAT/MAT_cart.tres" id="2_fffo8"]
+[ext_resource type="PackedScene" uid="uid://cd33yuh14n65y" path="res://scenes/climb_point.tscn" id="4_251lf"]
 
 [node name="JAM_Cart" unique_id=698080680 instance=ExtResource("1_iw57b")]
 axis_lock_angular_x = true
@@ -14,3 +15,7 @@ freeze = true
 [node name="PROP_cart" parent="." index="0" unique_id=517010977]
 surface_material_override/0 = ExtResource("2_251lf")
 surface_material_override/1 = ExtResource("2_fffo8")
+
+[node name="ClimbPoint" parent="." index="2" unique_id=952650059 instance=ExtResource("4_251lf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16626546, 2.4593778, 1.2748256)
+radius = 0.985
