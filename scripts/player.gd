@@ -90,6 +90,7 @@ var _facing_captor: bool = false
 @onready var _lamp: SpotLight3D = $Camera3D/Lamp
 @onready var _beam: MeshInstance3D = $Camera3D/Lamp/Beam
 @onready var _prompt: Control = $Camera3D/Fade/Prompt
+@onready var _prompt_label: Label = $Camera3D/Fade/Prompt/Label
 ## From the center of the capsule down to the feet
 @onready var _half_height: float = $CollisionShape3D.shape.height * $CollisionShape3D.scale.y / 2.0
 @onready var _footsteps_emitter: FmodEventEmitter3D = $FootstepsEmitter3D
@@ -446,6 +447,8 @@ func _process(delta: float) -> void:
 	_prompt.visible = _captor == null and (_held != null \
 			or (body != null and (body.is_in_group(&"draggable") or body.is_in_group(&"throwable") or body.is_in_group(&"throwable_cart"))) \
 			or (not freeze and target is ClimbPoint) or _is_lamp_pickup(target))
+	# Same priority as the E key: a held object is released before any climb
+	_prompt_label.text = "[E] - Climb" if _held == null and not freeze and target is ClimbPoint else "[E] - Interact"
 
 	if _beam.is_visible_in_tree():
 		# Same ray as the enemies cast to find the spot lit by the lamp
