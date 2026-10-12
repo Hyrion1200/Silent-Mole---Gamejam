@@ -63,6 +63,8 @@ const THREATS: Dictionary[State, int] = {
 ## --> looks like an endless line of enemies going the same way
 @export var teleport_to_start: bool = false
 @export var default_walking_animation: String = "walk drunk"
+## Highest ledge the enemy walks over as if it was a slope --> Used for rails
+@export var max_step: float = 0.15
 
 ## How close the enemy gets to a stop of its round
 const PATROL_REACH := 0.2
@@ -309,6 +311,15 @@ func _physics_process(delta: float) -> void:
 				_attach()
 				_set_state(State.IDLE)
 
+	# Same as the player --> a low ledge is a wall for the capsule
+	var ahead := move.normalized() * 0.05
+	var block := KinematicCollision3D.new() 
+	# Check ahead for 5cm ahead
+	if move != Vector3.ZERO and test_move(global_transform, ahead, block) and block.get_normal().y < cos(floor_max_angle) \
+			and not test_move(global_transform.translated(Vector3.UP * max_step), ahead + move.normalized() * max_step):
+		velocity.y = move.length()
+	else:
+		velocity.y = minf(velocity.y, 0.0)
 	velocity = Vector3(move.x, velocity.y, move.z)
 	if not is_on_floor():
 		velocity += get_gravity() * delta

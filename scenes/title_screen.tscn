@@ -324,8 +324,8 @@ mouse_filter = 2
 [node name="TextureRect" type="TextureRect" parent="psx_pixelate_Master" unique_id=1875496324]
 material = SubResource("ShaderMaterial_e8tpv")
 layout_mode = 0
-offset_right = 1885.0
-offset_bottom = 1104.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_filter = 2
 texture = SubResource("CanvasTexture_4qe4i")
 
