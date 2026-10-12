@@ -4,7 +4,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().create_timer(81).timeout
+	await get_tree().create_timer(83).timeout
 	camera.fade_out_duration = 10
 	camera.fade_out()
 	await get_tree().create_timer(10).timeout
